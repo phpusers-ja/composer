@@ -5,4 +5,4 @@ src = "translations/ja"
 title = "Composer"
 
 [output.html]
-git-repository-url = "https://github.com/gemmaro/composer"
+git-repository-url = "https://github.com/phpusers-ja/composer"
