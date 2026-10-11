@@ -242,6 +242,26 @@ class ConfigCommandTest extends TestCase
             ['setting-key' => 'policy.abandoned.audit', 'setting-value' => ['fail']],
             ['config' => ['policy' => ['abandoned' => ['audit' => 'fail']]]],
         ];
+        yield 'set policy.cooldown.period duration string' => [
+            [],
+            ['setting-key' => 'policy.cooldown.period', 'setting-value' => ['7 days']],
+            ['config' => ['policy' => ['cooldown' => ['period' => '7 days']]]],
+        ];
+        yield 'set policy.cooldown.period integer seconds' => [
+            [],
+            ['setting-key' => 'policy.cooldown.period', 'setting-value' => ['604800']],
+            ['config' => ['policy' => ['cooldown' => ['period' => 604800]]]],
+        ];
+        yield 'set policy.cooldown.period null disables' => [
+            [],
+            ['setting-key' => 'policy.cooldown.period', 'setting-value' => ['null']],
+            ['config' => ['policy' => ['cooldown' => ['period' => null]]]],
+        ];
+        yield 'set policy.cooldown.block false' => [
+            [],
+            ['setting-key' => 'policy.cooldown.block', 'setting-value' => ['false']],
+            ['config' => ['policy' => ['cooldown' => ['block' => false]]]],
+        ];
         yield 'set policy.ignore-unreachable bool true' => [
             [],
             ['setting-key' => 'policy.ignore-unreachable', 'setting-value' => ['true']],
@@ -286,6 +306,11 @@ class ConfigCommandTest extends TestCase
             [],
             ['setting-key' => 'policy.my-list.audit', 'setting-value' => ['report']],
             ['config' => ['policy' => ['my-list' => ['audit' => 'report']]]],
+        ];
+        yield 'set custom policy list block-scope' => [
+            [],
+            ['setting-key' => 'policy.my-list.block-scope', 'setting-value' => ['install']],
+            ['config' => ['policy' => ['my-list' => ['block-scope' => 'install']]]],
         ];
         yield 'unset policy.advisories.block leaves siblings' => [
             ['config' => ['policy' => ['advisories' => ['block' => false, 'audit' => 'fail']]]],
@@ -542,6 +567,17 @@ class ConfigCommandTest extends TestCase
 
         $appTester = $this->getApplicationTester();
         $appTester->run(['command' => 'config', 'setting-key' => 'policy.malware.block-scope', 'setting-value' => ['bogus']]);
+    }
+
+    public function testConfigThrowsForInvalidCustomPolicyBlockScope(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('must be one of: all, update, install');
+
+        $this->initTempComposer([]);
+
+        $appTester = $this->getApplicationTester();
+        $appTester->run(['command' => 'config', 'setting-key' => 'policy.my-list.block-scope', 'setting-value' => ['bogus']]);
     }
 
     public function testConfigThrowsForInvalidPolicyIgnoreSeverity(): void

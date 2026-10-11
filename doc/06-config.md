@@ -160,8 +160,9 @@ always allowed regardless of this setting.
 Unified dependency policy configuration. Controls Composer behavior for dependencies with security
 advisories, flagged as malware, abandoned packages, and custom dependency policies. Audit reports
 can be generated with `composer audit`; blocking prevents insecure or otherwise flagged package
-versions from being installed during `composer update`, `require`, or `remove` and malware also
-during a `composer install`.
+versions from being installed during `composer update`, `require`, or `remove`. The [malware](#block-scope)
+policy and [custom dependency policies](#block-scope-1) can additionally block during a
+`composer install` via their `block-scope` setting.
 
 Set to `false` to disable all dependency policy enforcement:
 
@@ -197,6 +198,17 @@ cannot be installed during `update`/`require`/`remove` unless the advisory or pa
     }
 }
 ```
+
+Advisories are matched against version numbers, so `dev-*` versions from branch names like `dev-main` are never
+blocked, even when required through an inline alias like `dev-main as 1.0.0`. Numeric branch names, which are turned into numbered dev versions like
+`3.3.x-dev`, and numeric branch aliases are matched normally. For example if `dev-main` has a branch alias
+of `3.3.x-dev`, an advisory affecting `<3.5` blocks requiring `^3.3`, but requiring `dev-main`
+explicitly still works. The audit still reports it though, as the installed code matches the
+advisory through its branch alias.
+
+For advisory authors, this means an advisory cannot target a named branch with a `dev-*` version directly, not even with
+`*` listed as the affected versions. To cover one, the affected versions must include its branch alias, like
+`3.3.x-dev` above.
 
 #### audit
 
@@ -431,6 +443,104 @@ A list of source names to exclude from malware checks.
 }
 ```
 
+### cooldown
+
+Withholds newly released package versions for a configurable period to reduce exposure to supply
+chain attacks. By introducing a waiting period before a new version becomes installable, you reduce
+the risk of pulling in a release that was compromised shortly after publication — many malicious
+versions are identified and removed within hours or days of being published.
+
+The cooldown policy applies when resolving dependencies during `composer update`/`require`. `composer require`,
+`init` and `create-project` also skip withheld versions when picking a version constraint or the
+project version, so that the constraint they write can be resolved. `composer outdated` and
+`composer show --latest` report the newest version the policy allows installing, and mark a newer
+release that is still in the cooldown period.
+
+The cooldown period is measured from the publication time reported by the package repository
+(`published-time`, which Packagist.org provides), as package authors cannot influence it. Composer
+repositories must provide it for every version Composer considers while a cooldown period is
+configured, otherwise the command errors out and names the package that lacks it. Set
+[`require-published-time`](05-repositories.md#require-published-time) to `false` on a repository that
+cannot provide it to fall back to the `time` field of each package's `composer.json`. Packages from
+VCS, path or artifact repositories always use that fallback, and Composer says so when it withholds
+such a version.
+
+#### period
+
+A duration string in the form `"<number> <unit>"` where the unit is one of `second`, `minute`,
+`hour`, `day` or `week` (lowercase, singular or plural — e.g. `"7 days"`, `"24 hours"`, `"30 minutes"`,
+`"1 week"`), an integer number of seconds, or `null` to disable. Relative phrases such as
+`"tomorrow"` or `"next week"` are rejected. Defaults to `null` (no cooldown period). The policy only
+takes effect once a period is set.
+
+```json
+{
+    "config": {
+        "policy": {
+            "cooldown": {
+                "period": "7 days"
+            }
+        }
+    }
+}
+```
+
+The following are never withheld by the cooldown policy:
+
+- **Dev versions** (e.g. `dev-main`) — they represent mutable branch state
+- **Locked packages that are not being updated** — a partial update (`composer update vendor/pkg`,
+  `composer require`) keeps the locked version of every other package. A full `composer update`
+  re-evaluates all versions, so a locked version still inside the cooldown period will be replaced by
+  an older release, or the update fails if no other version satisfies the requirements
+- **Platform packages** — PHP, extensions and other platform requirements
+- **Packages without any publication date** — for example a version defined inline in a
+  [`package` repository](05-repositories.md#package-1) without a `time` field, or a path repository
+  whose `composer.json` has none. Composer cannot tell how old such a version is and lets it through
+  rather than blocking it forever. A Composer repository that omits `published-time` errors out
+  instead, see above
+
+#### block
+
+Defaults to `true`. When `true`, versions still within the cooldown period cannot be installed during
+`update`/`require`. Set to `false` to skip blocking for a cooldown period entirely.
+
+#### ignore
+
+Packages listed under `ignore` bypass the cooldown policy. This uses the same
+[ignore format](#ignore-format) as the other policies, so each entry may carry a reason and an
+optional version constraint, and package names support wildcards (e.g. `vendor/*`).
+
+```json
+{
+    "config": {
+        "policy": {
+            "cooldown": {
+                "period": "7 days",
+                "ignore": {
+                    "mycompany/*": "We trust the code in our own packages",
+                    "symfony/security-bundle": "Security fixes need to be applied immediately"
+                }
+            }
+        }
+    }
+}
+```
+
+#### Environment variables
+
+`COMPOSER_POLICY_COOLDOWN_PERIOD` overrides the configured `period` (the `ignore` rules from
+`composer.json` are still respected), and `COMPOSER_POLICY_COOLDOWN_BLOCK` overrides `block`.
+A non-zero `COMPOSER_POLICY_COOLDOWN_PERIOD` also enables the cooldown policy when `cooldown` is set to
+`false`, but is ignored when the whole `policy` config is set to `false`:
+
+```bash
+# Disable the cooldown policy temporarily
+COMPOSER_POLICY_COOLDOWN_PERIOD=0 composer update
+
+# Set a specific duration
+COMPOSER_POLICY_COOLDOWN_PERIOD="24 hours" composer update
+```
+
 ### ignore-unreachable
 
 Defaults to `["update", "install"]`. When the operation is listed here, repositories and policies with URL sources that are unreachable or
@@ -534,6 +644,31 @@ The following names are reserved for future built-in dependency policies and can
 dependency policy names: `package`, `packages`, `license`, `licence`, `licenses`, `licences`, `support`,
 `maintenance`, `security`, `minimum-release-age`. Composer rejects any colliding key both at
 schema validation time (`composer validate`) and at config load time.
+
+#### block-scope
+
+Defaults to `update`. Controls which commands trigger blocking for this custom policy:
+
+- `all` — block during both `update`/`require`/`remove` and `install`
+- `update` — block only during `update`/`require`/`remove`
+- `install` — block only during `install`
+
+Unlike the [`malware`](#malware) policy (which defaults to `all`), custom dependency policies
+default to `update`, so they only block during `composer install` when you opt in with
+`block-scope` set to `install` or `all`. This is useful for enforcing a policy in environments
+where only `composer install` runs, such as CI or deployment.
+
+```json
+{
+    "config": {
+        "policy": {
+            "my-policy": {
+                "block-scope": "all"
+            }
+        }
+    }
+}
+```
 
 ### ignore format
 
@@ -974,6 +1109,9 @@ string, or array with username and token. For example using `{"gitlab.com":
 private repositories on gitlab. Using `{"gitlab.com": {"username": "gitlabuser",
  "token": "privatetoken"}}` will use both username and token for gitlab deploy
 token functionality (https://docs.gitlab.com/ee/user/project/deploy_tokens/)
+Using `gitlab-ci-token` as the username instead stores a
+[GitLab CI job token](https://docs.gitlab.com/ci/jobs/ci_job_token/), which Composer sends as a
+`JOB-TOKEN` header, and which requires GitLab 19.3 or newer to download dist archives.
 Please note: If the package is not hosted at
 gitlab.com the domain names must be also specified with the
 [`gitlab-domains`](06-config.md#gitlab-domains) option. The token must have
@@ -987,7 +1125,7 @@ value of the package metadata. One of `git` or `http`. (`https` is treated
 as a synonym for `http`.) Helpful when working with projects referencing
 private repositories which will later be cloned in GitLab CI jobs with a
 [GitLab CI_JOB_TOKEN](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html#predefined-variables-reference)
-using HTTP basic auth. By default, Composer will generate a git-over-SSH
+using HTTP basic auth for the clone. By default, Composer will generate a git-over-SSH
 URL for private repositories and HTTP(S) only for public.
 
 ## forgejo-domains
@@ -1108,7 +1246,8 @@ Defaults to `C:\Users\<user>\AppData\Local\Composer` on Windows,
 `/Users/<user>/Library/Caches/composer` on macOS, `$XDG_CACHE_HOME/composer`
 on unix systems that follow the XDG Base Directory Specifications, and
 `$COMPOSER_HOME/cache` on other unix systems. Stores all the caches used by
-Composer. See also [COMPOSER_HOME](03-cli.md#composer-home).
+Composer. See also [COMPOSER_HOME](03-cli.md#composer-home), and
+[Caching Composer dependencies](articles/caching.md) for caching it in CI.
 
 ## cache-files-dir
 
@@ -1168,6 +1307,13 @@ otherwise, a random suffix will be generated.
 ## optimize-autoloader
 
 Defaults to `false`. If `true`, always optimize when dumping the autoloader.
+
+## strict-psr-autoloader
+
+Defaults to `false`. If `true`, `install` and `update` return a failed exit code (6),
+and `dump-autoload` returns a failed exit code (1), if PSR-4 or PSR-0 mapping errors
+are present in the current project (dependencies excluded). Requires `optimize-autoloader`
+or `classmap-authoritative` to be enabled to work.
 
 ## sort-packages
 

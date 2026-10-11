@@ -14,17 +14,27 @@ namespace Composer\Test\Util;
 
 use Composer\Composer;
 use Composer\Util\Http\ProxyManager;
+use Composer\Util\Platform;
 use Composer\Util\StreamContextFactory;
 use Composer\Test\TestCase;
 
 class StreamContextFactoryTest extends TestCase
 {
+    /** @var array<string, string|false> */
+    private $originalCodingAgentEnv = [];
+
     protected function setUp(): void
     {
         unset($_SERVER['HTTP_PROXY'], $_SERVER['http_proxy'], $_SERVER['HTTPS_PROXY'], $_SERVER['https_proxy'], $_SERVER['NO_PROXY'], $_SERVER['no_proxy']);
         ProxyManager::reset();
         Composer::setRunningCommand(null);
         Composer::setRunningOperation(null);
+
+        // make sure the tests are not affected by an agent running them
+        foreach (array_merge(['AI_AGENT'], array_keys(Platform::CODING_AGENT_ENV_VARS)) as $envVar) {
+            $this->originalCodingAgentEnv[$envVar] = Platform::getEnv($envVar);
+            Platform::clearEnv($envVar);
+        }
     }
 
     protected function tearDown(): void
@@ -34,6 +44,13 @@ class StreamContextFactoryTest extends TestCase
         ProxyManager::reset();
         Composer::setRunningCommand(null);
         Composer::setRunningOperation(null);
+        foreach ($this->originalCodingAgentEnv as $envVar => $value) {
+            if (false === $value) {
+                Platform::clearEnv($envVar);
+            } else {
+                Platform::putEnv($envVar, $value);
+            }
+        }
     }
 
     /**
@@ -308,6 +325,40 @@ class StreamContextFactoryTest extends TestCase
         $options = StreamContextFactory::initOptions('https://example.org', []);
 
         self::assertStringContainsString('; cmd:update)', $this->getUserAgent($options));
+    }
+
+    public function testUserAgentIncludesAgentFlagWhenRunByACodingAgent(): void
+    {
+        Platform::putEnv('CLAUDECODE', '1');
+
+        $options = StreamContextFactory::initOptions('https://example.org', []);
+
+        self::assertMatchesRegularExpression('{; agent:claude-code[;)]}', $this->getUserAgent($options));
+    }
+
+    public function testUserAgentIncludesUnknownAgentWhenAgentCannotBeIdentified(): void
+    {
+        Platform::putEnv('AI_AGENT', '1');
+
+        $options = StreamContextFactory::initOptions('https://example.org', []);
+
+        self::assertMatchesRegularExpression('{; agent:unknown[;)]}', $this->getUserAgent($options));
+    }
+
+    public function testUserAgentIncludesSanitizedUnknownAgentName(): void
+    {
+        Platform::putEnv('AI_AGENT', 'Some-Agent/1.0; (evil)');
+
+        $options = StreamContextFactory::initOptions('https://example.org', []);
+
+        self::assertMatchesRegularExpression('{; agent:some-agent[;)]}', $this->getUserAgent($options));
+    }
+
+    public function testUserAgentOmitsAgentFlagWhenRunByAHuman(): void
+    {
+        $options = StreamContextFactory::initOptions('https://example.org', []);
+
+        self::assertStringNotContainsString('; agent', $this->getUserAgent($options));
     }
 
     /**

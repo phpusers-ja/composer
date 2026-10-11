@@ -89,8 +89,8 @@ class RequireCommand extends BaseCommand
                 new InputOption('no-install', null, InputOption::VALUE_NONE, 'Skip the install step after updating the composer.lock file.'),
                 new InputOption('no-audit', null, InputOption::VALUE_NONE, 'Skip the audit step after updating the composer.lock file (can also be set via the COMPOSER_NO_AUDIT=1 env var).'),
                 new InputOption('audit-format', null, InputOption::VALUE_REQUIRED, 'Audit output format. Must be "table", "plain", "json", or "summary".', Auditor::FORMAT_SUMMARY, Auditor::FORMATS),
-                new InputOption('no-security-blocking', null, InputOption::VALUE_NONE, 'DEPRECATED: use --no-blocking instead. Allows installing packages with security advisories or that are abandoned (can also be set via the COMPOSER_NO_SECURITY_BLOCKING=1 env var).'),
-                new InputOption('no-blocking', null, InputOption::VALUE_NONE, 'Disables all policy blocking during this command (can also be set via the COMPOSER_NO_BLOCKING=1 env var).'),
+                new InputOption('no-security-blocking', null, InputOption::VALUE_NONE, 'DEPRECATED: use --no-blocking instead. Allows installing packages with security advisories, that are abandoned or that are still in the cooldown period (can also be set via the COMPOSER_NO_SECURITY_BLOCKING=1 env var).'),
+                new InputOption('no-blocking', null, InputOption::VALUE_NONE, 'Disables all policy blocking during this command, including the cooldown period (can also be set via the COMPOSER_NO_BLOCKING=1 env var).'),
                 new InputOption('update-no-dev', null, InputOption::VALUE_NONE, 'Run the dependency update with the --no-dev option.'),
                 new InputOption('update-with-dependencies', 'w', InputOption::VALUE_NONE, 'Allows inherited dependencies to be updated, except those that are root requirements (can also be set via the COMPOSER_WITH_DEPENDENCIES=1 env var).'),
                 new InputOption('update-with-all-dependencies', 'W', InputOption::VALUE_NONE, 'Allows all inherited dependencies to be updated, including those that are root requirements (can also be set via the COMPOSER_WITH_ALL_DEPENDENCIES=1 env var).'),
@@ -149,7 +149,7 @@ EOT
         }
 
         if (filesize($this->file) === 0) {
-            file_put_contents($this->file, "{\n}\n");
+            Filesystem::safeFilePutContents($this->file, "{\n}\n");
         }
 
         $this->json = new JsonFile($this->file);
@@ -607,7 +607,7 @@ EOT
 
         $manipulator->removeMainKeyIfEmpty($removeKey);
 
-        file_put_contents($json->getPath(), $manipulator->getContents());
+        Filesystem::safeFilePutContents($json->getPath(), $manipulator->getContents());
 
         return true;
     }
@@ -632,9 +632,9 @@ EOT
                 $msg = ' and '.$this->lock.' to their ';
             }
             $io->writeError("\n".'<error>Installation failed, reverting '.$this->file.$msg.'original content.</error>');
-            file_put_contents($this->json->getPath(), $this->composerBackup);
+            Filesystem::safeFilePutContents($this->json->getPath(), $this->composerBackup);
             if ($this->lockBackup) {
-                file_put_contents($this->lock, $this->lockBackup);
+                Filesystem::safeFilePutContents($this->lock, $this->lockBackup);
             }
         }
     }

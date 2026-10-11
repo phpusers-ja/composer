@@ -486,6 +486,16 @@ class ValidatingArrayLoaderTest extends TestCase
             [
                 [
                     'name' => 'foo/bar',
+                    'bin' => ['bin/foo', 'bin/32 bit/foo.exe', 'src\foo', "bin/it's", "a*/ namespace Injected; /* x/bin", "bin/\x01foo"],
+                ],
+                [
+                    'bin.4 : invalid value (a*/ namespace Injected; /* x/bin), must not contain any of the characters *$`"&^|<>()%!; nor control characters',
+                    'bin.5 : invalid value (bin/'."\x01".'foo), must not contain any of the characters *$`"&^|<>()%!; nor control characters',
+                ],
+            ],
+            [
+                [
+                    'name' => 'foo/bar',
                     'source' => ['url' => 1],
                     'dist' => ['url' => null],
                 ],
@@ -790,6 +800,17 @@ class ValidatingArrayLoaderTest extends TestCase
                 ],
                 ['php-ext.configure-options.0.description : should be a string, int given'],
             ],
+            [
+                [
+                    'name' => 'foo/bar',
+                    'source' => [
+                        'type' => 'perforce',
+                        'url' => 'rsh:touch /tmp/pwned',
+                        'reference' => '//depot/main',
+                    ],
+                ],
+                ['source.url : invalid Perforce port ("rsh:touch /tmp/pwned"), it must be of the form [tcp|ssl:][host:]port'],
+            ],
         ]);
     }
 
@@ -954,6 +975,12 @@ class ValidatingArrayLoaderTest extends TestCase
         $package->setBinaries(['bin/foo', 'console', 'some.bin']);
         ValidatingArrayLoader::validatePackage($package);
 
+        $perforcePackage = self::getPackage('vendor/perforce', '1.0.0');
+        $perforcePackage->setSourceType('perforce');
+        $perforcePackage->setSourceUrl('ssl:p4.example.org:1666');
+        $perforcePackage->setSourceReference('//depot/main');
+        ValidatingArrayLoader::validatePackage($perforcePackage);
+
         // platform packages are accepted as-is, and the root package is skipped entirely
         ValidatingArrayLoader::validatePackage(self::getPackage('php', '8.2.0'));
         ValidatingArrayLoader::validatePackage(self::getRootPackage());
@@ -1000,6 +1027,11 @@ class ValidatingArrayLoaderTest extends TestCase
         $badBin = self::getPackage('vendor/pkg', '1.0.0');
         $badBin->setBinaries(['bin/ok', '../../../../escape-target.txt']);
 
+        $badPerforceUrl = self::getPackage('vendor/pkg', '1.0.0');
+        $badPerforceUrl->setSourceType('perforce');
+        $badPerforceUrl->setSourceUrl('rsh:touch /tmp/pwned');
+        $badPerforceUrl->setSourceReference('//depot/main');
+
         return [
             'invalid name' => [$badName, 'Invalid package found during dependency resolution'],
             'dash source.url' => [$badSourceUrl, 'vendor/pkg has an invalid source.url'],
@@ -1007,6 +1039,7 @@ class ValidatingArrayLoaderTest extends TestCase
             'dash dist.url' => [$badDistUrl, 'vendor/pkg has an invalid dist.url'],
             'dash dist.reference' => [$badDistReference, 'vendor/pkg has an invalid dist.reference'],
             'bin path traversal' => [$badBin, 'vendor/pkg has an invalid bin ../../../../escape-target.txt, it must not contain ".." path segments'],
+            'perforce rsh source.url' => [$badPerforceUrl, 'vendor/pkg has an invalid source.url, it must be a Perforce port of the form [tcp|ssl:][host:]port: rsh:touch /tmp/pwned'],
         ];
     }
 }

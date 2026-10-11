@@ -12,7 +12,6 @@
 
 namespace Composer\DependencyResolver;
 
-use Composer\Advisory\SecurityAdvisory;
 use Composer\Package\CompletePackageInterface;
 use Composer\Package\AliasPackage;
 use Composer\Package\BasePackage;
@@ -27,7 +26,6 @@ use Composer\Semver\Constraint\ConstraintInterface;
 use Composer\Package\Version\VersionParser;
 use Composer\Repository\PlatformRepository;
 use Composer\Semver\Constraint\MultiConstraint;
-use Symfony\Component\Console\Formatter\OutputFormatter;
 
 /**
  * Represents a problem detected while solving dependencies
@@ -380,64 +378,27 @@ class Problem
                 }
             }
 
-            if ($pool->isAbandonedRemovedPackageVersion($packageName, $constraint)) {
-                return ["- Root composer.json requires $packageName".self::constraintToText($constraint) . ', ', 'found '.self::getPackageList($packages, $isVerbose, $pool, $constraint).' but these were not loaded, because they are abandoned and you configured "policy.abandoned.block" to true.'];
+            // When several policies removed different versions, one sentence would attribute every reason to
+            // every version, so list the versions with their own reason instead
+            $policyRemovals = $pool->getPolicyRemovedVersions($packageName, $constraint);
+            $policies = array_unique(array_map(static function (PolicyRemovalReason $reason): string {
+                return $reason->getType();
+            }, $policyRemovals));
+            if (\count($policies) > 1) {
+                return ["- Root composer.json requires $packageName".self::constraintToText($constraint) . ', ', 'found '.self::getPackageList($packages, $isVerbose, $pool, $constraint).' but these were not loaded, because:'.self::formatPolicyRemovalReasons($policyRemovals)];
             }
 
-            if ($pool->isSecurityRemovedPackageVersion($packageName, $constraint)) {
-                $advisories = $repositorySet->getMatchingSecurityAdvisories($packages, false, true);
-                if (isset($advisories['advisories'][$packageName]) && \count($advisories['advisories'][$packageName]) > 0) {
-                    $advisoriesList = array_map(static function (SecurityAdvisory $advisory): string {
-                        if ($advisory->link !== null && $advisory->link !== '') {
-                            return '<href='.OutputFormatter::escape($advisory->link).'>'.$advisory->advisoryId.'</>';
-                        }
-
-                        if (str_starts_with($advisory->advisoryId, 'PKSA-')) {
-                            return '<href='.OutputFormatter::escape('https://packagist.org/security-advisories/'.$advisory->advisoryId).'>'.$advisory->advisoryId.'</>';
-                        }
-
-                        return $advisory->advisoryId;
-                    }, $advisories['advisories'][$packageName]);
-                    $advisoryIds = array_map(static function (SecurityAdvisory $advisory): string {
-                        return $advisory->advisoryId;
-                    }, $advisories['advisories'][$packageName]);
-                } else {
-                    $advisoryIds = $pool->getSecurityAdvisoryIdentifiersForPackageVersion($packageName, $constraint);
-                    $advisoriesList = array_map(static function (string $advisoryId): string {
-                        if (str_starts_with($advisoryId, 'PKSA-')) {
-                            return '<href='.OutputFormatter::escape('https://packagist.org/security-advisories/'.$advisoryId).'>'.$advisoryId.'</>';
-                        }
-
-                        return $advisoryId;
-                    }, $advisoryIds);
-                }
-
-                $hasPackagistAdvisories = true;
-                foreach ($advisoryIds as $advisoryId) {
-                    if (!str_starts_with($advisoryId, 'PKSA-')) {
-                        $hasPackagistAdvisories = false;
-                        break;
+            if (\count($policyRemovals) > 0) {
+                $reason = PolicyRemovalReason::combine($policyRemovals);
+                if ($reason->getType() === PolicyRemovalReason::ADVISORIES) {
+                    // the pool may only hold partial advisories, load the complete ones to link to their details
+                    $advisories = $repositorySet->getMatchingSecurityAdvisories($packages, false, true);
+                    if (\count($advisories['advisories'][$packageName] ?? []) > 0) {
+                        $reason = PolicyRemovalReason::advisories($packageName, $reason->getPrettyVersion(), $advisories['advisories'][$packageName]);
                     }
                 }
 
-                $advisoryDetailsHint = $hasPackagistAdvisories
-                    ? ' Go to https://packagist.org/security-advisories/ to find advisory details.'
-                    : ' Review the advisory details above for more information.';
-
-                return ["- Root composer.json requires $packageName".self::constraintToText($constraint) . ', ', 'found '.self::getPackageList($packages, $isVerbose, $pool, $constraint).' but these were not loaded, because they are affected by security advisories ("' . implode('", "', $advisoriesList). '").'.$advisoryDetailsHint.' To ignore the advisories, add their IDs to the "policy.advisories.ignore-id" config or add the package to "policy.advisories.ignore". To turn the feature off entirely, you can set "policy.advisories.block" to false.'];
-            }
-
-            if ($pool->isFilterListRemovedPackageVersion($packageName, $constraint)) {
-                $filters = $pool->getFilterListEntryForPackageVersion($packageName, $constraint);
-                $ignorePaths = implode(' and ', array_map(static function (string $listName): string {
-                    return '"policy.' . $listName . '.ignore"';
-                }, array_keys($filters)));
-
-                $offPaths = implode(' and ', array_map(static function (string $listName): string {
-                    return '"policy.' . $listName . '.block"';
-                }, array_keys($filters)));
-
-                return ["- Root composer.json requires $packageName".self::constraintToText($constraint) . ', ', 'found '.self::getPackageList($packages, $isVerbose, $pool, $constraint).' but these were not loaded, because they were ' . implode(', ', $filters). '. To ignore filters for this package, add the package to the ' . $ignorePaths . ' config. To turn the feature off entirely, you can set ' . $offPaths . ' to false.'];
+                return ["- Root composer.json requires $packageName".self::constraintToText($constraint) . ', ', 'found '.self::getPackageList($packages, $isVerbose, $pool, $constraint).' but these were not loaded, because they '.self::formatPolicyRemovalSentence($reason, true)];
             }
 
             if (!array_any($packages, static function ($p): bool {
@@ -517,20 +478,11 @@ class Problem
      */
     public static function getMissingLockedPackageReason(Pool $pool, BasePackage $package): array
     {
-        $packageName = $package->getName();
-        $constraint = new Constraint(Constraint::STR_OP_EQ, $package->getVersion());
-        $prefix = "- Package $packageName ".$package->getPrettyVersion().' (in the lock file) ';
+        $prefix = "- Package ".$package->getName()." ".$package->getPrettyVersion().' (in the lock file) ';
 
-        if ($pool->isFilterListRemovedPackageVersion($packageName, $constraint)) {
-            $filters = $pool->getFilterListEntryForPackageVersion($packageName, $constraint);
-            $ignorePaths = implode(' and ', array_map(static function (string $listName): string {
-                return '"policy.' . $listName . '.ignore"';
-            }, array_keys($filters)));
-            $offPaths = implode(' and ', array_map(static function (string $listName): string {
-                return '"policy.' . $listName . '.block"';
-            }, array_keys($filters)));
-
-            return [$prefix, 'was not loaded, because it was ' . implode(', ', $filters). '. To ignore filters for this package, add the package to the ' . $ignorePaths . ' config. To turn the feature off entirely, you can set ' . $offPaths . ' to false.'];
+        $reason = $pool->getPolicyRemovalReason($package->getName(), $package->getVersion());
+        if ($reason !== null) {
+            return [$prefix, 'was not loaded, because it '.self::formatPolicyRemovalSentence($reason, false)];
         }
 
         throw new \LogicException("Filter list removed locked package must have version removed from pool.");
@@ -762,5 +714,43 @@ class Problem
         }
 
         return null;
+    }
+
+    /**
+     * @return string the reason as the end of a sentence starting with "because they"/"because it", followed by the remedies
+     */
+    private static function formatPolicyRemovalSentence(PolicyRemovalReason $reason, bool $plural): string
+    {
+        $remedy = $reason->getRemedy();
+
+        return $reason->getVerb($plural).' '.$reason->getDescription().'.'.($remedy !== '' ? ' '.$remedy : '').' To turn the feature off entirely, you can set '.$reason->getOffSwitch().' to false.';
+    }
+
+    /**
+     * Lists the removed versions grouped by their reason, then the remedies once
+     *
+     * @param array<string, PolicyRemovalReason> $removals normalized version => reason, in version order
+     */
+    private static function formatPolicyRemovalReasons(array $removals): string
+    {
+        $versionsByReason = [];
+        $remedies = [];
+        $offSwitches = [];
+        foreach ($removals as $reason) {
+            $versionsByReason[$reason->getDescription()][$reason->getPrettyVersion()] = true;
+            if ($reason->getRemedy() !== '') {
+                $remedies[$reason->getRemedy()] = true;
+            }
+            $offSwitches[$reason->getOffSwitch()] = true;
+        }
+
+        $lines = [];
+        foreach ($versionsByReason as $description => $versions) {
+            $lines[] = implode(', ', array_keys($versions)) . ': ' . $description;
+        }
+
+        $remedies['To turn a policy off entirely, you can set ' . implode(' or ', array_keys($offSwitches)) . ' to false.'] = true;
+
+        return "\n      - " . implode("\n      - ", $lines) . "\n      " . implode(' ', array_keys($remedies));
     }
 }

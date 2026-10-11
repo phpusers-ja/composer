@@ -116,15 +116,15 @@ resolution.
   terminals or scripts which don't handle backspace characters.
 * **--audit:** Run an audit after installation is complete.
 * **--audit-format:** Audit output format. Must be "table", "plain", "json", or "summary" (default).
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories or that are abandoned. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during this command. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories, that are abandoned or that are still in the cooldown period. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy based dependency blocking during this command, including the cooldown period. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--optimize-autoloader (-o):** Convert PSR-0/4 autoloading to classmap to get a faster
   autoloader. This is recommended especially for production, but can take
   a bit of time to run so it is currently not done by default.
 * **--classmap-authoritative (-a):** Autoload classes from the classmap only.
   Implicitly enables `--optimize-autoloader`.
 * **--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or PSR-0 mapping errors
-  are present in the current project (dependencies excluded). Requires `--optimize-autoloader` to work.
+  are present in the current project (dependencies excluded). Requires `--optimize-autoloader` or `--classmap-authoritative` to work.
 * **--apcu-autoloader:** Use APCu to cache found/not-found classes.
 * **--apcu-autoloader-prefix:** Use a custom prefix for the APCu autoloader cache.
   Implicitly enables `--apcu-autoloader`.
@@ -202,8 +202,8 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
 * **--no-install:** Does not run the install step after updating the composer.lock file.
 * **--no-audit:** Does not run the audit steps after updating the composer.lock file. Also see [COMPOSER_NO_AUDIT](#composer-no-audit).
 * **--audit-format:** Audit output format. Must be "table", "plain", "json", or "summary" (default).
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories or that are abandoned. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during this command. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories, that are abandoned or that are still in the cooldown period. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy based dependency blocking during this command, including the cooldown period. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--lock:** Overwrites the lock file hash to suppress warning about the lock file being out of
   date without updating package versions. Package metadata like mirrors and URLs are updated if
   they changed.
@@ -219,7 +219,7 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
 * **--classmap-authoritative (-a):** Autoload classes from the classmap only.
   Implicitly enables `--optimize-autoloader`.
 * **--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or PSR-0 mapping errors
-  are present in the current project (dependencies excluded). Requires `--optimize-autoloader` to work.
+  are present in the current project (dependencies excluded). Requires `--optimize-autoloader` or `--classmap-authoritative` to work.
 * **--apcu-autoloader:** Use APCu to cache found/not-found classes.
 * **--apcu-autoloader-prefix:** Use a custom prefix for the APCu autoloader cache.
   Implicitly enables `--apcu-autoloader`.
@@ -298,8 +298,8 @@ If you do not want to install the new dependencies immediately you can call it w
 * **--no-install:** Does not run the install step after updating the composer.lock file.
 * **--no-audit:** Does not run the audit steps after updating the composer.lock file. Also see [COMPOSER_NO_AUDIT](#composer-no-audit).
 * **--audit-format:** Audit output format. Must be "table", "plain", "json", or "summary" (default).
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories or that are abandoned. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy blocking during this command. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories, that are abandoned or that are still in the cooldown period. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy blocking during this command, including the cooldown period. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--update-no-dev:** Run the dependency update with the `--no-dev` option. Also see [COMPOSER_NO_DEV](#composer-no-dev).
 * **--update-with-dependencies (-w):** Also update dependencies of the newly required packages, except those that are root requirements. Can also be set via the COMPOSER_WITH_DEPENDENCIES=1 env var.
 * **--update-with-all-dependencies (-W):** Also update dependencies of the newly required packages, including those that are root requirements. Can also be set via the COMPOSER_WITH_ALL_DEPENDENCIES=1 env var.
@@ -350,8 +350,8 @@ uninstalled.
 * **--no-install:** Does not run the install step after updating the composer.lock file.
 * **--no-audit:** Does not run the audit steps after installation is complete. Also see [COMPOSER_NO_AUDIT](#composer-no-audit).
 * **--audit-format:** Audit output format. Must be "table", "plain", "json", or "summary" (default).
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories or that are abandoned. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during this command. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories, that are abandoned or that are still in the cooldown period. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy based dependency blocking during this command, including the cooldown period. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--update-no-dev:** Run the dependency update with the --no-dev option. Also see [COMPOSER_NO_DEV](#composer-no-dev).
 * **--update-with-dependencies (-w):** Also update dependencies of the removed packages. Can also be set via the COMPOSER_WITH_DEPENDENCIES=1 env var.
   (Deprecated, is now default behavior)
@@ -584,6 +584,7 @@ php composer.phar show monolog/monolog 1.0.2
 * **--minor-only (-m):** Use with --latest or --outdated. Only shows packages that have minor SemVer-compatible updates.
 * **--patch-only:** Use with --latest or --outdated. Only shows packages that have patch-level SemVer-compatible updates.
 * **--sort-by-age (-A):** Displays the installed version's age, and sorts packages oldest first. Use with the --latest or --outdated option.
+* **--cooldown-period:** Overrides the configured [policy.cooldown.period](06-config.md#period) while looking up latest versions, even when the policy is disabled or not blocking; `0` disables it for this run. Use with the --latest or --outdated option.
 * **--direct (-D):** Restricts the list of packages to your direct dependencies.
 * **--strict:** Return a non-zero exit code when there are outdated packages.
 * **--format (-f):** Lets you pick between text (default) or json output format.
@@ -607,6 +608,14 @@ The color coding is as such:
 - **yellow (`~`)**: Dependency has a new version available that includes backwards compatibility breaks according to semver, so upgrade when
   you can but it may involve work.
 - **red (!)**: Dependency has a new version that is semver-compatible and you should upgrade it.
+- **uncolored (c)**: Dependency has a newer version that is still in the [cooldown period](06-config.md#cooldown)
+  and cannot be installed yet; the time left is shown next to it. Such packages are listed, but do not
+  count as outdated for `--strict`.
+
+When a cooldown period is configured, the latest version shown is the newest one the cooldown policy
+allows installing, so the output matches what `composer update` would do. A newer release still in
+the cooldown period is shown next to it with the time left, or in its place once you are on the newest
+installable version. When several are waiting, the one that becomes installable first is shown.
 
 ### Options
 
@@ -618,6 +627,7 @@ The color coding is as such:
 * **--minor-only (-m):** Only shows packages that have minor SemVer-compatible updates.
 * **--patch-only (-p):** Only shows packages that have patch-level SemVer-compatible updates.
 * **--sort-by-age (-A):** Displays the installed version's age, and sorts packages oldest first.
+* **--cooldown-period:** Overrides the configured [policy.cooldown.period](06-config.md#period), even when the policy is disabled or not blocking; `0` shows the newest releases regardless of the cooldown policy.
 * **--format (-f):** Lets you pick between text (default) or json output format.
 * **--no-dev:** Do not show outdated dev dependencies.
 * **--locked:** Shows updates for packages from the lock file, regardless of what is currently in vendor dir.
@@ -881,8 +891,14 @@ See the [Config](06-config.md) chapter for valid configuration options.
   that this cannot be used in conjunction with the `--global` option.
 * **--absolute:** Returns absolute paths when fetching `*-dir` config values
   instead of relative.
-* **--json:** JSON decode the setting value, to be used with `extra.*` keys.
-* **--merge:** Merge the setting value with the current value, to be used with `extra.*` keys in combination with `--json`.
+* **--json:** JSON decode the setting value. Only supported for `extra.*`,
+  `policy.*.ignore`, `policy.advisories.ignore-id`, `policy.ignore-unreachable`,
+  `audit.ignore` and `audit.ignore-abandoned` keys, it is ignored for all other keys.
+* **--merge:** Merge the setting value with the current value instead of replacing
+  it. Only supported for `extra.*` keys in combination with `--json`, and for
+  `policy.*.ignore`, `policy.advisories.ignore-id`, `audit.ignore` and
+  `audit.ignore-abandoned` keys with or without `--json`. It is ignored for all
+  other keys.
 * **--append:** When adding a repository, append it (lowest priority) to the existing ones instead of prepending it (highest priority).
 * **--source:** Display where the config value is loaded from.
 
@@ -1050,8 +1066,8 @@ By default the command checks for the packages on packagist.org.
 * **--no-install:** Disables installation of the vendors.
 * **--no-audit:** Does not run the audit steps after installation is complete. Also see [COMPOSER_NO_AUDIT](#composer-no-audit).
 * **--audit-format:** Audit output format. Must be "table", "plain", "json", or "summary" (default).
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories or that are abandoned. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy blocking during this command. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows installing packages with security advisories, that are abandoned or that are still in the cooldown period. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy blocking during this command, including the cooldown period. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--ignore-platform-reqs:** ignore all platform requirements (`php`, `hhvm`,
   `lib-*` and `ext-*`) and force the installation even if the local machine does
   not fulfill these.
@@ -1102,7 +1118,8 @@ performance.
 * **--strict-psr:** Return a failed exit code (1) if PSR-4 or PSR-0 mapping errors
   are present in the current project (dependencies excluded). Requires `--optimize` to work.
 * **--strict-ambiguous:** Return a failed exit code (2) if the same class is found
-  in multiple files. Requires `--optimize` to work.
+  in multiple files. It also checks if files or folders exist with different case variants that
+  cause issues on case-insensitive filesystems. Requires `--optimize` to work.
 
 ## clear-cache / clearcache / cc
 
@@ -1280,6 +1297,9 @@ Directory Specifications](https://specifications.freedesktop.org/basedir-spec/ba
 it points to `$XDG_CACHE_HOME/composer`. On other \*nix systems and on macOS, it points to
 `$COMPOSER_HOME/cache`.
 
+See [Caching Composer dependencies](articles/caching.md) for how to cache it in CI
+and container builds.
+
 ### COMPOSER_CAFILE
 
 By setting this environmental value, you can set a path to a certificate bundle
@@ -1434,13 +1454,13 @@ When set to `0`, all policy specific overrides below are ignored — the whole d
 
 ### COMPOSER_NO_BLOCKING
 
-If set to `1`, it is the equivalent of passing the `--no-blocking` option to a `require`, `update`, `remove`, `install`, or `create-project` command. This disables all policy based blocking of dependencies. It overrides the `block` config option for each configured dependency policy e.g. [policy.advisories.block](06-config.md#block).
+If set to `1`, it is the equivalent of passing the `--no-blocking` option to a `require`, `update`, `remove`, `install`, or `create-project` command. This disables all policy based blocking of dependencies, including the cooldown period. It overrides the `block` config option for each configured dependency policy e.g. [policy.advisories.block](06-config.md#block).
 
 ### COMPOSER_NO_SECURITY_BLOCKING
 
 DEPRECATED, use [COMPOSER_NO_BLOCKING](#composer-no-blocking) instead.
 
-If set to `1`, it is the equivalent of passing the `--no-security-blocking` option to a `require`, `update`, `remove`, `install`, or `create-project` command. This allows installing packages with security advisories or that are abandoned. It overrides the config option [policy.advisories.block](06-config.md#block).
+If set to `1`, it is the equivalent of passing the `--no-security-blocking` option to a `require`, `update`, `remove`, `install`, or `create-project` command. This allows installing packages with security advisories, that are abandoned or that are still in the cooldown period. It overrides the config option [policy.advisories.block](06-config.md#block).
 
 ### COMPOSER_POLICY_ADVISORIES_BLOCK
 
@@ -1461,6 +1481,19 @@ Value takes precedence over the value of the legacy variable [COMPOSER_SECURITY_
 DEPRECATED, use [COMPOSER_POLICY_ABANDONED_BLOCK](#composer-policy-abandoned-block) instead.
 
 If set to `1`, enables blocking of abandoned packages during dependency resolution (equivalent to setting `audit.block-abandoned` config to `true`). If set to `0`, disables blocking of abandoned packages. It overrides the config option [audit.block-abandoned](06-config.md#block-abandoned).
+
+### COMPOSER_POLICY_COOLDOWN_PERIOD
+
+If set to a value accepted by [policy.cooldown.period](06-config.md#period), such as `"7 days"`,
+`"24 hours"` or an integer number of seconds, enables the cooldown policy. Package versions
+published within that period are withheld during `composer update`/`require`. Set to `0` to disable.
+This overrides only the `period` value from [policy.cooldown](06-config.md#cooldown); any `ignore`
+rules configured in composer.json are still respected.
+
+### COMPOSER_POLICY_COOLDOWN_BLOCK
+
+If set to `1`, forces cooldown blocking on; if set to `0`, disables it. Overrides the
+[policy.cooldown.block](06-config.md#block-3) config option.
 
 ### COMPOSER_NO_DEV
 

@@ -13,6 +13,7 @@
 namespace Composer\Package\Loader;
 
 use Composer\Exception\SecurityException;
+use Composer\Installer\BinaryInstaller;
 use Composer\Package\BasePackage;
 use Composer\Package\PackageInterface;
 use Composer\Package\RootPackageInterface;
@@ -23,6 +24,7 @@ use Composer\Repository\PlatformRepository;
 use Composer\Semver\Constraint\MatchNoneConstraint;
 use Composer\Semver\Intervals;
 use Composer\Spdx\SpdxLicenses;
+use Composer\Util\Perforce;
 
 /**
  * @author Jordi Boggiano <j.boggiano@seld.be>
@@ -117,17 +119,15 @@ class ValidatingArrayLoader implements LoaderInterface
             } else {
                 $this->validateFlatArray('bin');
             }
-            // A ".." path segment in a bin escapes the package install directory and lets the
-            // package chmod/point at an arbitrary host file during install (GHSA-gjfg-22fp-rrxx).
             if (isset($this->config['bin']) && is_string($this->config['bin'])) {
-                if (Preg::isMatch('{(?:^|[\\\\/])\.\.(?:[\\\\/]|$)}', $this->config['bin'])) {
-                    $this->errors[] = 'bin : invalid value ('.$this->config['bin'].'), must not contain a ".." path component';
+                if (null !== $error = self::findBinError($this->config['bin'])) {
+                    $this->errors[] = 'bin : invalid value ('.$this->config['bin'].'), '.$error;
                     unset($this->config['bin']);
                 }
             } elseif (isset($this->config['bin']) && is_array($this->config['bin'])) {
                 foreach ($this->config['bin'] as $key => $bin) {
-                    if (is_string($bin) && Preg::isMatch('{(?:^|[\\\\/])\.\.(?:[\\\\/]|$)}', $bin)) {
-                        $this->errors[] = 'bin.'.$key.' : invalid value ('.$bin.'), must not contain a ".." path component';
+                    if (is_string($bin) && null !== $error = self::findBinError($bin)) {
+                        $this->errors[] = 'bin.'.$key.' : invalid value ('.$bin.'), '.$error;
                         unset($this->config['bin'][$key]);
                     }
                 }
@@ -551,6 +551,14 @@ class ValidatingArrayLoader implements LoaderInterface
                 if (isset($this->config[$srcType]['url']) && Preg::isMatch('{^\s*-}', (string) $this->config[$srcType]['url'])) {
                     $this->errors[] = $srcType . '.url : must not start with a "-", "'.$this->config[$srcType]['url'].'" given';
                 }
+                // a perforce url is passed to the p4 client as P4PORT, where rsh:/jsh: endpoints
+                // mean "run this command locally" (GHSA-rvx4-ffvw-m9q3)
+                if ($srcType === 'source' && ($this->config[$srcType]['type'] ?? null) === 'perforce'
+                    && isset($this->config[$srcType]['url']) && is_string($this->config[$srcType]['url'])
+                    && !Perforce::isValidPort($this->config[$srcType]['url'])
+                ) {
+                    $this->errors[] = $srcType . '.url : invalid Perforce port ("'.$this->config[$srcType]['url'].'"), it must be of the form [tcp|ssl:][host:]port';
+                }
             }
         }
 
@@ -700,6 +708,14 @@ class ValidatingArrayLoader implements LoaderInterface
             }
         }
 
+        // A perforce source.url ends up as the p4 client's P4PORT, and a "rsh:"/"jsh:" endpoint
+        // there makes the client execute the rest of the value as a local command instead of
+        // connecting to a server (GHSA-rvx4-ffvw-m9q3), so only accept network endpoints.
+        $sourceUrl = $package->getSourceUrl();
+        if ($package->getSourceType() === 'perforce' && $sourceUrl !== null && !Perforce::isValidPort($sourceUrl)) {
+            throw new SecurityException($package->getName().' has an invalid source.url, it must be a Perforce port of the form [tcp|ssl:][host:]port: '.$sourceUrl);
+        }
+
         // Bin paths are resolved relative to the package install dir and then chmod'd (and
         // proxied) by BinaryInstaller. A ".." segment escapes that directory and lets a
         // dependency chmod/point at an arbitrary host file (GHSA-gjfg-22fp-rrxx), so reject it.
@@ -708,6 +724,27 @@ class ValidatingArrayLoader implements LoaderInterface
                 throw new SecurityException($package->getName().' has an invalid bin '.$bin.', it must not contain ".." path segments');
             }
         }
+    }
+
+    /**
+     * Validates a bin path, returning the reason it is unacceptable or null if it is fine
+     *
+     * A ".." segment escapes the package install directory and lets the package chmod/point at an
+     * arbitrary host file during install (GHSA-gjfg-22fp-rrxx). The character check is the same one
+     * BinaryInstaller applies before generating a proxy, done here as well so that packagist.org
+     * and composer validate flag such a bin at the source.
+     */
+    private static function findBinError(string $bin): ?string
+    {
+        if (Preg::isMatch('{(?:^|[\\\\/])\.\.(?:[\\\\/]|$)}', $bin)) {
+            return 'must not contain a ".." path component';
+        }
+
+        if (!BinaryInstaller::isSafeBinPath($bin)) {
+            return 'must not contain any of the characters *$`"&^|<>()%!; nor control characters';
+        }
+
+        return null;
     }
 
     /**
