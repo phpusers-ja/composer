@@ -255,6 +255,39 @@ replace/provide規則はここでは考慮すべきではありません。
 これらのフィールドは省略可能です。
 恐らく独自のリポジトリでは必要ないでしょう。
 
+#### Rate limiting and warnings
+
+A repository which needs to turn requests away for a while should respond
+with `429 Too Many Requests` and a `Retry-After` header, either as a number
+of seconds or as an HTTP date. When the interval is 60 seconds or less,
+Composer waits it out and retries the request, up to three times. The
+interval is taken to apply to the whole repository, so no further request to
+it, new or retried, is sent before the latest interval it asked for has
+passed. Requests to other repositories keep downloading in the meantime. A
+longer interval is not waited for, and the request fails with a message
+which says how long the repository asked to wait. A `429` without a
+`Retry-After` header is not retried.
+
+`Retry-After` is also honoured on the status codes Composer already retries,
+such as `503 Service Unavailable`. There, an interval longer than 60 seconds
+is ignored and Composer retries on its usual short backoff.
+
+To tell users why they are limited, and how to raise the limit, return a
+JSON body with a `warning` key and an `application/json` content type:
+
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 30
+Content-Type: application/json
+
+{"warning": "Anonymous requests are limited to 100 per minute, authenticate to raise the limit"}
+```
+
+Composer shows the warning whether it then retries or fails. When many
+parallel requests are limited at once, the warning and the notice that
+Composer is waiting are each shown once per repository, not once per
+request.
+
 #### cURLとストリームオプション
 
 リポジトリへはcURL（ext-curlが有効なComposer 2）またはPHPストリームの何れかを使ってアクセスします。
@@ -438,6 +471,28 @@ The repo-level `filter` only narrows what this repository contributes; it
 cannot enable a list that is not configured globally under
 [`config.policy`](06-config.md#policy).
 
+#### require-published-time
+
+Defaults to `true`. When the [cooldown policy](06-config.md#cooldown) is
+active, Composer errors out and exits if a version from this repository
+carries no `published-time`, as the policy then cannot tell whether the
+version is new or old. Set it to `false` for repositories that cannot
+provide publication times, such as Satis-generated ones, to fall back to the
+`time` field of each package's `composer.json`. That field is set by the
+package author, so the protection is weaker.
+
+```json
+{
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.example.org",
+            "require-published-time": false
+        }
+    ]
+}
+```
+
 ### VCS
 
 VCSはバージョンコントロールシステム (Version Control System)
@@ -595,161 +650,11 @@ Subversionクライアントが既定で資格情報を保存するように構�
 }
 ```
 
-### パッケージ
-
-上記のどの方法でもComposerに対応していないプロジェクトを使いたい場合でも、`package`リポジトリを使って自分でパッケージを定義できます。
-
-基本的に`composer`リポジトリの`package.json`に含まれるのと同じ情報を定義しますが、単一のパッケージ用限定です。
-繰り返しますが、最小限必要なフィールドは`name`、`version`、そして`dist`または`source`の何れかです。
-
-以下は雛形エンジンのsmartyの例です。
-
-```json
-{
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "smarty/smarty",
-                "version": "3.1.7",
-                "dist": {
-                    "url": "https://www.smarty.net/files/Smarty-3.1.7.zip",
-                    "type": "zip"
-                },
-                "source": {
-                    "url": "http://smarty-php.googlecode.com/svn/",
-                    "type": "svn",
-                    "reference": "tags/Smarty_3_1_7/distribution/"
-                },
-                "autoload": {
-                    "classmap": ["libs/"]
-                }
-            }
-        }
-    ],
-    "require": {
-        "smarty/smarty": "3.1.*"
-    }
-}
-```
-
-source部分は放置しておくのが普通です。本当に必要なことはまずないからです。
-
-sourceキーが含まれているとき、referenceフィールドはインストールされるバージョンへの参照となります。
-typeフィールドが`git`のとき、このフィールドはコミットIDやブランチやタグ名になります。
-
-> **補足：**
-> referenceフィールドにGitのブランチ名を使うことはお勧めしません。
-> `git checkout`に対応しているため妥当ではあるのですが、ブランチ名は可変なので固定できないのです。
-
-フィールドが`svn`のとき、referenceフィールドには`svn co`を走らせるときに後ろに付ける参照が含まれます。
-
-> **補足**：
-> このリポジトリ種別には2、3の制約があり、できる限り避けるべきです。
->
-> - Composerは`version`フィールドを変えない限りパッケージを更新しません。
-> - Composerはコミット参照を更新しません。
->   そのため、参照として`master`を使う場合、強制的に更新するためにパッケージを削除し、不安定な固定ファイルに対処しなければならなくなるでしょう。
-
-`package`リポジトリ中の`"package"`キーには複数バージョンのパッケージを定義する配列を設定できます。
-
-```json
-{
-    "repositories": [
-        {
-            "type": "package",
-            "package": [
-                {
-                    "name": "foo/bar",
-                    "version": "1.0.0",
-                    ...
-                },
-                {
-                    "name": "foo/bar",
-                    "version": "2.0.0",
-                    ...
-                }
-            ]
-        }
-    ]
-}
-```
-
-## 自分でホスティングする
-
-多分殆どの場合でパッケージをpackagistに置きたいものと思われますが、自分のリポジトリをホスティングすることによる用途もあります。
-
-* **企業の私有パッケージ：**
-  内部的なパッケージ用にComposerを使っている企業に所属しているなら、それらのパッケージを私有としておきたいかもしれません。
-
-* **別のエコシステム:**
-  独自のエコシステムを持つプロジェクトがあり、より大きなPHPコミュニティからそのパッケージを実際に再利用できない場合は、packagistから分離させておきたいかもしれません。
-  一例はWordPressプラグインです。
-
-自分のパッケージをホスティングするには、ネイティブな`composer`の種類のリポジトリが推奨されます。
-一番の効率性が齎されるからです。
-
-`composer`リポジトリを作る上で、手助けになるツールはいくつかあります。
-
-### 私有Packagist
-
-[私有Packagist](https://packagist.com/)ではGitHub、Packagist.org、その他のパッケージリポジトリのミラーリングと共に私有パッケージのホスティングを提供するアプリケーションです。
-Packagistでも立てられていますが、自分で立てることもできます。
-
-詳細は[Packagist.com](https://packagist.com/)をご確認ください。
-
-### Satis
-
-Satisは静的な`composer`リポジトリ生成器です。
-packagistを超軽量にして、静的なファイルを基盤にしたバージョンのようなものです。
-
-Satisにはリポジトリを含む`composer.json`を与えます。
-リポジトリとしてよくあるのはVCSやパッケージレポジトリの定義です。
-`require`されるパッケージを全て取得し、`packages.json`を吐き出しますが、これが`composer`リポジトリになります。
-
-詳細は[satisのGitHubリポジトリ](https://github.com/composer/satis)と[プライベートパッケージを扱うことについての記事](articles/handling-private-packages.md)をご確認ください。
-
-### アーティファクト
-
-前述のどのリポジトリの種類もオンラインにできない場合があります。
-VCSが使われていたとしても例外ではありません。
-よくある例は、ビルドアーティファクトによる組織間のライブラリ交換です。
-もちろん殆どの場合で、これらは私有とされます。
-これらのアーカイブをそのまま使用するには、これらの私有パッケージのZIPまたはTARアーカイブを含むフォルダーに対して、種別`artifact`のリポジトリを使用できます。
-
-```json
-{
-    "repositories": [
-        {
-            "type": "artifact",
-            "url": "path/to/directory/with/zips/"
-        }
-    ],
-    "require": {
-        "private-vendor-one/core": "15.6.2",
-        "private-vendor-two/connectivity": "*",
-        "acme-corp/parser": "10.3.5"
-    }
-}
-```
-
-それぞれのzipアーティファクトとは、根幹のフォルダにある`composer.json`があるZIPアーカイブです。
-
-```shell
-unzip -l acme-corp-parser-10.3.5.zip
-```
-```text
-composer.json
-...
-```
-
-パッケージのバージョンが異なる2つのアーカイブがある場合、両方ともインポートされます。
-新しいバージョンのアーカイブがアーティファクトフォルダーに追加された状態で`update`を実行すると、そのバージョンもインポートされ、Composerは最新版に更新されます。
-
 ### パス
 
-アーティファクトリポジトリに加えて、絶対パスまたは相対パスのローカルディレクトリに依存するパスを使用できます。
-モノリシックリポジトリを扱う場合に特に役立ちます。
+The `path` repository allows you to depend on a local directory, either
+absolute or relative. This can be especially useful when dealing with
+monolithic repositories.
 
 例えばリポジトリが以下のディレクトリ構造になっているとします。
 ```text
@@ -856,6 +761,157 @@ false`オプションでミラーリングしたりすることを強制でき�
     ]
 }
 ```
+
+### パッケージ
+
+上記のどの方法でもComposerに対応していないプロジェクトを使いたい場合でも、`package`リポジトリを使って自分でパッケージを定義できます。
+
+基本的に`composer`リポジトリの`package.json`に含まれるのと同じ情報を定義しますが、単一のパッケージ用限定です。
+繰り返しますが、最小限必要なフィールドは`name`、`version`、そして`dist`または`source`の何れかです。
+
+以下は雛形エンジンのsmartyの例です。
+
+```json
+{
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "smarty/smarty",
+                "version": "3.1.7",
+                "dist": {
+                    "url": "https://www.smarty.net/files/Smarty-3.1.7.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "http://smarty-php.googlecode.com/svn/",
+                    "type": "svn",
+                    "reference": "tags/Smarty_3_1_7/distribution/"
+                },
+                "autoload": {
+                    "classmap": ["libs/"]
+                }
+            }
+        }
+    ],
+    "require": {
+        "smarty/smarty": "3.1.*"
+    }
+}
+```
+
+source部分は放置しておくのが普通です。本当に必要なことはまずないからです。
+
+sourceキーが含まれているとき、referenceフィールドはインストールされるバージョンへの参照となります。
+typeフィールドが`git`のとき、このフィールドはコミットIDやブランチやタグ名になります。
+
+> **補足：**
+> referenceフィールドにGitのブランチ名を使うことはお勧めしません。
+> `git checkout`に対応しているため妥当ではあるのですが、ブランチ名は可変なので固定できないのです。
+
+フィールドが`svn`のとき、referenceフィールドには`svn co`を走らせるときに後ろに付ける参照が含まれます。
+
+> **補足**：
+> このリポジトリ種別には2、3の制約があり、できる限り避けるべきです。
+>
+> - Composerは`version`フィールドを変えない限りパッケージを更新しません。
+> - Composerはコミット参照を更新しません。
+>   そのため、参照として`master`を使う場合、強制的に更新するためにパッケージを削除し、不安定な固定ファイルに対処しなければならなくなるでしょう。
+
+`package`リポジトリ中の`"package"`キーには複数バージョンのパッケージを定義する配列を設定できます。
+
+```json
+{
+    "repositories": [
+        {
+            "type": "package",
+            "package": [
+                {
+                    "name": "foo/bar",
+                    "version": "1.0.0",
+                    ...
+                },
+                {
+                    "name": "foo/bar",
+                    "version": "2.0.0",
+                    ...
+                }
+            ]
+        }
+    ]
+}
+```
+
+### アーティファクト
+
+前述のどのリポジトリの種類もオンラインにできない場合があります。
+VCSが使われていたとしても例外ではありません。
+よくある例は、ビルドアーティファクトによる組織間のライブラリ交換です。
+もちろん殆どの場合で、これらは私有とされます。
+これらのアーカイブをそのまま使用するには、これらの私有パッケージのZIPまたはTARアーカイブを含むフォルダーに対して、種別`artifact`のリポジトリを使用できます。
+
+```json
+{
+    "repositories": [
+        {
+            "type": "artifact",
+            "url": "path/to/directory/with/zips/"
+        }
+    ],
+    "require": {
+        "private-vendor-one/core": "15.6.2",
+        "private-vendor-two/connectivity": "*",
+        "acme-corp/parser": "10.3.5"
+    }
+}
+```
+
+それぞれのzipアーティファクトとは、根幹のフォルダにある`composer.json`があるZIPアーカイブです。
+
+```shell
+unzip -l acme-corp-parser-10.3.5.zip
+```
+```text
+composer.json
+...
+```
+
+パッケージのバージョンが異なる2つのアーカイブがある場合、両方ともインポートされます。
+新しいバージョンのアーカイブがアーティファクトフォルダーに追加された状態で`update`を実行すると、そのバージョンもインポートされ、Composerは最新版に更新されます。
+
+## 自分でホスティングする
+
+多分殆どの場合でパッケージをpackagistに置きたいものと思われますが、自分のリポジトリをホスティングすることによる用途もあります。
+
+* **企業の私有パッケージ：**
+  内部的なパッケージ用にComposerを使っている企業に所属しているなら、それらのパッケージを私有としておきたいかもしれません。
+
+* **別のエコシステム:**
+  独自のエコシステムを持つプロジェクトがあり、より大きなPHPコミュニティからそのパッケージを実際に再利用できない場合は、packagistから分離させておきたいかもしれません。
+  一例はWordPressプラグインです。
+
+自分のパッケージをホスティングするには、ネイティブな`composer`の種類のリポジトリが推奨されます。
+一番の効率性が齎されるからです。
+
+`composer`リポジトリを作る上で、手助けになるツールはいくつかあります。
+
+### 私有Packagist
+
+[私有Packagist](https://packagist.com/)ではGitHub、Packagist.org、その他のパッケージリポジトリのミラーリングと共に私有パッケージのホスティングを提供するアプリケーションです。
+Packagistでも立てられていますが、自分で立てることもできます。
+
+詳細は[Packagist.com](https://packagist.com/)をご確認ください。
+
+### Satis
+
+Satisは静的な`composer`リポジトリ生成器です。
+packagistを超軽量にして、静的なファイルを基盤にしたバージョンのようなものです。
+
+Satisにはリポジトリを含む`composer.json`を与えます。
+リポジトリとしてよくあるのはVCSやパッケージレポジトリの定義です。
+`require`されるパッケージを全て取得し、`packages.json`を吐き出しますが、これが`composer`リポジトリになります。
+
+詳細は[satisのGitHubリポジトリ](https://github.com/composer/satis)と[プライベートパッケージを扱うことについての記事](articles/handling-private-packages.md)をご確認ください。
 
 ## Packagist.orgを無効にする
 

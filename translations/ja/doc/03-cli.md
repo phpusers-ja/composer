@@ -113,19 +113,21 @@ php composer.phar install
 * **--audit:** インストールが完了した後に監査を走らせます。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:**
-  非推奨であり、`--no-blocking`を代用してください。
-  セキュリティ勧告があったり放棄されたりしているパッケージのインストールを許容します。
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
-* **--no-blocking:**
-  このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にします。
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
+  instead. Allows installing packages with security advisories, that are
+  abandoned or that are still in the cooldown period. Also see
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy based dependency blocking during
+  this command, including the cooldown period. Also see
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--optimize-autoloader (-o):** PSR-0の自動読み込みをクラス対応表に変換して自動読み込みを高速にします。
   実運用では特にお勧めしますが、走らせるのに少し時間が掛かることがあるので、現在は既定ではされません。
 * **--classmap-authoritative (-a):** クラス対応表からクラスのみを自動読み込みします。
   暗黙裡に`--optimize-autoloader`を有効にします。
-* **--strict-psr-autoloader:**
-  現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存在するなら失敗の終了コード (6) を返します。
-  動作には`--optimize-autoloader`が必要です。
+* **--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or
+  PSR-0 mapping errors are present in the current project (dependencies
+  excluded). Requires `--optimize-autoloader` or `--classmap-authoritative`
+  to work.
 * **--apcu-autoloader:** APCuを使って、クラスの有無をキャッシュします。
 * **--apcu-autoloader-prefix:** APCu自動読み込み器のキャッシュ用に独自の接頭辞を使います。
   暗黙裡に`--apcu-autoloader`を有効にします。
@@ -203,12 +205,13 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
   composer.lockを更新した後の監査過程を走らせません。[COMPOSER_NO_AUDIT](#composer-no-audit)も参照してください。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:**
-  非推奨であり、`--no-blocking`を代用してください。
-  セキュリティ勧告があったり放棄されたりしているパッケージのインストールを許容します。
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
-* **--no-blocking:**
-  このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にします。
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
+  instead. Allows installing packages with security advisories, that are
+  abandoned or that are still in the cooldown period. Also see
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy based dependency blocking during
+  this command, including the cooldown period. Also see
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--lock:**
   パッケージのバージョンを更新せず、固定ファイルが期限切れであることについての警告を抑えるために固定ファイルを上書きします。
   ミラーやURLといったパッケージのメタデータが変更されていれば更新します。
@@ -230,9 +233,10 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
   特に実運用で推奨されますが、走らせるのに少し時間が掛かるため、現時点では既定では有効になっていません。
 * **--classmap-authoritative (-a):** クラス対応表からクラスのみを自動読み込みします。
   暗黙裡に`--optimize-autoloader`を有効にします。
-* **--strict-psr-autoloader:**
-  現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存在するなら失敗の終了コード (6) を返します。
-  動作には`--optimize-autoloader`が必要です。
+* **--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or
+  PSR-0 mapping errors are present in the current project (dependencies
+  excluded). Requires `--optimize-autoloader` or `--classmap-authoritative`
+  to work.
 * **--apcu-autoloader:** APCuを使って、クラスの有無をキャッシュします。
 * **--apcu-autoloader-prefix:** APCu自動読み込み器のキャッシュ用に独自の接頭辞を使います。
   暗黙裡に`--apcu-autoloader`を有効にします。
@@ -314,13 +318,13 @@ php composer.phar require vendor/package vendor/package2
   composer.lockを更新した後の監査過程を走らせません。[COMPOSER_NO_AUDIT](#composer-no-audit)も参照してください。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:**
-  非推奨であり、`--no-blocking`を代用してください。
-  セキュリティ勧告があったり放棄されたりしているパッケージのインストールを許容します。
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
-* **--no-blocking:**
-  このコマンドの間はすべてのポリシーによる遮断を無効にします。
-  [COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
+  instead. Allows installing packages with security advisories, that are
+  abandoned or that are still in the cooldown period. Also see
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy blocking during this command,
+  including the cooldown period. Also see
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--update-no-dev:**
   `--no-dev`オプションと共に依存関係の更新を走らせます。[COMPOSER_NO_DEV](#composer-no-dev)も参照してください。
 * **--update-with-dependencies (-w):**
@@ -383,12 +387,13 @@ php composer.phar remove vendor/package vendor/package2
   [COMPOSER_NO_AUDIT](#composer-no-audit)も参照してください。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:**
-  非推奨であり、`--no-blocking`を代用してください。
-  セキュリティ勧告があったり放棄されたりしているパッケージのインストールを許容します。
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
-* **--no-blocking:**
-  このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にします。
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
+  instead. Allows installing packages with security advisories, that are
+  abandoned or that are still in the cooldown period. Also see
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy based dependency blocking during
+  this command, including the cooldown period. Also see
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--update-no-dev:**
   --no-devオプションで依存関係の更新を走らせます。[COMPOSER_NO_DEV](#composer-no-dev)も参照してください。
 * **--update-with-dependencies (-w):**
@@ -623,6 +628,10 @@ php composer.phar show monolog/monolog 1.0.2
 * **--sort-by-age (-A):**
   インストールされたバージョンの経過時間を表示し、古い順にパッケージを整列します。
   --latestないし--outdatedオプションと一緒に使ってください。
+* **--cooldown-period:** Overrides the configured
+  [policy.cooldown.period](06-config.md#period) while looking up latest
+  versions, even when the policy is disabled or not blocking; `0` disables
+  it for this run. Use with the --latest or --outdated option.
 * **--direct (-D):** パッケージの一覧を直接的な依存関係に限定します。
 * **--strict:** 時代遅れのパッケージがあるときは非ゼロの終了コードを返します。
 * **--format (-f):** 出力形式としてtext（既定）ないしjsonを選びます。
@@ -646,6 +655,17 @@ php composer.phar show monolog/monolog 1.0.2
   そのため更新できそうならしても良いですが、作業が発生する可能性があります。
 - **red (!)**:
   依存関係にセマンティックバージョニング上互換性のある新しいバージョンがあり、更新するべきです。
+- **uncolored (c)**: Dependency has a newer version that is still in the
+  [cooldown period](06-config.md#cooldown)  and cannot be installed yet; the
+  time left is shown next to it. Such packages are listed, but do not count
+  as outdated for `--strict`.
+
+When a cooldown period is configured, the latest version shown is the newest
+one the cooldown policy allows installing, so the output matches what
+`composer update` would do. A newer release still in the cooldown period is
+shown next to it with the time left, or in its place once you are on the
+newest installable version. When several are waiting, the one that becomes
+installable first is shown.
 
 ### オプション
 
@@ -663,6 +683,10 @@ php composer.phar show monolog/monolog 1.0.2
   パッチ水準のセマンティックバージョニング上の互換性を伴う更新のみ示します。
 * **--sort-by-age (-A):**
   インストールされたバージョンの経過時間を表示し、古い順にパッケージを整列します。
+* **--cooldown-period:** Overrides the configured
+  [policy.cooldown.period](06-config.md#period), even when the policy is
+  disabled or not blocking; `0` shows the newest releases regardless of the
+  cooldown policy.
 * **--format (-f):** 出力形式としてtext（既定）ないしjsonを選びます。
 * **--no-dev:** 時代遅れの開発用依存関係を表示しません。
 * **--locked:**
@@ -846,24 +870,15 @@ sudo -H composer self-update
 
 ComposerがPHARとしてインストールされていなければこのコマンドは使えません（Composerがオペレーティングシステムのパッケージ管理によってインストールされたときはこの場合に当たることがあります）。
 
-When updating, Composer warns you if the version you are on or updating to
-is end of life, or is an older line nearing end of life that only receives
-critical security fixes, and points you to the latest stable release. If a
-newer Composer version exists but requires a newer PHP version than the one
-you are running, Composer tells you which PHP version you would need and
-that you are pinned to an older release line.
+更新時、今いるバージョンや更新先のバージョンが保守終了であるか、または致命的なセキュリティの修正のみが取得される保守終了が間近のより古いバージョン系列であれば、Composerは警告し、最新安定リリースを指し示します。
+より新しいComposerのバージョンは存在するものの走らせているものより新しいPHPのバージョンが要求されるなら、Composerは必要になるPHPのバージョンがどれかと今はより古いリリース系列に釘付けされていることを伝えます。
 
-Backups created for `--rollback` are stored in the
-[`data-dir`](06-config.md#data-dir), and the public keys used to verify
-downloads are stored in `COMPOSER_HOME`. Both directories must be writable
-only by the user that owns the Composer installation and should be treated
-as trusted: a directory writable by other users could be used to plant a
-malicious `composer.phar` that a privileged `self-update --rollback` would
-then install.  When rolling back to a tagged release the backup is verified
-against the published signature from getcomposer.org before being installed
-(the rollback aborts on a mismatch or if the signature cannot be
-downloaded); snapshot/dev builds cannot be verified this way, so a rollback
-to one asks for confirmation when run interactively.
+`--rollback`で作成されたバックアップは[`data-dir`](06-config.md#data-dir)中に保管され、ダウンロードの検証に使われる公開鍵は`COMPOSER_HOME`中に保管されます。
+両方のディレクトリはComposerのインストール物を所有する利用者によってのみ書き込みできなければならず信頼されたものとして扱われるべきです。
+つまり他の利用者により書き込めるディレクトリは悪意のある`composer.phar`を植え付けるために使われ得り、特権つきの`self-update
+--rollback`でインストールされるでしょう。
+タグ付きリリースにロールバックするときは、インストールされる前にバックアップはgetcomposer.orgより公開された署名に対して検証されます（不一致または署名がダウンロードできなければロールバックは中座されます）。
+ただしスナップショット／開発版の構築物はこのように検証できませんから、対話的に走らせているときはそれらへのロールバックで確定するか尋ねます。
 
 ### オプション
 
@@ -918,8 +933,15 @@ php composer.phar config --list
   なお、`--global`オプションと織り交ぜて使うことはできません。
 * **--absolute:**
   `*-dir`設定値を取得するとき、相対パスではなく絶対パスを返します。
-* **--json:** 設定値をJSONでデコードします。このデコード結果は`extra.*`キーで使うことができます。
-* **--merge:** 設定値を現在の値と統合します。`--json`と組み合わせて`extra.*`キーに使えます。
+* **--json:** JSON decode the setting value. Only supported for `extra.*`,
+  `policy.*.ignore`, `policy.advisories.ignore-id`,
+  `policy.ignore-unreachable`, `audit.ignore` and `audit.ignore-abandoned`
+  keys, it is ignored for all other keys.
+* **--merge:** Merge the setting value with the current value instead of
+  replacing it. Only supported for `extra.*` keys in combination with
+  `--json`, and for `policy.*.ignore`, `policy.advisories.ignore-id`,
+  `audit.ignore` and `audit.ignore-abandoned` keys with or without
+  `--json`. It is ignored for all other keys.
 * **--append:** リポジトリを追加するとき、既存のものの先頭に追加する（最優先）のではなく末尾に付ける（低優先）ようにします。
 * **--source:** 設定値がどこから読み込まれたのかを表示します。
 
@@ -1003,13 +1025,13 @@ php composer.phar repo enable packagist.org
 
 ## policy
 
-The `policy` command lets you manage custom dependency policies and their
-sources in your `composer.json` under `config.policy`. A source points
-Composer at a remote URL which provides the set of package versions the
-policy applies to. Adding a source for a dependency policy that does not yet
-exist will create the policy automatically.
+`policy`コマンドでは`composer.json`中の`config.policy`配下で独自の依存関係の方針とそのソースを管理します。
+ソースはその方針が適用する先のパッケージのバージョンの集合を提供する遠隔のURLをComposerに指し示します。
+まだ存在しない依存関係の方針のためのソースを追加すると自動でその方針が作成されます。
 
-Built-in dependency policies (`advisories`, `malware`, `abandoned`) do not accept sources and are rejected. To change their settings, use `composer config policy.<policy>.<field>` instead — see the [policy](06-config.md#policy) config documentation.
+組み込みの依存関係の方針 (`advisories`, `malware`, `abandoned`) はソースを受け付けず却下します。
+設定を変えるには、代わりに`composer config policy.<方針>.<フィールド>`を使ってください。
+構成の文書については[方針](06-config.md#policy)をご参照ください。
 
 ### 使い方
 
@@ -1092,24 +1114,24 @@ php composer.phar create-project composer/hello-world my-project
   [COMPOSER_NO_AUDIT](#composer-no-audit)も参照してください。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:**
-  非推奨であり、`--no-blocking`を代用してください。
-  セキュリティ勧告があったり放棄されたりしているパッケージのインストールを許容します。
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
-* **--no-blocking:**
-  このコマンドの間はすべてのポリシーによる遮断を無効にします。
-  [COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。
+* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
+  instead. Allows installing packages with security advisories, that are
+  abandoned or that are still in the cooldown period. Also see
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
+* **--no-blocking:** Disables all policy blocking during this command,
+  including the cooldown period. Also see
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
 * **--ignore-platform-reqs:**
   全てのプラットフォーム要件（`php`、`hhvm`、`lib-*`、`ext-*`）を無視し、ローカルマシンがたとえこれらを満たしていなくてもインストールを強行します。
   [`platform`](06-config.md#platform)設定オプションも参照してください。
 * **--ignore-platform-req:**
   特定のプラットフォーム要件（`php`、`hhvm`、`lib-*`、`ext-*`）を無視して、たとえローカルマシンが満たしていなかったとしても、インストールを強行します。
   ワイルドカードを使って複数の要件を無視できます。
-* **--require:** Require additional package(s) to be added to composer.json
-  after installing the project. If a lock file is present it will be deleted
-  and an update will be run instead of install. Can be specified multiple
-  times for multiple packages. Should be in format `foo/bar:1.0.0` format if
-  you want to specify a constraint.
+* **--require:**
+  プロジェクトをインストールした後に追加のパッケージをcomposer.jsonへ追加することを要求。
+  固定ファイルが存在するなら削除されインストールの代わりに更新が走ります。
+  複数のパッケージ用に複数回指定できます。
+  制約を指定したければ`foo/bar:1.0.0`の形式にすべきです。
 * **--ask:** 利用者に新しいプロジェクトの対象ディレクトリを入れてもらうようにします。
 
 ## dump-autoload / dumpautoload
@@ -1144,9 +1166,10 @@ php composer.phar create-project composer/hello-world my-project
 * **--strict-psr:**
   現在のプロジェクトで、PSR-4またはPSR-0の対応付けで失敗する場合、失敗の終了コード (1) を返します。
   動作には`--optimize`が必要です。
-* **--strict-ambiguous:**
-  複数ファイルに同じクラスがあるとき、失敗の終了コード (2) を返します。
-  動作には`--optimize`が必要です。
+* **--strict-ambiguous:** Return a failed exit code (2) if the same class is
+  found in multiple files. It also checks if files or folders exist with
+  different case variants that cause issues on case-insensitive
+  filesystems. Requires `--optimize` to work.
 
 ## clear-cache / clearcache / cc
 
@@ -1288,11 +1311,11 @@ COMPOSER=composer-other.json php composer.phar install
 
 ### COMPOSER_ALLOW_UNSAFE_PHAR_METADATA
 
-This env var only has an effect on PHP versions before 8.0. On those versions Composer
-refuses to read or extract `tar`/`phar` dist archives, because parsing such an archive
-is not safe to do with untrusted input on PHP < 8.0. The recommended fix is to upgrade
-to PHP 8.0 or newer. If you cannot upgrade and accept the risk, set this to 1 to allow
-Composer to process these archives anyway. PHP 8.0+ is unaffected and ignores this setting.
+この環境変数はPHPのバージョン8.0より前でのみ効果があります。
+それらのバージョンではComposerは`tar`/`phar`の配布物のアーカイブを読んだり抽出したりすることを拒絶しますが、それはPHP < 8.0では信頼されない入力にそうすることは安全でないからです。
+推奨される修正はPHP 8.0かそれより新しいものへ更新することです。
+更新できず危険性を受け入れるなら、これを1に設定するととにもかくにもComposerがこれらのアーカイブを処理することを許容します。
+PHP 8.0+では影響がなくこの設定を無視します。
 
 ### COMPOSER_ALLOW_XDEBUG
 
@@ -1320,6 +1343,9 @@ Composer to process these archives anyway. PHP 8.0+ is unaffected and ignores th
 Windowsにおいて既定では`C:\Users\<user>\AppData\Local\Composer`（もしくは`%LOCALAPPDATA%/Composer`）を指します。
 \*nixシステムでは[XDG Base Directory Specifications](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)に従い、`$XDG_CACHE_HOME/composer`を指します。他の\*nixシステムとmacOSにおいては`$COMPOSER_HOME/cache`を指します。
 
+See [Caching Composer dependencies](articles/caching.md) for how to cache it
+in CI and container builds.
+
 ### COMPOSER_CAFILE
 
 この環境値を設定することで、パスを証明書バンドルファイルに設定してSSL/TLSピア検証で使えるようにします。
@@ -1345,9 +1371,7 @@ Windowsにおいて既定では`C:\Users\<user>\AppData\Local\Composer`（もし
 
 既定では、Windowsにおいては`C:\Users\<user>\AppData\Roaming\Composer`を、macOSにおいては`/Users/<user>/.composer`を指します。\*nixシステムでは[XDG Base Directory Specifications](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)に従い、`$XDG_CONFIG_HOME/composer`を指します。他の\*nixシステムでは`/home/<user>/.composer`を指します。
 
-This directory holds the public keys used to verify Composer downloads
-during `self-update`, so it must be writable only by the user that owns the
-Composer installation and should be treated as a trusted location.
+このディレクトリには`self-update`の間にComposerのダウンロード物を検証するために使われる公開鍵が保管されるため、Composerのインストール物を所有する利用者によってのみ書き込みできなければならず信頼された場所として扱われるべきです。
 
 #### COMPOSER_HOME/config.json
 
@@ -1446,48 +1470,48 @@ composer.jsonで`policy.abandoned`が`false`に設定されているときは効
 
 ### COMPOSER_POLICY
 
-Main dependency policy switch. Set to `0` to disable all dependency policy
-enforcement on updates, installs and audits, or `1` to enable it. Setting
-this to `1` will use the policy configuration in the composer.json. If you
-want to change the config value, use `composer config policy 1` instead.
+主要な依存関係の方針のスイッチです。
+`0`に設定すると更新、インストール、監査での全ての依存関係の方針の促進が無効となり、あるいは`1`とすればそれを有効にします。
+これを`1`に設定するとcomposer.json中での方針の構成を使います。
+構成値を変えたければ、代わりに`composer config policy 1`を使ってください。
 
 `0`に設定したときは、以降のポリシー固有のオーバーライドすべてが無視されます――依存関係のポリシーの構成の全体が短絡され無効になります。
 
 ### COMPOSER_NO_BLOCKING
 
-`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-blocking`オプションを渡すことと等価になります。
-これはすべてのポリシーに基づく依存関係の遮断を無効にします。
-例えば[policy.advisories.block](06-config.md#block)のようなそれぞれの構成された依存関係のポリシーに対して`block`構成オプションをオーバーライドします。
+If set to `1`, it is the equivalent of passing the `--no-blocking` option to
+a `require`, `update`, `remove`, `install`, or `create-project`
+command. This disables all policy based blocking of dependencies, including
+the cooldown period. It overrides the `block` config option for each
+configured dependency policy
+e.g. [policy.advisories.block](06-config.md#block).
 
 ### COMPOSER_NO_SECURITY_BLOCKING
 
 非推奨であり、[COMPOSER_NO_BLOCKING](#composer-no-blocking)を代用してください。
 
-`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-security-blocking`オプションを渡すことと等価になります。
-これにより、セキュリティ勧告があったり放棄されたりしているパッケージをインストールすることが許容されます。
-構成オプション[policy.advisories.block](06-config.md#block)をオーバーライドします。
+If set to `1`, it is the equivalent of passing the `--no-security-blocking`
+option to a `require`, `update`, `remove`, `install`, or `create-project`
+command. This allows installing packages with security advisories, that are
+abandoned or that are still in the cooldown period. It overrides the config
+option [policy.advisories.block](06-config.md#block).
 
 ### COMPOSER_POLICY_ADVISORIES_BLOCK
 
-If set to `1`, enables blocking of packages with security advisories during
-dependency resolution (equivalent to setting `policy.advisories.block` to
-`true`). If set to `0`, disables blocking.
+`1`に設定すると、依存関係の解決の最中にセキュリティ勧告付きのパッケージの遮断を有効にします（設定の`policy.advisories.block`を`true`にすることと等価）。
+`0`に設定すれば、遮断を無効にします。
 
 ### COMPOSER_POLICY_MALWARE_BLOCK
 
-If set to `1`, enables blocking of packages flagged as malware during
-dependency resolution (equivalent to setting `policy.malware.block` to
-`true`). If set to `0`, disables blocking.
+`1`に設定すれば、依存関係の解決の最中にマルウェアとして旗が立てられたパッケージの遮断を有効にします（設定の`policy.malware.block`を`true`にすることと等価）。
+`0`に設定すれば、遮断を無効にします。
 
 ### COMPOSER_POLICY_ABANDONED_BLOCK
 
-If set to `1`, enables blocking of abandoned packages during dependency
-resolution (equivalent to setting `policy.abandoned.block` to `true`). If
-set to `0`, disables blocking.
+`1`に設定すれば、依存関係の解決の最中に放棄されたパッケージの遮断を有効にします（`policy.abandoned.block`を`true`に設定することと等価）。
+`0`に設定すれば、遮断を無効にします。
 
-Value takes precedence over the value of the legacy variable
-[COMPOSER_SECURITY_BLOCKING_ABANDONED](#composer-security-blocking-abandoned)
-when it's set to a different value.
+この値に古い変数[COMPOSER_SECURITY_BLOCKING_ABANDONED](#composer-security-blocking-abandoned)と違った値に設定されている場合はその設定の値より優先されます。
 
 ### COMPOSER_SECURITY_BLOCKING_ABANDONED
 
@@ -1496,6 +1520,22 @@ when it's set to a different value.
 `1`に設定すると、依存関係を解決するとき、放棄されたパッケージの遮断を有効にします（`audit.block-abandoned`の構成を`true`に設定することと等価です）。
 `0`に設定すると、放棄されたパッケージの遮断を無効にします。
 構成オプション[audit.block-abandoned](06-config.md#block-abandoned)をオーバーライドします。
+
+### COMPOSER_POLICY_COOLDOWN_PERIOD
+
+If set to a value accepted by [policy.cooldown.period](06-config.md#period),
+such as `"7 days"`, `"24 hours"` or an integer number of seconds, enables
+the cooldown policy. Package versions published within that period are
+withheld during `composer update`/`require`. Set to `0` to disable.  This
+overrides only the `period` value from
+[policy.cooldown](06-config.md#cooldown); any `ignore` rules configured in
+composer.json are still respected.
+
+### COMPOSER_POLICY_COOLDOWN_BLOCK
+
+If set to `1`, forces cooldown blocking on; if set to `0`, disables
+it. Overrides the [policy.cooldown.block](06-config.md#block-3) config
+option.
 
 ### COMPOSER_NO_DEV
 
