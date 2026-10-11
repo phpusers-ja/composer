@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
 "POT-Creation-Date: 2026-10-11 09:20+0900\n"
-"PO-Revision-Date: 2026-10-11 09:20+0900\n"
+"PO-Revision-Date: 2026-10-11 09:37+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -2662,12 +2662,6 @@ msgstr ""
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:141 ../doc/03-cli.md:249 ../doc/03-cli.md:329
 #: ../doc/03-cli.md:377 ../doc/03-cli.md:1084
-#, fuzzy
-#| msgid ""
-#| "**--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. "
-#| "Allows installing packages with security advisories or that are "
-#| "abandoned. Also see [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-"
-#| "blocking)."
 msgid ""
 "**--no-security-blocking:** DEPRECATED, use `--no-blocking` instead. Allows "
 "installing packages with security advisories, that are abandoned or that are "
@@ -2676,23 +2670,19 @@ msgid ""
 msgstr ""
 "**--no-security-blocking:**\n"
 "非推奨であり、`--no-blocking`を代用してください。\n"
-"セキュリティ勧告があったり放棄されたりしているパッケージのインストールを許容"
-"します。\n"
+"セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。\n"
 "[COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。"
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:141 ../doc/03-cli.md:249 ../doc/03-cli.md:377
-#, fuzzy
-#| msgid ""
-#| "**--no-blocking:** Disables all policy based dependency blocking during "
-#| "this command. Also see [COMPOSER_NO_BLOCKING](#composer-no-blocking)."
 msgid ""
 "**--no-blocking:** Disables all policy based dependency blocking during this "
 "command, including the cooldown period. Also see [COMPOSER_NO_BLOCKING]"
 "(#composer-no-blocking)."
 msgstr ""
 "**--no-blocking:**\n"
-"このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にします。"
+"このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。\n"
+"[COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。"
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:141 ../doc/03-cli.md:377 ../doc/03-cli.md:442
@@ -2719,20 +2709,14 @@ msgstr ""
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:141 ../doc/03-cli.md:249
-#, fuzzy
-#| msgid ""
-#| "**--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or "
-#| "PSR-0 mapping errors are present in the current project (dependencies "
-#| "excluded). Requires `--optimize-autoloader` to work."
 msgid ""
 "**--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or PSR-0 "
 "mapping errors are present in the current project (dependencies excluded). "
 "Requires `--optimize-autoloader` or `--classmap-authoritative` to work."
 msgstr ""
 "**--strict-psr-autoloader:**\n"
-"現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存"
-"在するなら失敗の終了コード (6) を返します。\n"
-"動作には`--optimize-autoloader`が必要です。"
+"現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存在するなら失敗の終了コード (6) を返します。\n"
+"動作には`--optimize-autoloader`または`--classmap-authoritative`が必要です。"
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:141 ../doc/03-cli.md:249 ../doc/03-cli.md:329
@@ -3142,17 +3126,13 @@ msgstr ""
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:329 ../doc/03-cli.md:1084
-#, fuzzy
-#| msgid ""
-#| "**--no-blocking:** Disables all policy blocking during this command. Also "
-#| "see [COMPOSER_NO_BLOCKING](#composer-no-blocking)."
 msgid ""
 "**--no-blocking:** Disables all policy blocking during this command, "
 "including the cooldown period. Also see [COMPOSER_NO_BLOCKING](#composer-no-"
 "blocking)."
 msgstr ""
 "**--no-blocking:**\n"
-"このコマンドの間はすべてのポリシーによる遮断を無効にします。\n"
+"このコマンドの間はすべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。\n"
 "[COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。"
 
 #. type: Bullet: '* '
@@ -5424,10 +5404,6 @@ msgstr ""
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:1123
-#, fuzzy
-#| msgid ""
-#| "**--strict-ambiguous:** Return a failed exit code (2) if the same class "
-#| "is found in multiple files. Requires `--optimize` to work."
 msgid ""
 "**--strict-ambiguous:** Return a failed exit code (2) if the same class is "
 "found in multiple files. It also checks if files or folders exist with "
@@ -5435,7 +5411,8 @@ msgid ""
 "Requires `--optimize` to work."
 msgstr ""
 "**--strict-ambiguous:**\n"
-"複数ファイルに同じクラスがあるとき、失敗の終了コード (2) を返します。\n"
+"複数ファイルに同じクラスが見られるとき、失敗の終了コード (2) を返します。\n"
+"ファイルまたはフォルダが違う大文字と小文字の変種で存在するかも検査しますが、それらは大文字と小文字を区別しないファイルシステムで問題を引き起こします。\n"
 "動作には`--optimize`が必要です。"
 
 #. type: Title ##
@@ -6457,13 +6434,6 @@ msgstr "COMPOSER_NO_BLOCKING"
 
 #. type: Plain text
 #: ../doc/03-cli.md:1458
-#, fuzzy
-#| msgid ""
-#| "If set to `1`, it is the equivalent of passing the `--no-blocking` option "
-#| "to a `require`, `update`, `remove`, `install`, or `create-project` "
-#| "command. This disables all policy based blocking of dependencies. It "
-#| "overrides the `block` config option for each configured dependency policy "
-#| "e.g. [policy.advisories.block](06-config.md#block)."
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--no-blocking` option to "
 "a `require`, `update`, `remove`, `install`, or `create-project` command. "
@@ -6471,11 +6441,9 @@ msgid ""
 "cooldown period. It overrides the `block` config option for each configured "
 "dependency policy e.g. [policy.advisories.block](06-config.md#block)."
 msgstr ""
-"`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コ"
-"マンドに`--no-blocking`オプションを渡すことと等価になります。\n"
-"これはすべてのポリシーに基づく依存関係の遮断を無効にします。\n"
-"例えば[policy.advisories.block](06-config.md#block)のようなそれぞれの構成され"
-"た依存関係のポリシーに対して`block`構成オプションをオーバーライドします。"
+"`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-blocking`オプションを渡すことと等価になります。\n"
+"これはすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間を含みます。\n"
+"例えば[policy.advisories.block](06-config.md#block)のような、それぞれの構成された依存関係のポリシーに対して`block`構成オプションをオーバーライドします。"
 
 #. type: Title ###
 #: ../doc/03-cli.md:1459
@@ -6492,13 +6460,6 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/03-cli.md:1464
-#, fuzzy
-#| msgid ""
-#| "If set to `1`, it is the equivalent of passing the `--no-security-"
-#| "blocking` option to a `require`, `update`, `remove`, `install`, or "
-#| "`create-project` command. This allows installing packages with security "
-#| "advisories or that are abandoned. It overrides the config option "
-#| "[policy.advisories.block](06-config.md#block)."
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--no-security-blocking` "
 "option to a `require`, `update`, `remove`, `install`, or `create-project` "
@@ -6506,12 +6467,9 @@ msgid ""
 "abandoned or that are still in the cooldown period. It overrides the config "
 "option [policy.advisories.block](06-config.md#block)."
 msgstr ""
-"`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コ"
-"マンドに`--no-security-blocking`オプションを渡すことと等価になります。\n"
-"これにより、セキュリティ勧告があったり放棄されたりしているパッケージをインス"
-"トールすることが許容されます。\n"
-"構成オプション[policy.advisories.block](06-config.md#block)をオーバーライドし"
-"ます。"
+"`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-security-blocking`オプションを渡すことと等価になります。\n"
+"これにより、セキュリティ勧告があるパッケージをインストールすることが許容されますが、それらは放棄されたりまだ冷却期間にあるものです。\n"
+"構成オプション[policy.advisories.block](06-config.md#block)をオーバーライドします。"
 
 #. type: Title ###
 #: ../doc/03-cli.md:1465
@@ -6607,10 +6565,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../doc/03-cli.md:1485
-#, fuzzy, no-wrap
-#| msgid "COMPOSER_POLICY_ABANDONED_BLOCK"
+#, no-wrap
 msgid "COMPOSER_POLICY_COOLDOWN_PERIOD"
-msgstr "COMPOSER_POLICY_ABANDONED_BLOCK"
+msgstr "COMPOSER_POLICY_COOLDOWN_PERIOD"
 
 #. type: Plain text
 #: ../doc/03-cli.md:1492
@@ -6626,10 +6583,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../doc/03-cli.md:1493
-#, fuzzy, no-wrap
-#| msgid "COMPOSER_POLICY_ABANDONED_BLOCK"
+#, no-wrap
 msgid "COMPOSER_POLICY_COOLDOWN_BLOCK"
-msgstr "COMPOSER_POLICY_ABANDONED_BLOCK"
+msgstr "COMPOSER_POLICY_COOLDOWN_BLOCK"
 
 #. type: Plain text
 #: ../doc/03-cli.md:1497
@@ -7708,10 +7664,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../doc/04-schema.md:309
-#, fuzzy, no-wrap
-#| msgid "ignore-source"
+#, no-wrap
 msgid "source"
-msgstr "ignore-source"
+msgstr "source"
 
 #. type: Plain text
 #: ../doc/04-schema.md:312
@@ -7726,16 +7681,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:315
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"repositories\": [\n"
-#| "        {\n"
-#| "            \"type\": \"composer\",\n"
-#| "            \"url\": \"https://example.org\"\n"
-#| "        }\n"
-#| "    ]\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"source\": {\n"
@@ -7746,27 +7692,22 @@ msgid ""
 "}\n"
 msgstr ""
 "{\n"
-"    \"repositories\": [\n"
-"        {\n"
-"            \"type\": \"composer\",\n"
-"            \"url\": \"https://example.org\"\n"
-"        }\n"
-"    ]\n"
+"    \"source\": {\n"
+"        \"type\": \"git\",\n"
+"        \"url\": \"https://github.com/composer/composer.git\",\n"
+"        \"reference\": \"2.8.0\"\n"
+"    }\n"
 "}\n"
 
 #. type: Plain text
 #: ../doc/04-schema.md:328
-#, fuzzy
-#| msgid ""
-#| "Where the type field is `svn`, the reference field should contain the "
-#| "reference that gets appended to the URL when running `svn co`."
 msgid ""
 "Where `type` is `git`, the reference is a commit id, branch or tag name. "
 "Where it is `svn`, it is the reference that gets appended to the URL when "
 "running `svn co`."
 msgstr ""
-"フィールドが`svn`のとき、referenceフィールドには`svn co`を走らせるときに後ろ"
-"に付ける参照が含まれます。"
+"`type`が`git`の場合、参照はコミット識別子か、ブランチか、タグ名です。\n"
+"`svn`の場合、`svn co`を走らせるときにURLの後ろに付ける参照です。"
 
 #. type: Plain text
 #: ../doc/04-schema.md:334
@@ -7799,16 +7740,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:344
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"name\": \"smarty/smarty\",\n"
-#| "    \"version\": \"3.1.7\",\n"
-#| "    \"dist\": {\n"
-#| "        \"url\": \"https://www.smarty.net/files/Smarty-3.1.7.zip\",\n"
-#| "        \"type\": \"zip\"\n"
-#| "    }\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"dist\": {\n"
@@ -7818,11 +7750,9 @@ msgid ""
 "}\n"
 msgstr ""
 "{\n"
-"    \"name\": \"smarty/smarty\",\n"
-"    \"version\": \"3.1.7\",\n"
 "    \"dist\": {\n"
-"        \"url\": \"https://www.smarty.net/files/Smarty-3.1.7.zip\",\n"
-"        \"type\": \"zip\"\n"
+"        \"type\": \"zip\",\n"
+"        \"url\": \"https://www.smarty.net/files/Smarty-3.1.7.zip\"\n"
 "    }\n"
 "}\n"
 
@@ -7857,16 +7787,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:369
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"repositories\": [\n"
-#| "        {\n"
-#| "            \"type\": \"composer\",\n"
-#| "            \"url\": \"https://example.org\"\n"
-#| "        }\n"
-#| "    ]\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"dist\": {\n"
@@ -7876,12 +7797,10 @@ msgid ""
 "}\n"
 msgstr ""
 "{\n"
-"    \"repositories\": [\n"
-"        {\n"
-"            \"type\": \"composer\",\n"
-"            \"url\": \"https://example.org\"\n"
-"        }\n"
-"    ]\n"
+"    \"dist\": {\n"
+"        \"type\": \"zip\",\n"
+"        \"url\": \"https://example.org/dist/%package%/%prettyVersion%.zip\"\n"
+"    }\n"
 "}\n"
 
 #. type: Plain text
@@ -9192,45 +9111,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:925
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"repositories\": [\n"
-#| "        {\n"
-#| "            \"type\": \"composer\",\n"
-#| "            \"url\": \"http://packages.example.com\"\n"
-#| "        },\n"
-#| "        {\n"
-#| "            \"type\": \"composer\",\n"
-#| "            \"url\": \"https://packages.example.com\",\n"
-#| "            \"options\": {\n"
-#| "                \"ssl\": {\n"
-#| "                    \"verify_peer\": \"true\"\n"
-#| "                }\n"
-#| "            }\n"
-#| "        },\n"
-#| "        {\n"
-#| "            \"type\": \"vcs\",\n"
-#| "            \"url\": \"https://github.com/Seldaek/monolog\"\n"
-#| "        },\n"
-#| "        {\n"
-#| "            \"type\": \"package\",\n"
-#| "            \"package\": {\n"
-#| "                \"name\": \"smarty/smarty\",\n"
-#| "                \"version\": \"3.1.7\",\n"
-#| "                \"dist\": {\n"
-#| "                    \"url\": \"https://www.smarty.net/files/Smarty-3.1.7.zip\",\n"
-#| "                    \"type\": \"zip\"\n"
-#| "                },\n"
-#| "                \"source\": {\n"
-#| "                    \"url\": \"https://smarty-php.googlecode.com/svn/\",\n"
-#| "                    \"type\": \"svn\",\n"
-#| "                    \"reference\": \"tags/Smarty_3_1_7/distribution/\"\n"
-#| "                }\n"
-#| "            }\n"
-#| "        }\n"
-#| "    ]\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"repositories\": [\n"
@@ -9292,6 +9173,10 @@ msgstr ""
 "        {\n"
 "            \"type\": \"vcs\",\n"
 "            \"url\": \"https://github.com/Seldaek/monolog\"\n"
+"        },\n"
+"        {\n"
+"            \"type\": \"path\",\n"
+"            \"url\": \"../packages/my-package\"\n"
 "        },\n"
 "        {\n"
 "            \"type\": \"package\",\n"
@@ -9426,10 +9311,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../doc/04-schema.md:1014
-#, fuzzy, no-wrap
-#| msgid "scripts <span>([root-only](04-schema.md#root-package))</span>"
+#, no-wrap
 msgid "scripts-descriptions <span>([root-only](04-schema.md#root-package))</span>"
-msgstr "scripts <span>（[根幹限定](04-schema.md#root-package)）</span>"
+msgstr "scripts-descriptions <span>（[根幹限定](04-schema.md#root-package)）</span>"
 
 #. type: Plain text
 #: ../doc/04-schema.md:1019
@@ -9441,13 +9325,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:1020
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"config\": {\n"
-#| "        \"policy\": false\n"
-#| "    }\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"scripts-descriptions\": {\n"
@@ -9456,8 +9334,8 @@ msgid ""
 "}\n"
 msgstr ""
 "{\n"
-"    \"config\": {\n"
-"        \"policy\": false\n"
+"    \"scripts-descriptions\": {\n"
+"        \"test\": \"Run all tests!\"\n"
 "    }\n"
 "}\n"
 
@@ -9470,20 +9348,15 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/04-schema.md:1032
-#, fuzzy
-#| msgid "See [Scripts](articles/scripts.md) for events details and examples."
 msgid ""
 "See [Scripts](articles/scripts.md#custom-descriptions) for more details."
-msgstr ""
-"イベントについての詳細と例については[スクリプト](articles/scripts.md)を参照し"
-"てください。"
+msgstr "より詳しいことについては[スクリプト](articles/scripts.md)を参照。"
 
 #. type: Title ###
 #: ../doc/04-schema.md:1035
-#, fuzzy, no-wrap
-#| msgid "scripts <span>([root-only](04-schema.md#root-package))</span>"
+#, no-wrap
 msgid "scripts-aliases <span>([root-only](04-schema.md#root-package))</span>"
-msgstr "scripts <span>（[根幹限定](04-schema.md#root-package)）</span>"
+msgstr "scripts-aliases <span>（[根幹限定](04-schema.md#root-package)）</span>"
 
 #. type: Plain text
 #: ../doc/04-schema.md:1039
@@ -9494,13 +9367,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:1040
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"autoload\": {\n"
-#| "        \"psr-4\": { \"\": \"src/\" }\n"
-#| "    }\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"scripts-aliases\": {\n"
@@ -9509,8 +9376,8 @@ msgid ""
 "}\n"
 msgstr ""
 "{\n"
-"    \"autoload\": {\n"
-"        \"psr-4\": { \"\": \"src/\" }\n"
+"    \"scripts-aliases\": {\n"
+"        \"phpstan\": [\"stan\", \"analyze\"]\n"
 "    }\n"
 "}\n"
 
@@ -9523,12 +9390,8 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/04-schema.md:1052
-#, fuzzy
-#| msgid "See [Scripts](articles/scripts.md) for events details and examples."
 msgid "See [Scripts](articles/scripts.md#custom-aliases) for more details."
-msgstr ""
-"イベントについての詳細と例については[スクリプト](articles/scripts.md)を参照し"
-"てください。"
+msgstr "より詳しいことについては[スクリプト](articles/scripts.md)を参照。"
 
 #. type: Title ###
 #: ../doc/04-schema.md:1055
@@ -9794,10 +9657,8 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/04-schema.md:1183
-#, fuzzy
-#| msgid "Defaults to false."
 msgid "Defaults to `false`."
-msgstr "既定では偽です。"
+msgstr "既定では`false`です。"
 
 # プロパティ名なので訳しません。
 #. type: Title ###
@@ -11096,17 +10957,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/05-repositories.md:514
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"repositories\": [\n"
-#| "        {\n"
-#| "            \"type\": \"composer\",\n"
-#| "            \"url\": \"https://example.org\",\n"
-#| "            \"filter\": false\n"
-#| "        }\n"
-#| "    ]\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"repositories\": [\n"
@@ -11122,8 +10973,8 @@ msgstr ""
 "    \"repositories\": [\n"
 "        {\n"
 "            \"type\": \"composer\",\n"
-"            \"url\": \"https://example.org\",\n"
-"            \"filter\": false\n"
+"            \"url\": \"https://packages.example.org\",\n"
+"            \"require-published-time\": false\n"
 "        }\n"
 "    ]\n"
 "}\n"
@@ -11593,19 +11444,13 @@ msgstr "パス"
 
 #. type: Plain text
 #: ../doc/05-repositories.md:708
-#, fuzzy
-#| msgid ""
-#| "In addition to the artifact repository, you can use the path one, which "
-#| "allows you to depend on a local directory, either absolute or relative. "
-#| "This can be especially useful when dealing with monolithic repositories."
 msgid ""
 "The `path` repository allows you to depend on a local directory, either "
 "absolute or relative. This can be especially useful when dealing with "
 "monolithic repositories."
 msgstr ""
-"アーティファクトリポジトリに加えて、絶対パスまたは相対パスのローカルディレク"
-"トリに依存するパスを使用できます。\n"
-"モノリシックリポジトリを扱う場合に特に役立ちます。"
+"`path`リポジトリでは、ローカルディレクトリに依存することができ、そのディレクトリは絶対か相対です。\n"
+"これが特に有用なことがあるのは、モノシリックリポジトリを扱うときです。"
 
 #. type: Plain text
 #: ../doc/05-repositories.md:710
@@ -13413,17 +13258,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/06-config.md:476
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"config\": {\n"
-#| "        \"policy\": {\n"
-#| "            \"malware\": {\n"
-#| "                \"block-scope\": \"update\"\n"
-#| "            }\n"
-#| "        }\n"
-#| "    }\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"config\": {\n"
@@ -13438,8 +13273,8 @@ msgstr ""
 "{\n"
 "    \"config\": {\n"
 "        \"policy\": {\n"
-"            \"malware\": {\n"
-"                \"block-scope\": \"update\"\n"
+"            \"cooldown\": {\n"
+"                \"period\": \"7 days\"\n"
 "            }\n"
 "        }\n"
 "    }\n"
@@ -13484,20 +13319,14 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/06-config.md:506
-#, fuzzy
-#| msgid ""
-#| "Defaults to `true`. When `true`, package versions with active security "
-#| "advisories are blocked and cannot be installed during `update`/`require`/"
-#| "`remove` unless the advisory or package is ignored."
 msgid ""
 "Defaults to `true`. When `true`, versions still within the cooldown period "
 "cannot be installed during `update`/`require`. Set to `false` to skip "
 "blocking for a cooldown period entirely."
 msgstr ""
 "既定で`true`です。\n"
-"`true`のとき、その勧告かパッケージが無視されない限りは、活性なセキュリティ勧"
-"告付きのパッケージは遮断され`update`/`require`/`remove`の間にインストールでき"
-"ません。"
+"`true`のとき、まだ冷却期間内のバージョンは、`update`/`require`中にインストールできません。\n"
+"`false`に設定すると、全面的に冷却期間での遮断が飛ばされます。"
 
 #. type: Plain text
 #: ../doc/06-config.md:512
@@ -13510,20 +13339,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/06-config.md:513
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"config\": {\n"
-#| "        \"policy\": {\n"
-#| "            \"advisories\": {\n"
-#| "                \"ignore-severity\": {\n"
-#| "                    \"low\":    {\"on-block\": false},\n"
-#| "                    \"medium\": {\"on-audit\": false, \"reason\": \"Handled via WAF\"}\n"
-#| "                }\n"
-#| "            }\n"
-#| "        }\n"
-#| "    }\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"config\": {\n"
@@ -13542,10 +13358,11 @@ msgstr ""
 "{\n"
 "    \"config\": {\n"
 "        \"policy\": {\n"
-"            \"advisories\": {\n"
-"                \"ignore-severity\": {\n"
-"                    \"low\":    {\"on-block\": false},\n"
-"                    \"medium\": {\"on-audit\": false, \"reason\": \"Handled via WAF\"}\n"
+"            \"cooldown\": {\n"
+"                \"period\": \"7 days\",\n"
+"                \"ignore\": {\n"
+"                    \"mycompany/*\": \"We trust the code in our own packages\",\n"
+"                    \"symfony/security-bundle\": \"Security fixes need to be applied immediately\"\n"
 "                }\n"
 "            }\n"
 "        }\n"
@@ -13792,14 +13609,12 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/06-config.md:651
-#, fuzzy
-#| msgid "Defaults to `all`. Controls which commands trigger blocking:"
 msgid ""
 "Defaults to `update`. Controls which commands trigger blocking for this "
 "custom policy:"
 msgstr ""
-"既定で`all`です。\n"
-"これはどのコマンドが阻害のきっかけとなるかを制御するものです。"
+"既定で`update`です。\n"
+"この独自ポリシーに対しどのコマンドが遮断を引き起こすかを制御します。"
 
 #. type: Plain text
 #: ../doc/06-config.md:660
@@ -13813,17 +13628,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/06-config.md:661
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"config\": {\n"
-#| "        \"policy\": {\n"
-#| "            \"malware\": {\n"
-#| "                \"block-scope\": \"update\"\n"
-#| "            }\n"
-#| "        }\n"
-#| "    }\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"config\": {\n"
@@ -13838,8 +13643,8 @@ msgstr ""
 "{\n"
 "    \"config\": {\n"
 "        \"policy\": {\n"
-"            \"malware\": {\n"
-"                \"block-scope\": \"update\"\n"
+"            \"my-policy\": {\n"
+"                \"block-scope\": \"all\"\n"
 "            }\n"
 "        }\n"
 "    }\n"
@@ -15504,10 +15309,9 @@ msgstr ""
 
 #. type: Title ##
 #: ../doc/06-config.md:1311
-#, fuzzy, no-wrap
-#| msgid "prepend-autoloader"
+#, no-wrap
 msgid "strict-psr-autoloader"
-msgstr "prepend-autoloader"
+msgstr "strict-psr-autoloader"
 
 #. type: Plain text
 #: ../doc/06-config.md:1317
