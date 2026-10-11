@@ -322,9 +322,8 @@ source.
 }
 ```
 
-Where `type` is `git`, the reference is a commit id, branch or tag
-name. Where it is `svn`, it is the reference that gets appended to the URL
-when running `svn co`.
+`type`が`git`の場合、参照はコミット識別子か、ブランチか、タグ名です。
+`svn`の場合、`svn co`を走らせるときにURLの後ろに付ける参照です。
 
 You normally do not write this field yourself. The repository a package
 comes from provides it: Packagist and other `composer` repositories fill it
@@ -955,7 +954,7 @@ Composerではスクリプトの使用を通じてインストールの過程の
 
 イベントについての詳細と例については[スクリプト](articles/scripts.md)を参照してください。
 
-### scripts-descriptions <span>([root-only](04-schema.md#root-package))</span>
+### scripts-descriptions <span>（[根幹限定](04-schema.md#root-package)）</span>
 
 Descriptions for the custom commands defined in `scripts`, shown by
 `composer list` and `composer run -l` instead of the default "Runs the
@@ -972,11 +971,11 @@ Descriptions for the custom commands defined in `scripts`, shown by
 `composer validate` warns about a description given for a script that does
 not exist.
 
-See [Scripts](articles/scripts.md#custom-descriptions) for more details.
+より詳しいことについては[スクリプト](articles/scripts.md)を参照。
 
 省略可能です。
 
-### scripts-aliases <span>([root-only](04-schema.md#root-package))</span>
+### scripts-aliases <span>（[根幹限定](04-schema.md#root-package)）</span>
 
 Alternate names for the custom commands defined in `scripts`, as an array of
 strings per script. Available as of Composer 2.7.
@@ -992,7 +991,7 @@ strings per script. Available as of Composer 2.7.
 `composer validate` warns about aliases given for a script that does not
 exist.
 
-See [Scripts](articles/scripts.md#custom-aliases) for more details.
+より詳しいことについては[スクリプト](articles/scripts.md)を参照。
 
 省略可能です。
 
@@ -1122,7 +1121,7 @@ itself, to `true` on the branch that the repository reports as its default
 one and on nothing else. It ends up in the metadata that `composer`
 repositories serve, which is where you may see it.
 
-Defaults to `false`.
+既定では`false`です。
 
 ### non-feature-branches
 

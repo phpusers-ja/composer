@@ -113,21 +113,20 @@ php composer.phar install
 * **--audit:** インストールが完了した後に監査を走らせます。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during
-  this command, including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:**
+  非推奨であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。
 * **--optimize-autoloader (-o):** PSR-0の自動読み込みをクラス対応表に変換して自動読み込みを高速にします。
   実運用では特にお勧めしますが、走らせるのに少し時間が掛かることがあるので、現在は既定ではされません。
 * **--classmap-authoritative (-a):** クラス対応表からクラスのみを自動読み込みします。
   暗黙裡に`--optimize-autoloader`を有効にします。
-* **--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or
-  PSR-0 mapping errors are present in the current project (dependencies
-  excluded). Requires `--optimize-autoloader` or `--classmap-authoritative`
-  to work.
+* **--strict-psr-autoloader:**
+  現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存在するなら失敗の終了コード (6) を返します。
+  動作には`--optimize-autoloader`または`--classmap-authoritative`が必要です。
 * **--apcu-autoloader:** APCuを使って、クラスの有無をキャッシュします。
 * **--apcu-autoloader-prefix:** APCu自動読み込み器のキャッシュ用に独自の接頭辞を使います。
   暗黙裡に`--apcu-autoloader`を有効にします。
@@ -205,13 +204,13 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
   composer.lockを更新した後の監査過程を走らせません。[COMPOSER_NO_AUDIT](#composer-no-audit)も参照してください。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during
-  this command, including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:**
+  非推奨であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。
 * **--lock:**
   パッケージのバージョンを更新せず、固定ファイルが期限切れであることについての警告を抑えるために固定ファイルを上書きします。
   ミラーやURLといったパッケージのメタデータが変更されていれば更新します。
@@ -233,10 +232,9 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
   特に実運用で推奨されますが、走らせるのに少し時間が掛かるため、現時点では既定では有効になっていません。
 * **--classmap-authoritative (-a):** クラス対応表からクラスのみを自動読み込みします。
   暗黙裡に`--optimize-autoloader`を有効にします。
-* **--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or
-  PSR-0 mapping errors are present in the current project (dependencies
-  excluded). Requires `--optimize-autoloader` or `--classmap-authoritative`
-  to work.
+* **--strict-psr-autoloader:**
+  現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存在するなら失敗の終了コード (6) を返します。
+  動作には`--optimize-autoloader`または`--classmap-authoritative`が必要です。
 * **--apcu-autoloader:** APCuを使って、クラスの有無をキャッシュします。
 * **--apcu-autoloader-prefix:** APCu自動読み込み器のキャッシュ用に独自の接頭辞を使います。
   暗黙裡に`--apcu-autoloader`を有効にします。
@@ -318,13 +316,13 @@ php composer.phar require vendor/package vendor/package2
   composer.lockを更新した後の監査過程を走らせません。[COMPOSER_NO_AUDIT](#composer-no-audit)も参照してください。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy blocking during this command,
-  including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:**
+  非推奨であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間はすべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。
 * **--update-no-dev:**
   `--no-dev`オプションと共に依存関係の更新を走らせます。[COMPOSER_NO_DEV](#composer-no-dev)も参照してください。
 * **--update-with-dependencies (-w):**
@@ -387,13 +385,13 @@ php composer.phar remove vendor/package vendor/package2
   [COMPOSER_NO_AUDIT](#composer-no-audit)も参照してください。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during
-  this command, including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:**
+  非推奨であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。
 * **--update-no-dev:**
   --no-devオプションで依存関係の更新を走らせます。[COMPOSER_NO_DEV](#composer-no-dev)も参照してください。
 * **--update-with-dependencies (-w):**
@@ -1114,13 +1112,13 @@ php composer.phar create-project composer/hello-world my-project
   [COMPOSER_NO_AUDIT](#composer-no-audit)も参照してください。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking).
-* **--no-blocking:** Disables all policy blocking during this command,
-  including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer-no-blocking).
+* **--no-security-blocking:**
+  非推奨であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間はすべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。
+  [COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。
 * **--ignore-platform-reqs:**
   全てのプラットフォーム要件（`php`、`hhvm`、`lib-*`、`ext-*`）を無視し、ローカルマシンがたとえこれらを満たしていなくてもインストールを強行します。
   [`platform`](06-config.md#platform)設定オプションも参照してください。
@@ -1166,10 +1164,10 @@ php composer.phar create-project composer/hello-world my-project
 * **--strict-psr:**
   現在のプロジェクトで、PSR-4またはPSR-0の対応付けで失敗する場合、失敗の終了コード (1) を返します。
   動作には`--optimize`が必要です。
-* **--strict-ambiguous:** Return a failed exit code (2) if the same class is
-  found in multiple files. It also checks if files or folders exist with
-  different case variants that cause issues on case-insensitive
-  filesystems. Requires `--optimize` to work.
+* **--strict-ambiguous:**
+  複数ファイルに同じクラスが見られるとき、失敗の終了コード (2) を返します。
+  ファイルまたはフォルダが違う大文字と小文字の変種で存在するかも検査しますが、それらは大文字と小文字を区別しないファイルシステムで問題を引き起こします。
+  動作には`--optimize`が必要です。
 
 ## clear-cache / clearcache / cc
 
@@ -1479,22 +1477,17 @@ composer.jsonで`policy.abandoned`が`false`に設定されているときは効
 
 ### COMPOSER_NO_BLOCKING
 
-If set to `1`, it is the equivalent of passing the `--no-blocking` option to
-a `require`, `update`, `remove`, `install`, or `create-project`
-command. This disables all policy based blocking of dependencies, including
-the cooldown period. It overrides the `block` config option for each
-configured dependency policy
-e.g. [policy.advisories.block](06-config.md#block).
+`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-blocking`オプションを渡すことと等価になります。
+これはすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間を含みます。
+例えば[policy.advisories.block](06-config.md#block)のような、それぞれの構成された依存関係のポリシーに対して`block`構成オプションをオーバーライドします。
 
 ### COMPOSER_NO_SECURITY_BLOCKING
 
 非推奨であり、[COMPOSER_NO_BLOCKING](#composer-no-blocking)を代用してください。
 
-If set to `1`, it is the equivalent of passing the `--no-security-blocking`
-option to a `require`, `update`, `remove`, `install`, or `create-project`
-command. This allows installing packages with security advisories, that are
-abandoned or that are still in the cooldown period. It overrides the config
-option [policy.advisories.block](06-config.md#block).
+`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-security-blocking`オプションを渡すことと等価になります。
+これにより、セキュリティ勧告があるパッケージをインストールすることが許容されますが、それらは放棄されたりまだ冷却期間にあるものです。
+構成オプション[policy.advisories.block](06-config.md#block)をオーバーライドします。
 
 ### COMPOSER_POLICY_ADVISORIES_BLOCK
 

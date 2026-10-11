@@ -652,9 +652,8 @@ Subversionクライアントが既定で資格情報を保存するように構�
 
 ### パス
 
-The `path` repository allows you to depend on a local directory, either
-absolute or relative. This can be especially useful when dealing with
-monolithic repositories.
+`path`リポジトリでは、ローカルディレクトリに依存することができ、そのディレクトリは絶対か相対です。
+これが特に有用なことがあるのは、モノシリックリポジトリを扱うときです。
 
 例えばリポジトリが以下のディレクトリ構造になっているとします。
 ```text

@@ -2670,7 +2670,8 @@ msgid ""
 msgstr ""
 "**--no-security-blocking:**\n"
 "非推奨であり、`--no-blocking`を代用してください。\n"
-"セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。\n"
+"セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄さ"
+"れたものかまだ冷却期間にあるかです。\n"
 "[COMPOSER_NO_SECURITY_BLOCKING](#composer-no-security-blocking)も参照。"
 
 #. type: Bullet: '* '
@@ -2681,7 +2682,8 @@ msgid ""
 "(#composer-no-blocking)."
 msgstr ""
 "**--no-blocking:**\n"
-"このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。\n"
+"このコマンドの間はすべてのポリシーに基づく依存関係の遮断を無効にし、これには"
+"冷却期間も含まれます。\n"
 "[COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。"
 
 #. type: Bullet: '* '
@@ -2715,7 +2717,8 @@ msgid ""
 "Requires `--optimize-autoloader` or `--classmap-authoritative` to work."
 msgstr ""
 "**--strict-psr-autoloader:**\n"
-"現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存在するなら失敗の終了コード (6) を返します。\n"
+"現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存"
+"在するなら失敗の終了コード (6) を返します。\n"
 "動作には`--optimize-autoloader`または`--classmap-authoritative`が必要です。"
 
 #. type: Bullet: '* '
@@ -3132,7 +3135,8 @@ msgid ""
 "blocking)."
 msgstr ""
 "**--no-blocking:**\n"
-"このコマンドの間はすべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。\n"
+"このコマンドの間はすべてのポリシーによる遮断を無効にし、これには冷却期間を含"
+"みます。\n"
 "[COMPOSER_NO_BLOCKING](#composer-no-blocking)も参照。"
 
 #. type: Bullet: '* '
@@ -5412,7 +5416,8 @@ msgid ""
 msgstr ""
 "**--strict-ambiguous:**\n"
 "複数ファイルに同じクラスが見られるとき、失敗の終了コード (2) を返します。\n"
-"ファイルまたはフォルダが違う大文字と小文字の変種で存在するかも検査しますが、それらは大文字と小文字を区別しないファイルシステムで問題を引き起こします。\n"
+"ファイルまたはフォルダが違う大文字と小文字の変種で存在するかも検査しますが、"
+"それらは大文字と小文字を区別しないファイルシステムで問題を引き起こします。\n"
 "動作には`--optimize`が必要です。"
 
 #. type: Title ##
@@ -6441,9 +6446,12 @@ msgid ""
 "cooldown period. It overrides the `block` config option for each configured "
 "dependency policy e.g. [policy.advisories.block](06-config.md#block)."
 msgstr ""
-"`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-blocking`オプションを渡すことと等価になります。\n"
-"これはすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間を含みます。\n"
-"例えば[policy.advisories.block](06-config.md#block)のような、それぞれの構成された依存関係のポリシーに対して`block`構成オプションをオーバーライドします。"
+"`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コ"
+"マンドに`--no-blocking`オプションを渡すことと等価になります。\n"
+"これはすべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間を含"
+"みます。\n"
+"例えば[policy.advisories.block](06-config.md#block)のような、それぞれの構成さ"
+"れた依存関係のポリシーに対して`block`構成オプションをオーバーライドします。"
 
 #. type: Title ###
 #: ../doc/03-cli.md:1459
@@ -6467,9 +6475,12 @@ msgid ""
 "abandoned or that are still in the cooldown period. It overrides the config "
 "option [policy.advisories.block](06-config.md#block)."
 msgstr ""
-"`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-security-blocking`オプションを渡すことと等価になります。\n"
-"これにより、セキュリティ勧告があるパッケージをインストールすることが許容されますが、それらは放棄されたりまだ冷却期間にあるものです。\n"
-"構成オプション[policy.advisories.block](06-config.md#block)をオーバーライドします。"
+"`1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コ"
+"マンドに`--no-security-blocking`オプションを渡すことと等価になります。\n"
+"これにより、セキュリティ勧告があるパッケージをインストールすることが許容され"
+"ますが、それらは放棄されたりまだ冷却期間にあるものです。\n"
+"構成オプション[policy.advisories.block](06-config.md#block)をオーバーライドし"
+"ます。"
 
 #. type: Title ###
 #: ../doc/03-cli.md:1465
@@ -11449,7 +11460,8 @@ msgid ""
 "absolute or relative. This can be especially useful when dealing with "
 "monolithic repositories."
 msgstr ""
-"`path`リポジトリでは、ローカルディレクトリに依存することができ、そのディレクトリは絶対か相対です。\n"
+"`path`リポジトリでは、ローカルディレクトリに依存することができ、そのディレク"
+"トリは絶対か相対です。\n"
 "これが特に有用なことがあるのは、モノシリックリポジトリを扱うときです。"
 
 #. type: Plain text
@@ -13325,7 +13337,8 @@ msgid ""
 "blocking for a cooldown period entirely."
 msgstr ""
 "既定で`true`です。\n"
-"`true`のとき、まだ冷却期間内のバージョンは、`update`/`require`中にインストールできません。\n"
+"`true`のとき、まだ冷却期間内のバージョンは、`update`/`require`中にインストー"
+"ルできません。\n"
 "`false`に設定すると、全面的に冷却期間での遮断が飛ばされます。"
 
 #. type: Plain text

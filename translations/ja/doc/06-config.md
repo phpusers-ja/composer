@@ -514,9 +514,9 @@ The following are never withheld by the cooldown policy:
 
 #### block
 
-Defaults to `true`. When `true`, versions still within the cooldown period
-cannot be installed during `update`/`require`. Set to `false` to skip
-blocking for a cooldown period entirely.
+既定で`true`です。
+`true`のとき、まだ冷却期間内のバージョンは、`update`/`require`中にインストールできません。
+`false`に設定すると、全面的に冷却期間での遮断が飛ばされます。
 
 #### ignore
 
@@ -677,8 +677,8 @@ at schema validation time (`composer validate`) and at config load time.
 
 #### block-scope
 
-Defaults to `update`. Controls which commands trigger blocking for this
-custom policy:
+既定で`update`です。
+この独自ポリシーに対しどのコマンドが遮断を引き起こすかを制御します。
 
 - `all`では、`update`/`require`/`remove`と`install`の両方の間に阻害します
 - `update`では、`update`/`require`/`remove`の間でのみ阻害します
