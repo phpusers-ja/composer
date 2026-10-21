@@ -114,7 +114,7 @@ class ShowCommand extends BaseCommand
 The show command displays detailed information about a package, or
 lists all packages available.
 
-Read more at https://getcomposer.org/doc/03-cli.md#show-info
+Read more at https://getcomposer.org/doc/03-cli.md#show--info
 EOT
             )
         ;
@@ -1642,6 +1642,10 @@ EOT
         }
 
         $latest = $candidate !== false ? $candidate : null;
+        // versions exist but none is installable on this platform, so there is nothing to update to
+        if ($latest === null && count($versionSelector->getPlatformRejectedCandidates()) > 0) {
+            $latest = $package;
+        }
         $withheld = null;
         if ($cooldown !== null && !str_starts_with($package->getVersion(), 'dev-')) {
             // a waiting release is only worth mentioning if it is newer than what can be installed already

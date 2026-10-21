@@ -39,6 +39,8 @@ use Composer\Plugin\CommandEvent;
 use Composer\Plugin\PluginEvents;
 use Composer\Repository\CompositeRepository;
 use Composer\Repository\PlatformRepository;
+use Composer\Console\ProgramStatus;
+use Composer\IO\ConsoleIO;
 use Composer\IO\IOInterface;
 use Composer\Advisory\Auditor;
 use Composer\Util\Silencer;
@@ -82,7 +84,7 @@ class RequireCommand extends BaseCommand
                 new InputOption('prefer-source', null, InputOption::VALUE_NONE, 'Forces installation from package sources when possible, including VCS information.'),
                 new InputOption('prefer-dist', null, InputOption::VALUE_NONE, 'Forces installation from package dist (default behavior).'),
                 new InputOption('prefer-install', null, InputOption::VALUE_REQUIRED, 'Forces installation from package dist|source|auto (auto chooses source for dev versions, dist for the rest).', null, $this->suggestPreferInstall()),
-                new InputOption('fixed', null, InputOption::VALUE_NONE, 'Write fixed version to the composer.json.'),
+                new InputOption('fixed', null, InputOption::VALUE_NONE, 'Write the exact resolved version to the composer.json instead of the recommended constraint (only allowed when the root package type is "project", or with --dev).'),
                 new InputOption('no-suggest', null, InputOption::VALUE_NONE, 'DEPRECATED: This flag does not exist anymore.'),
                 new InputOption('no-progress', null, InputOption::VALUE_NONE, 'Do not output download progress.'),
                 new InputOption('no-update', null, InputOption::VALUE_NONE, 'Disables the automatic update of the dependencies (implies --no-install).'),
@@ -118,7 +120,7 @@ If you do not specify a version constraint, composer will choose a suitable one 
 
 If you do not want to install the new dependencies immediately you can call it with --no-update
 
-Read more at https://getcomposer.org/doc/03-cli.md#require-r
+Read more at https://getcomposer.org/doc/03-cli.md#require--r
 EOT
             )
         ;
@@ -160,6 +162,10 @@ EOT
         $signalHandler = SignalHandler::create([SignalHandler::SIGINT, SignalHandler::SIGTERM, SignalHandler::SIGHUP], function (string $signal, SignalHandler $handler) {
             $this->getIO()->writeError('Received '.$signal.', aborting', true, IOInterface::DEBUG);
             $this->revertComposerFile();
+            $io = $this->getIO();
+            if ($io instanceof ConsoleIO) {
+                $io->writeProgramStatus(ProgramStatus::idle());
+            }
             $handler->exitWithLastSignal();
         });
 
@@ -180,7 +186,7 @@ EOT
              * @see https://github.com/composer/composer/pull/8313#issuecomment-532637955
              */
             if ($packageType !== 'project' && !$input->getOption('dev')) {
-                $io->writeError('<error>The "--fixed" option is only allowed for packages with a "project" type or for dev dependencies to prevent possible misuses.</error>');
+                $io->writeError('<error>The "--fixed" option is only allowed when the root package has a "project" type or for dev dependencies to prevent possible misuses.</error>');
 
                 if (!isset($config['type'])) {
                     $io->writeError('<error>If your package is not a library, you can explicitly specify the "type" by using "composer config type project".</error>');

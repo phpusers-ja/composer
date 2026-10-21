@@ -41,7 +41,7 @@ COMPOSER_CACHE_DIR="$PWD/.composer-cache" composer install --no-interaction --pr
 
 Add such a cache directory inside your project to `.gitignore`, and to `.dockerignore` if you build images from the same checkout, so it does not show up as an untracked change or ends up in archives, Docker build contexts and code-analysis runs.
 
-A CI cache is usually shared between jobs, and often between branches, so do not add credentials, `auth.json`, SSH keys, tokens, or other secrets to the paths it saves. In particular, persist the Composer cache directory rather than the whole [`COMPOSER_HOME`](../03-cli.md#composer-home) directory, which can contain `auth.json`.
+A CI cache is usually shared between jobs, and often between branches, so do not add credentials, `auth.json`, SSH keys, tokens, or other secrets to the paths it saves. In particular, persist the Composer cache directory rather than the whole [`COMPOSER_HOME`](../03-cli.md#composer_home) directory, which can contain `auth.json`.
 
 ## Cache downloads, not installed dependencies
 
@@ -61,7 +61,7 @@ When persisting the Composer cache, configure fallback keys (called `restore-key
 
 When persisting `vendor/`, do not use fallback keys, and include the hash of `composer.lock`, the install flags, the PHP version, and the list of enabled PHP extensions in the key. `composer install` checks the platform requirements of the locked packages against the PHP version and extensions (unless you use `--ignore-platform-reqs`), and a `vendor/` restored from a different environment would skip that check.
 
-Libraries often do not commit `composer.lock` and run `composer update` in CI instead. A key based on the hash of `composer.lock` is then the same in every run, because the file does not exist when the key is computed. Most CI providers do not overwrite an existing entry, so the Composer cache is saved once and never updated with newer package versions. Instead, build the key from the hash of `composer.json` plus a value that is different on every run, and use prefixes of that key as fallback keys, so every run restores the most recent entry and saves a new one. On GitHub Actions for example:
+CI jobs running `composer update`, such as library jobs testing against the latest dependency versions, need a different approach. A key based on the hash of `composer.lock` is then the same in every run, because it is computed from the committed file (or from no file at all) rather than the versions that get installed. Most CI providers do not overwrite an existing entry, so the Composer cache is saved once and never updated with newer package versions. Instead, build the key from the hash of `composer.json` plus a value that is different on every run, and use prefixes of that key as fallback keys, so every run restores the most recent entry and saves a new one. On GitHub Actions for example:
 
 ```yaml
 key: composer-${{ hashFiles('composer.json') }}-${{ github.run_id }}
@@ -228,7 +228,7 @@ A reliable cache setup has three properties: the build still works when no cache
 ## Further reading
 
 - [Composer configuration: cache settings](../06-config.md#cache-dir)
-- [Composer CLI: `clear-cache`](../03-cli.md#clear-cache-clearcache-cc)
+- [Composer CLI: `clear-cache`](../03-cli.md#clear-cache--clearcache--cc)
 - [GitHub Actions dependency caching](https://docs.github.com/actions/reference/workflows-and-actions/dependency-caching)
 - [ramsey/composer-install](https://github.com/ramsey/composer-install)
 - [GitLab CI/CD cache examples](https://docs.gitlab.com/ci/caching/examples/)

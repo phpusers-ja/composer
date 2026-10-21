@@ -38,6 +38,7 @@ use Composer\Plugin\PluginEvents;
 use Composer\Plugin\PreFileDownloadEvent;
 use Composer\EventDispatcher\EventDispatcher;
 use Composer\Downloader\TransportException;
+use Composer\Exception\SecurityException;
 use Composer\Semver\Constraint\ConstraintInterface;
 use Composer\Semver\Constraint\Constraint;
 use Composer\Semver\Constraint\MatchAllConstraint;
@@ -1126,7 +1127,8 @@ class ComposerRepository extends ArrayRepository implements ConfigurableReposito
     protected function configurePackageTransportOptions(PackageInterface $package): void
     {
         foreach ($package->getDistUrls() as $url) {
-            if (strpos($url, $this->baseUrl) === 0) {
+            // require a boundary after the base URL so e.g. https://example.org.example.net does not match https://example.org
+            if (Preg::isMatch('{^'.preg_quote($this->baseUrl).'(?:[/?#]|$)}', $url)) {
                 $package->setTransportOptions($this->options);
 
                 return;
@@ -1245,7 +1247,8 @@ class ComposerRepository extends ArrayRepository implements ConfigurableReposito
                     continue;
                 }
 
-                if (!isset($versionsToLoad[$version['uid']])) {
+                $uid = $version['uid'] ?? null;
+                if (null === $uid || !isset($versionsToLoad[$uid])) {
                     if (!isset($version['version_normalized'])) {
                         $version['version_normalized'] = $this->versionParser->normalize($version['version']);
                     } elseif ($version['version_normalized'] === VersionParser::DEFAULT_BRANCH_ALIAS) {
@@ -1259,7 +1262,12 @@ class ComposerRepository extends ArrayRepository implements ConfigurableReposito
                     }
 
                     if ($this->isVersionAcceptable(null, $normalizedName, $version, $acceptableStabilities, $stabilityFlags)) {
-                        $versionsToLoad[$version['uid']] = $version;
+                        // inline packages have no uid and need no dedup
+                        if (null === $uid) {
+                            $versionsToLoad[] = $version;
+                        } else {
+                            $versionsToLoad[$uid] = $version;
+                        }
                     }
                 }
             }
@@ -1853,7 +1861,7 @@ class ComposerRepository extends ArrayRepository implements ConfigurableReposito
                     throw $e;
                 }
 
-                if ($e instanceof RepositorySecurityException) {
+                if ($e instanceof RepositorySecurityException || $e instanceof SecurityException) {
                     throw $e;
                 }
 
@@ -1927,7 +1935,7 @@ class ComposerRepository extends ArrayRepository implements ConfigurableReposito
 
             return $data;
         } catch (\Exception $e) {
-            if ($e instanceof \LogicException) {
+            if ($e instanceof \LogicException || $e instanceof SecurityException) {
                 throw $e;
             }
 
