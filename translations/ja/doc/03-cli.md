@@ -69,12 +69,10 @@ php composer.phar init
 * **--require-dev:** 開発のための要件です。**--require**を参照。
 * **--stability (-s):** `minimum-stability`フィールド用の値。
 * **--license (-l):** パッケージの利用許諾。
-* **--repository:** Provide one (or more) custom repositories. They will be
-  stored in the generated composer.json, and used for auto-completion when
-  prompting for the list of requires. Every repository can be either an HTTP
-  URL pointing to a `composer` repository or a JSON string which is similar
-  to what the [repositories](04-schema.md#repositories-root-only) key
-  accepts.
+* **--repository:**
+  1つ（かそれ以上）のカスタムリポジトリを与えます。
+  これらのリポジトリは生成されるcomposer.jsonに収められ、要件の一覧を提案する際の自動補完に使われます。
+  全てのリポジトリは、`composer`リポジトリを指すHTTPのURLないし[repositories](04-schema.md#repositories-root-only)キーが受け付けるものと同様のJSON文字列の何れかを取りえます。
 * **--autoload (-a):** composer.jsonへのPSR-4自動読み込みの対応付けを加えます。
   自動的にパッケージの名前空間を与えられたディレクトリに対応付けます（src/のような相対パスを想定しています）。
   [PSR-4自動読み込み](04-schema.md#psr-4)も参照してください。
@@ -106,9 +104,10 @@ php composer.phar install
   インストールを模擬して何が起こるのかを示します。
 * **--download-only:** ダウンロードするのみで、パッケージをインストールしません。
 * **--dev:** `require-dev`に挙げられたパッケージをインストールします（既定の挙動です）。
-* **--no-dev:** Skip installing packages listed in `require-dev`. The
-  autoloader generation skips the `autoload-dev` rules. Also see
-  [COMPOSER_NO_DEV](#composer_no_dev).
+* **--no-dev:**
+  `require-dev`に挙げられたパッケージのインストールを飛ばします。
+  自動読み込み器の生成では`autoload-dev`規則を読み飛ばします。
+  [COMPOSER_NO_DEV](#composer_no_dev)も参照。
 * **--no-autoloader:** 自動読み込み器の生成を飛ばします。
 * **--no-progress:**
   進捗表示を除きます。
@@ -116,13 +115,13 @@ php composer.phar install
 * **--audit:** インストールが完了した後に監査を走らせます。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during
-  this command, including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer_no_blocking).
+* **--no-security-blocking:**
+  廃用であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
+  [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
 * **--optimize-autoloader (-o):** PSR-0の自動読み込みをクラス対応表に変換して自動読み込みを高速にします。
   実運用では特にお勧めしますが、走らせるのに少し時間が掛かることがあるので、現在は既定ではされません。
 * **--classmap-authoritative (-a):** クラス対応表からクラスのみを自動読み込みします。
@@ -198,22 +197,24 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
 * **--dry-run:**
   実際には何もせず、コマンドを模擬します。
 * **--dev:** `require-dev`に挙げられたパッケージをインストールします（既定の挙動です）。
-* **--no-dev:** Skip installing packages listed in `require-dev`. The
-  autoloader generation skips the `autoload-dev` rules. Also see
-  [COMPOSER_NO_DEV](#composer_no_dev).
+* **--no-dev:**
+  `require-dev`に挙げられたパッケージのインストールを飛ばします。
+  自動読み込み器の生成では`autoload-dev`規則を読み飛ばします。
+  [COMPOSER_NO_DEV](#composer_no_dev)も参照。
 * **--no-install:**
   composer.lockを更新した後のインストール過程を走らせません。
-* **--no-audit:** Does not run the audit steps after updating the
-  composer.lock file. Also see [COMPOSER_NO_AUDIT](#composer_no_audit).
+* **--no-audit:**
+  composer.lockファイルを更新した後の監査の工程を走らせません。
+  [COMPOSER_NO_AUDIT](#composer_no_audit)も参照。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during
-  this command, including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer_no_blocking).
+* **--no-security-blocking:**
+  廃用であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
+  [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
 * **--lock:**
   パッケージのバージョンを更新せず、固定ファイルが期限切れであることについての警告を抑えるために固定ファイルを上書きします。
   ミラーやURLといったパッケージのメタデータが変更されていれば更新します。
@@ -315,19 +316,21 @@ php composer.phar require vendor/package vendor/package2
 * **--no-update:** 依存関係の自動的な更新を無効にします（--no-installを暗示します）。
 * **--no-install:**
   composer.lockを更新した後のインストール過程を走らせません。
-* **--no-audit:** Does not run the audit steps after updating the
-  composer.lock file. Also see [COMPOSER_NO_AUDIT](#composer_no_audit).
+* **--no-audit:**
+  composer.lockファイルを更新した後の監査の工程を走らせません。
+  [COMPOSER_NO_AUDIT](#composer_no_audit)も参照。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking).
-* **--no-blocking:** Disables all policy blocking during this command,
-  including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer_no_blocking).
-* **--update-no-dev:** Run the dependency update with the `--no-dev`
-  option. Also see [COMPOSER_NO_DEV](#composer_no_dev).
+* **--no-security-blocking:**
+  廃用であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間は、すべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。
+  [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
+* **--update-no-dev:**
+  `--no-dev`オプションつきで依存関係の更新を走らせます。
+  [COMPOSER_NO_DEV](#composer_no_dev)も参照。
 * **--update-with-dependencies (-w):**
   新しく要求するパッケージの依存関係も更新します。
   ただし根幹要件は除きます。
@@ -387,19 +390,21 @@ php composer.phar remove vendor/package vendor/package2
 * **--no-update:** 依存関係の自動的な更新を無効にします（--no-installを暗示します）。
 * **--no-install:**
   composer.lockを更新した後のインストール過程を走らせません。
-* **--no-audit:** Does not run the audit steps after installation is
-  complete. Also see [COMPOSER_NO_AUDIT](#composer_no_audit).
+* **--no-audit:**
+  インストールが完了した後で、監査の工程を走らせません。
+  [COMPOSER_NO_AUDIT](#composer_no_audit)も参照。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking).
-* **--no-blocking:** Disables all policy based dependency blocking during
-  this command, including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer_no_blocking).
-* **--update-no-dev:** Run the dependency update with the --no-dev
-  option. Also see [COMPOSER_NO_DEV](#composer_no_dev).
+* **--no-security-blocking:**
+  廃用であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
+  [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
+* **--update-no-dev:**
+  --no-devオプションつきで依存関係の更新を走らせます。
+  [COMPOSER_NO_DEV](#composer_no_dev)も参照。
 * **--update-with-dependencies (-w):**
   削除されたパッケージの依存関係も更新します。
   COMPOSER_WITH_DEPENDENCIES=1 環境変数でも設定できます（廃止されました。
@@ -441,10 +446,8 @@ php composer.phar remove vendor/package vendor/package2
 
 ## reinstall
 
-The `reinstall` command looks up installed packages by name (or by type with
-`--type`), uninstalls them and reinstalls them. This lets you do a clean
-install of a package if you messed with its files, or if you wish to change
-the installation type using --prefer-install.
+`reinstall`コマンドは、名前により（または`--type`による種別により）インストールされているパッケージを拾い上げ、アンインストールと再インストールをします。
+そのファイルを散らかしたり、または--prefer-installを使ってインストールの種類を変えたいと思ったりしたときは、こうすることで綺麗なパッケージのインストールがされます。
 
 ```shell
 php composer.phar reinstall acme/foo acme/bar
@@ -510,9 +513,7 @@ updateやinstallとは異なり、このコマンドはconfig.platform設定を�
 
 ## global
 
-The global command allows you to run other commands like `install`,
-`remove`, `require` or `update` as if you were running them from the
-[COMPOSER_HOME](#composer_home)  directory.
+globalコマンドでは、`install`、`remove`、`require`、`update`のようなコマンドを、あたかも[COMPOSER_HOME](#composer_home)ディレクトリから走らせているかのように、実行できます。
 
 中心的な場所に保管されたプロジェクトを管理するためのただの補助であり、CLIツールやComposerプラグインのような、どこでも使えるようにしたいものを置いておけます。
 
@@ -792,8 +793,8 @@ psr/log 1.1.4 Common interface for logging libraries
 * **--recursive (-r):**
   再帰的に根幹パッケージまで木構造を解決します。
 * **--tree (-t):** 入れ子の木構造を結果に出力します。-rを暗示します。
-* **--locked:** Read dependency information from `composer.lock` instead of
-  the installed packages.
+* **--locked:**
+  インストールされたパッケージからではなく、`composer.lock`から依存関係の情報を読みます。
 
 ## prohibits / why-not
 
@@ -827,13 +828,12 @@ doctrine/instantiator 1.0.5  requires php (>=5.3,<8.0-DEV)
 * **--recursive (-r):**
   再帰的に根幹パッケージまで木構造を解決します。
 * **--tree (-t):** 入れ子の木構造を結果に出力します。-rを暗示します。
-* **--locked:** Read dependency information from `composer.lock` instead of
-  the installed packages.
+* **--locked:**
+  インストールされたパッケージからではなく、`composer.lock`から依存関係の情報を読みます。
 
 ## validate
 
-You should always run the `validate` command before you commit your
-`composer.json` and `composer.lock` files, and before you tag a release.
+`composer.json`と`composer.lock`をコミットする前、そしてリリースのタグを打つ前は、常に`validate`コマンドを走らせるべきです。
 
 `composer.json`が正当であるか検査します。
 `composer.lock`があるとき、`composer.json`に対して最新かも検査します。
@@ -1115,12 +1115,11 @@ php composer.phar create-project composer/hello-world my-project
   Composerがパッケージの開発版用の`source`を自動的に使う、以前の挙動にしたければ、`--prefer-install=auto`を使ってください。
   [config.preferred-install](06-config.md#preferred-install)も参照してください。
   このフラグを渡すと、設定値より優先されます。
-* **--repository:** Provide a custom repository to search for the package,
-  which will be used instead of packagist. Can be either an HTTP URL
-  pointing to a `composer` repository, a path to a local `packages.json`
-  file, or a JSON string which similar to what the
-  [repositories](04-schema.md#repositories-root-only)  key accepts. You can
-  use this multiple times to configure multiple repositories.
+* **--repository:**
+  パッケージを探索するためのカスタムリポジトリを与え、これがpackagistの代わりに使われます。
+  `composer`ディレクトリを指すHTTP
+  URLや、ローカルの`packages.json`ファイルへのパスや、[repositories](04-schema.md#repositories-root-only)キーが受け付けるものに似たJSON文字列のいずれかを取れます。
+  これを複数回使って複数のリポジトリを構成できます。
 * **--add-repository:**
   composer.jsonの中に独自のリポジトリを加えます。
   固定ファイルが存在している場合、一旦削除されインストールの代わりに更新が走ります。
@@ -1140,17 +1139,18 @@ php composer.phar create-project composer/hello-world my-project
   これが役に立つのはコマンドを非対話的なモードで走らせているときが殆どです。
 * **--remove-vcs:** プロンプト無しにVCSメタデータを強制削除します。
 * **--no-install:** ベンダーのインストールを無効にします。
-* **--no-audit:** Does not run the audit steps after installation is
-  complete. Also see [COMPOSER_NO_AUDIT](#composer_no_audit).
+* **--no-audit:**
+  インストールが完了した後で、監査の工程を走らせません。
+  [COMPOSER_NO_AUDIT](#composer_no_audit)も参照。
 * **--audit-format:** 監査の出力形式です。
   "table"、"plain"、"json"、または"summary"（既定）のどれかでなければなりません。
-* **--no-security-blocking:** DEPRECATED, use `--no-blocking`
-  instead. Allows installing packages with security advisories, that are
-  abandoned or that are still in the cooldown period. Also see
-  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking).
-* **--no-blocking:** Disables all policy blocking during this command,
-  including the cooldown period. Also see
-  [COMPOSER_NO_BLOCKING](#composer_no_blocking).
+* **--no-security-blocking:**
+  廃用であり、`--no-blocking`を代用してください。
+  セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。
+  [COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking)も参照。
+* **--no-blocking:**
+  このコマンドの間は、すべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。
+  [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
 * **--ignore-platform-reqs:**
   全てのプラットフォーム要件（`php`、`hhvm`、`lib-*`、`ext-*`）を無視し、ローカルマシンがたとえこれらを満たしていなくてもインストールを強行します。
   [`platform`](06-config.md#platform)設定オプションも参照してください。
@@ -1291,8 +1291,8 @@ php composer.phar audit
 ### オプション
 
 * **--no-dev:** require-devのパッケージの監査を無効にします。
-* **--direct (-D):** Only audit packages directly required by the root
-  package, skipping transitive dependencies.
+* **--direct (-D):**
+  根幹パッケージにより直接要求されるパッケージのみの監査で、推移的な依存関係は飛ばします。
 * **--format (-f):**
   出力の形式を監査します。監査の出力は「table」（既定）、「plain」、「json」、「summary」の何れかです。
 * **--locked:**
@@ -1523,7 +1523,7 @@ composer.jsonで`policy.abandoned`が`false`に設定されているときは効
 
 ### COMPOSER_NO_SECURITY_BLOCKING
 
-DEPRECATED, use [COMPOSER_NO_BLOCKING](#composer_no_blocking) instead.
+廃用で、[COMPOSER_NO_BLOCKING](#composer_no_blocking)を代用してください。
 
 `1`に設定すると、`require`、`update`、`remove`、`install`、`create-project`コマンドに`--no-security-blocking`オプションを渡すことと等価になります。
 これにより、セキュリティ勧告があるパッケージをインストールすることが許容されますが、それらは放棄されたりまだ冷却期間にあるものです。
@@ -1544,14 +1544,11 @@ DEPRECATED, use [COMPOSER_NO_BLOCKING](#composer_no_blocking) instead.
 `1`に設定すれば、依存関係の解決の最中に放棄されたパッケージの遮断を有効にします（`policy.abandoned.block`を`true`に設定することと等価）。
 `0`に設定すれば、遮断を無効にします。
 
-Value takes precedence over the value of the legacy variable
-[COMPOSER_SECURITY_BLOCKING_ABANDONED](#composer_security_blocking_abandoned)
-when it's set to a different value.
+この値は、古い変数[COMPOSER_SECURITY_BLOCKING_ABANDONED](#composer_security_blocking_abandoned)と違った値に設定されている場合は、それより優先されます。
 
 ### COMPOSER_SECURITY_BLOCKING_ABANDONED
 
-DEPRECATED, use
-[COMPOSER_POLICY_ABANDONED_BLOCK](#composer_policy_abandoned_block) instead.
+廃用であり、[COMPOSER_POLICY_ABANDONED_BLOCK](#composer_policy_abandoned_block)を代用してください。
 
 `1`に設定すると、依存関係を解決するとき、放棄されたパッケージの遮断を有効にします（`audit.block-abandoned`の構成を`true`に設定することと等価です）。
 `0`に設定すると、放棄されたパッケージの遮断を無効にします。

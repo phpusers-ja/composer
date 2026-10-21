@@ -402,13 +402,11 @@ since the VCS it names is cloned once and then checked out at the reference.
 
 全てのリンクは省略可能なフィールドです。
 
-`require` and `require-dev` additionally support _stability flags_
-([root-only](04-schema.md#root-package)).  They take the form
-"_constraint_@_stability flag_".  These allow you to further restrict or
-expand the stability of a package beyond the scope of the
-[minimum-stability](#minimum-stability-root-only) setting. You can apply
-them to a constraint, or apply them to an empty _constraint_ if you want to
-allow unstable packages of a dependency for example.
+`require`と`require-dev`は追加で *安定性フラグ*
+（[根幹限定](04-schema.md#root-package)）に対応しています。
+"*constraint*@*stability flag*" の形式を取っています。
+これらによりパッケージの安定性を、[minimum-stability](#minimum-stability-root-only)の設定の範疇を超え、更に制限したり拡張したりできます。
+こうしたフラグが適用できるのは、制約や、例えば依存関係に不安定なパッケージを許容したい場合は、空の *制約* です。
 
 例：
 

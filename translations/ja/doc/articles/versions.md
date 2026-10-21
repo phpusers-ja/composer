@@ -63,14 +63,10 @@ ComposerにVCSで利用できるバージョンの完全な一覧ができたら
 
 ### ブランチ
 
-If you want Composer to check out a branch instead of a tag, you need to
-point it to the branch using the special `dev-*` prefix (or sometimes
-suffix; see below). If you're checking out a branch, it's assumed that you
-want to *work* on the branch and Composer actually clones the repo into the
-correct place in your `vendor` directory. For tags, it copies the right
-files without actually cloning the repo. (You can modify this behavior with
---prefer-source and --prefer-dist, see [install
-options](../03-cli.md#install--i).)
+タグではなくブランチをチェックアウトしたければ、特別な`dev-*`接頭辞（ときには接尾辞、後述）を使ってブランチを指す必要があります。
+ブランチをチェックアウトすると、ブランチで *作業* したいものと仮定し、実際にリポジトリを`vendor`ディレクトリの正しい場所にクローンします。
+タグについては、実際にはリポジトリをクローンせず、正しいファイルをコピーします（--prefer-sourceや--prefer-distでこの挙動を改変できます。
+[インストールオプション](../03-cli.md#install--i)を参照）。
 
 上の例では`my-feature`ブランチをチェックアウトしたいため、`require`節のバージョン制約として`dev-my-feature`を指定することになります。
 こうすると`my-liberay`リポジトリが`vendor`ディレクトリにクローンされ、`my-feature`ブランチがチェックアウトされます。
@@ -97,17 +93,13 @@ Composerは次の安定性を（この順で）認識します。
 
 ### 最小安定性
 
-There's one more thing that will affect which files are checked out of a
-library's VCS and added to your project: Composer allows you to specify
-stability constraints to limit which tags are considered valid. In the above
-example, note that the library released a beta and two release candidates
-for version `1.1` before the final official release. To receive these
-versions when running `composer install` or `composer update`, we have to
-explicitly tell Composer that we are ok with release candidates and beta
-releases (and alpha releases, if we want those). This can be done using
-either a project-wide `minimum-stability` value in `composer.json` or using
-"stability flags" in version constraints. Read more on the [schema
-page](../04-schema.md#minimum-stability-root-only).
+もう1つ、ライブラリのVCSからチェックアウトされてプロジェクトに加わるファイルに作用する点があります。
+Composerでは、安定性の制約を指定し、正当と見做されるタグを制限できます。
+上の例で、最終的な公式リリースの前に、バージョン`1.1`にベータ版と2つのリリース候補が、ライブラリでリリースされていることにご注目ください。
+`composer install`や`composer
+update`を走らせるときに、これらのバージョンを取得するには、リリース候補やベータリリース（または所望であればアルファリリース）で良いことを、Composerに陽に伝えなければなりません。
+これには、プロジェクト範囲の`composer.json`における`minimum-stability`値か、バージョン制約中の「安定性フラグ」のいずれかを使います。
+詳しくは[スキーマのページ](../04-schema.md#minimum-stability-root-only)をお読みください。
 
 ## パッケージ制約を書く
 
@@ -222,12 +214,8 @@ Composerでのバージョンの捉え方が分かったところで、プロジ
  `~1.3`             | `>=1.3.0.0-dev <2.0.0.0-dev`
  `1.4.*`            | `>=1.4.0.0-dev <1.5.0.0-dev`
 
-To allow various stabilities without enforcing them at the constraint level
-however, you may use [stability-flags](../04-schema.md#package-links) like
-`@<stability>` (e.g. `@dev`) to let Composer know that a given package
-can be installed in a different stability than your default minimum-stability
-setting. All available stability flags are listed on the minimum-stability
-section of the [schema page](../04-schema.md#minimum-stability-root-only).
+しかし制約の水準を促進することなく、様々な安定性を許すには、`@<安定性>`（例：`@dev`）のように[stability-flags](../04-schema.md#package-links)を使い、与えられたパッケージが既定のminimum-stabilityの設定とは違う安定性でインストールできることを、Composerに知らせて構いません。
+使える全ての安定性フラグは[スキーマのページ](../04-schema.md#minimum-stability-root-only)のminimum-stabilityの節に挙がっています。
 
 ## まとめ
 ```jsonc

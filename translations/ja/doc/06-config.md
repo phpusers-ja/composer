@@ -171,9 +171,8 @@ via their `block-scope` setting.
 }
 ```
 
-> **Migrating from `config.audit`?** See
-> [How `config.audit` interacts with `config.policy`](#how-configaudit-interacts-with-configpolicy)
-> for how the legacy keys are still honored as a fallback while you migrate.
+> **`config.audit`からの移行ですか？**
+> 移行の際に旧いキーがどのように今なおフォールバックとして尊重されているかについては、[どのように`config.audit`が`config.policy`と対応するか](#how-configaudit-interacts-with-configpolicy)を参照。
 
 ### advisories
 
@@ -370,9 +369,8 @@ during `update`/`require`/`remove`.
 }
 ```
 
-Can be overridden via the
-[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned)
-environment variable or the [`--abandoned`](03-cli.md#audit) CLI option.
+[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned)環境変数または[`--abandoned`](03-cli.md#audit)
+CLIオプションによりオーバーライドできます。
 
 #### ignore
 
@@ -933,9 +931,8 @@ Composer 2.7以降、既定で`fail`です（このオプションが追加さ�
 }
 ```
 
-Since Composer 2.7, the option can be overridden via the
-[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned) environment
-variable.
+Composer
+2.7以降、[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned)環境変数により、オプションをオーバーライドできます。
 
 Composer
 2.8以降、[`--abandoned`](03-cli.md#audit)コマンドラインオプションを介して、オプションをオーバーライドできます。
@@ -1063,11 +1060,10 @@ Composer
 > **非推奨です。**
 > [`config.policy.ignore-unreachable`](#ignore-unreachable)を代用してください。
 
-Defaults to `false`. Should unreachable repositories be ignored during a
-`composer audit`. This can be helpful if you are running the command in an
-environment from which not all repositories can be accessed. This setting
-does not apply to version blocking or audit reports generated in other
-places than the `composer audit` command.
+既定で`false`。
+到達できないリポジトリは`composer audit`のときに無視されるでしょう。
+必ずしも全てのリポジトリへアクセスできない環境でコマンドを実行するときは、これが役立つことがあります。
+この設定は`composer audit`コマンド以外のところで生成されたバージョンの遮断や監査の報告には適用されません。
 
 ```json
 {
@@ -1277,11 +1273,9 @@ vendor-dirと以下の全ての`*-dir`オプション中では、`$HOME`と`~`�
 
 ## data-dir
 
-Defaults to `C:\Users\<user>\AppData\Roaming\Composer` on Windows,
-`$XDG_DATA_HOME/composer` on unix systems that follow the XDG Base Directory
-Specifications, and `$COMPOSER_HOME` on other unix systems. Right now it is only
-used for storing past composer.phar files to be able to roll back to older
-versions. See also [COMPOSER_HOME](03-cli.md#composer_home).
+既定では、Windowsでは`C:\Users\<利用者>\AppData\Roaming\Composer`、XDG Base Directory Specificationsに従うunixシステムでは`$XDG_DATA_HOME/composer`、その他のunixシステムでは`$COMPOSER_HOME`です。
+現在、過去のcomposer.pharファイルを保存して、より古いバージョンにロールバックできるようにするためにのみ使用されています。
+[COMPOSER_HOME](03-cli.md#composer_home)も参照。
 
 Because `self-update --rollback` restores a previously stored
 `composer.phar` from this directory, it must be writable only by the user
@@ -1291,12 +1285,9 @@ malicious phar that a privileged rollback would install.
 
 ## cache-dir
 
-Defaults to `C:\Users\<user>\AppData\Local\Composer` on Windows,
-`/Users/<user>/Library/Caches/composer` on macOS, `$XDG_CACHE_HOME/composer`
-on unix systems that follow the XDG Base Directory Specifications, and
-`$COMPOSER_HOME/cache` on other unix systems. Stores all the caches used by
-Composer. See also [COMPOSER_HOME](03-cli.md#composer_home), and
-[Caching Composer dependencies](articles/caching.md) for caching it in CI.
+既定では、Windowsでは`C:\Users\<利用者>\AppData\Local\Composer`、macOSでは`/Users/<利用者>/Library/Caches/composer`、XDG Base Directory Specificationに従うunixシステムでは`$XDG_CACHE_HOME/composer`、他のunixシステムでは`$COMPOSER_HOME/cache`になります。
+Composerで使う全てのキャッシュが保管されます。
+[COMPOSER_HOME](03-cli.md#composer_home)、またCIでのキャッシュにかけては[Composerの依存関係をキャッシュ](articles/caching.md)も参照。
 
 ## cache-files-dir
 

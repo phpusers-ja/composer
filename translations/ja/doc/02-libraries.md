@@ -116,8 +116,8 @@ update` in any build or release steps.
 
 パッケージリポジトリの挙動や他にどのようなタイプが利用できるかについての詳細は、[リポジトリ](05-repositories.md)を参照してください。
 
-That's all. You can now install the dependencies by running Composer's
-[`install`](03-cli.md#install--i) command!
+以上です。
+これでComposerの[`install`](03-cli.md#install--i)コマンドを実行すれば依存関係をインストールできます！
 
 **まとめ：**
 `composer.json`を含むあらゆるgit/svn/hg/fossilリポジトリは、[`require`](04-schema.md#require)フィールドでパッケージリポジトリを指定して依存関係を宣言することで、プロジェクトに追加できます。

@@ -1084,8 +1084,14 @@ msgid ""
 "(Read more [about Packagist](#packagist), and [about repositories](05-"
 "repositories.md))."
 msgstr ""
-"Composerはこの情報を使って、[`repositories`](04-schema.md#repositories-root-only)キーを使って登録しているパッケージ「リポジトリ」にある、または既定のパッケージレジストリである[Packagist.org](https://packagist.org)にある、正しいファイル一式を探します。\n"
-"上の例では、他のリポジトリは`composer.json`ファイルに何も登録されていないので、`monolog/monolog`パッケージはPackagist.orgに登録されているものと推定されます（詳細は[Packagistについて](#packagist)と[リポジトリについて](05-repositories.md)を参照）。"
+"Composerはこの情報を使って、[`repositories`](04-schema.md#repositories-root-"
+"only)キーを使って登録しているパッケージ「リポジトリ」にある、または既定のパッ"
+"ケージレジストリである[Packagist.org](https://packagist.org)にある、正しい"
+"ファイル一式を探します。\n"
+"上の例では、他のリポジトリは`composer.json`ファイルに何も登録されていないの"
+"で、`monolog/monolog`パッケージはPackagist.orgに登録されているものと推定され"
+"ます（詳細は[Packagistについて](#packagist)と[リポジトリについて](05-"
+"repositories.md)を参照）。"
 
 #. type: Title ###
 #: ../doc/01-basic-usage.md:47
@@ -1201,7 +1207,9 @@ msgstr "依存物をインストール"
 msgid ""
 "To initially install the defined dependencies for your project, you should "
 "run the [`update`](03-cli.md#update--u--upgrade) command."
-msgstr "定義された依存関係をプロジェクトに初めてインストールするときは、[`update`](03-cli.md#update--u--upgrade)コマンドを走らせると良いです。"
+msgstr ""
+"定義された依存関係をプロジェクトに初めてインストールするときは、[`update`]"
+"(03-cli.md#update--u--upgrade)コマンドを走らせると良いです。"
 
 #. type: Fenced code block (shell)
 #: ../doc/01-basic-usage.md:95 ../doc/01-basic-usage.md:170
@@ -1245,9 +1253,13 @@ msgid ""
 "`vendor/`."
 msgstr ""
 "それから暗黙裡に[`install`](03-cli.md#install--i)コマンドが走ります。\n"
-"これにより依存関係のファイルがプロジェクトの`vendor`ディレクトリにダウンロードされます（`vendor`ディレクトリはプロジェクトの全てのサードパーティコード用の定番の場所です）。\n"
-"上の例では、最終的にMonologのソースファイルが`vendor/monolog/monolog`にあることになります。\n"
-"Monologには`psr/log`への依存関係があるため、そのパッケージのファイルもまた`vendor/`の中に見当たります。"
+"これにより依存関係のファイルがプロジェクトの`vendor`ディレクトリにダウンロー"
+"ドされます（`vendor`ディレクトリはプロジェクトの全てのサードパーティコード用"
+"の定番の場所です）。\n"
+"上の例では、最終的にMonologのソースファイルが`vendor/monolog/monolog`にあるこ"
+"とになります。\n"
+"Monologには`psr/log`への依存関係があるため、そのパッケージのファイルもまた"
+"`vendor/`の中に見当たります。"
 
 #. type: Plain text
 #: ../doc/01-basic-usage.md:116
@@ -1396,9 +1408,12 @@ msgid ""
 "will fetch the latest matching versions (according to your `composer.json` "
 "file) and update the lock file with the new versions."
 msgstr ""
-"先に言及したように、`composer.lock`ファイルは自動的に依存関係の最新版が取得されるのを防ぎます。\n"
-"最新のバージョンに更新するには、[`update`](03-cli.md#update--u--upgrade)コマンドを使います。\n"
-"こうすると（`composer.json`ファイルに沿うように）照合する最新バージョンを取得して新しいバージョンで固定ファイルを更新します。"
+"先に言及したように、`composer.lock`ファイルは自動的に依存関係の最新版が取得さ"
+"れるのを防ぎます。\n"
+"最新のバージョンに更新するには、[`update`](03-cli.md#update--u--upgrade)コマ"
+"ンドを使います。\n"
+"こうすると（`composer.json`ファイルに沿うように）照合する最新バージョンを取得"
+"して新しいバージョンで固定ファイルを更新します。"
 
 #. type: Plain text
 #: ../doc/01-basic-usage.md:177
@@ -1538,7 +1553,9 @@ msgstr ""
 msgid ""
 "You can use [`show --platform`](03-cli.md#show--info) to get a list of your "
 "locally available platform packages."
-msgstr "[`show --platform`](03-cli.md#show--info)を使うと、ローカルで利用できるプラットフォームパッケージの一覧が得られます。"
+msgstr ""
+"[`show --platform`](03-cli.md#show--info)を使うと、ローカルで利用できるプラッ"
+"トフォームパッケージの一覧が得られます。"
 
 #. type: Title ##
 #: ../doc/01-basic-usage.md:224
@@ -1643,7 +1660,8 @@ msgid ""
 "information."
 msgstr ""
 "このコマンドは`vendor/autoload.php`ファイルを再生成します。\n"
-"より詳しい情報は[`dump-autoload`](03-cli.md#dump-autoload--dumpautoload)の節を参照。"
+"より詳しい情報は[`dump-autoload`](03-cli.md#dump-autoload--dumpautoload)の節"
+"を参照。"
 
 #. type: Plain text
 #: ../doc/01-basic-usage.md:270
@@ -2040,7 +2058,8 @@ msgid ""
 "[`install`](03-cli.md#install--i) command!"
 msgstr ""
 "以上です。\n"
-"これでComposerの[`install`](03-cli.md#install--i)コマンドを実行すれば依存関係をインストールできます！"
+"これでComposerの[`install`](03-cli.md#install--i)コマンドを実行すれば依存関係"
+"をインストールできます！"
 
 #. type: Plain text
 #: ../doc/02-libraries.md:139
@@ -2498,8 +2517,11 @@ msgid ""
 msgstr ""
 "**--repository:**\n"
 "1つ（かそれ以上）のカスタムリポジトリを与えます。\n"
-"これらのリポジトリは生成されるcomposer.jsonに収められ、要件の一覧を提案する際の自動補完に使われます。\n"
-"全てのリポジトリは、`composer`リポジトリを指すHTTPのURLないし[repositories](04-schema.md#repositories-root-only)キーが受け付けるものと同様のJSON文字列の何れかを取りえます。"
+"これらのリポジトリは生成されるcomposer.jsonに収められ、要件の一覧を提案する際"
+"の自動補完に使われます。\n"
+"全てのリポジトリは、`composer`リポジトリを指すHTTPのURLないし[repositories]"
+"(04-schema.md#repositories-root-only)キーが受け付けるものと同様のJSON文字列の"
+"何れかを取りえます。"
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:80
@@ -2660,7 +2682,8 @@ msgid ""
 msgstr ""
 "**--no-security-blocking:**\n"
 "廃用であり、`--no-blocking`を代用してください。\n"
-"セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄されたものかまだ冷却期間にあるかです。\n"
+"セキュリティ勧告のあるパッケージのインストールを許容しますが、それらは放棄さ"
+"れたものかまだ冷却期間にあるかです。\n"
 "[COMPOSER_NO_SECURITY_BLOCKING](#composer_no_security_blocking)も参照。"
 
 #. type: Bullet: '* '
@@ -2671,7 +2694,8 @@ msgid ""
 "(#composer_no_blocking)."
 msgstr ""
 "**--no-blocking:**\n"
-"このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。\n"
+"このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これに"
+"は冷却期間も含まれます。\n"
 "[COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。"
 
 #. type: Bullet: '* '
@@ -3124,7 +3148,8 @@ msgid ""
 "(#composer_no_blocking)."
 msgstr ""
 "**--no-blocking:**\n"
-"このコマンドの間は、すべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。\n"
+"このコマンドの間は、すべてのポリシーによる遮断を無効にし、これには冷却期間を"
+"含みます。\n"
 "[COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。"
 
 #. type: Bullet: '* '
@@ -3355,8 +3380,12 @@ msgid ""
 "install of a package if you messed with its files, or if you wish to change "
 "the installation type using --prefer-install."
 msgstr ""
-"`reinstall`コマンドは、名前により（または`--type`による種別により）インストールされているパッケージを拾い上げ、アンインストールと再インストールをします。\n"
-"そのファイルを散らかしたり、または--prefer-installを使ってインストールの種類を変えたいと思ったりしたときは、こうすることで綺麗なパッケージのインストールがされます。"
+"`reinstall`コマンドは、名前により（または`--type`による種別により）インストー"
+"ルされているパッケージを拾い上げ、アンインストールと再インストールをしま"
+"す。\n"
+"そのファイルを散らかしたり、または--prefer-installを使ってインストールの種類"
+"を変えたいと思ったりしたときは、こうすることで綺麗なパッケージのインストール"
+"がされます。"
 
 #. type: Fenced code block (shell)
 #: ../doc/03-cli.md:407
@@ -3483,7 +3512,10 @@ msgid ""
 "The global command allows you to run other commands like `install`, "
 "`remove`, `require` or `update` as if you were running them from the "
 "[COMPOSER_HOME](#composer_home)  directory."
-msgstr "globalコマンドでは、`install`、`remove`、`require`、`update`のようなコマンドを、あたかも[COMPOSER_HOME](#composer_home)ディレクトリから走らせているかのように、実行できます。"
+msgstr ""
+"globalコマンドでは、`install`、`remove`、`require`、`update`のようなコマンド"
+"を、あたかも[COMPOSER_HOME](#composer_home)ディレクトリから走らせているかのよ"
+"うに、実行できます。"
 
 #. type: Plain text
 #: ../doc/03-cli.md:480
@@ -4296,7 +4328,8 @@ msgid ""
 "the installed packages."
 msgstr ""
 "**--locked:**\n"
-"インストールされたパッケージからではなく、`composer.lock`から依存関係の情報を読みます。"
+"インストールされたパッケージからではなく、`composer.lock`から依存関係の情報を"
+"読みます。"
 
 #. type: Title ##
 #: ../doc/03-cli.md:737
@@ -4377,7 +4410,9 @@ msgstr "validate"
 msgid ""
 "You should always run the `validate` command before you commit your "
 "`composer.json` and `composer.lock` files, and before you tag a release."
-msgstr "`composer.json`と`composer.lock`をコミットする前、そしてリリースのタグを打つ前は、常に`validate`コマンドを走らせるべきです。"
+msgstr ""
+"`composer.json`と`composer.lock`をコミットする前、そしてリリースのタグを打つ"
+"前は、常に`validate`コマンドを走らせるべきです。"
 
 #. type: Plain text
 #: ../doc/03-cli.md:780
@@ -5202,8 +5237,11 @@ msgid ""
 "times to configure multiple repositories."
 msgstr ""
 "**--repository:**\n"
-"パッケージを探索するためのカスタムリポジトリを与え、これがpackagistの代わりに使われます。\n"
-"`composer`ディレクトリを指すHTTP URLや、ローカルの`packages.json`ファイルへのパスや、[repositories](04-schema.md#repositories-root-only)キーが受け付けるものに似たJSON文字列のいずれかを取れます。\n"
+"パッケージを探索するためのカスタムリポジトリを与え、これがpackagistの代わりに"
+"使われます。\n"
+"`composer`ディレクトリを指すHTTP URLや、ローカルの`packages.json`ファイルへの"
+"パスや、[repositories](04-schema.md#repositories-root-only)キーが受け付けるも"
+"のに似たJSON文字列のいずれかを取れます。\n"
 "これを複数回使って複数のリポジトリを構成できます。"
 
 #. type: Bullet: '* '
@@ -5709,7 +5747,8 @@ msgid ""
 "package, skipping transitive dependencies."
 msgstr ""
 "**--direct (-D):**\n"
-"根幹パッケージにより直接要求されるパッケージのみの監査で、推移的な依存関係は飛ばします。"
+"根幹パッケージにより直接要求されるパッケージのみの監査で、推移的な依存関係は"
+"飛ばします。"
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:1247
@@ -6512,7 +6551,8 @@ msgstr "COMPOSER_NO_SECURITY_BLOCKING"
 #. type: Plain text
 #: ../doc/03-cli.md:1489
 msgid "DEPRECATED, use [COMPOSER_NO_BLOCKING](#composer_no_blocking) instead."
-msgstr "廃用で、[COMPOSER_NO_BLOCKING](#composer_no_blocking)を代用してください。"
+msgstr ""
+"廃用で、[COMPOSER_NO_BLOCKING](#composer_no_blocking)を代用してください。"
 
 #. type: Plain text
 #: ../doc/03-cli.md:1491
@@ -6588,7 +6628,10 @@ msgid ""
 "Value takes precedence over the value of the legacy variable "
 "[COMPOSER_SECURITY_BLOCKING_ABANDONED]"
 "(#composer_security_blocking_abandoned) when it's set to a different value."
-msgstr "この値は、古い変数[COMPOSER_SECURITY_BLOCKING_ABANDONED](#composer_security_blocking_abandoned)と違った値に設定されている場合は、それより優先されます。"
+msgstr ""
+"この値は、古い変数[COMPOSER_SECURITY_BLOCKING_ABANDONED]"
+"(#composer_security_blocking_abandoned)と違った値に設定されている場合は、それ"
+"より優先されます。"
 
 #. type: Title ###
 #: ../doc/03-cli.md:1506
@@ -6601,7 +6644,9 @@ msgstr "COMPOSER_SECURITY_BLOCKING_ABANDONED"
 msgid ""
 "DEPRECATED, use [COMPOSER_POLICY_ABANDONED_BLOCK]"
 "(#composer_policy_abandoned_block) instead."
-msgstr "廃用であり、[COMPOSER_POLICY_ABANDONED_BLOCK](#composer_policy_abandoned_block)を代用してください。"
+msgstr ""
+"廃用であり、[COMPOSER_POLICY_ABANDONED_BLOCK]"
+"(#composer_policy_abandoned_block)を代用してください。"
 
 #. type: Plain text
 #: ../doc/03-cli.md:1511
@@ -8022,10 +8067,13 @@ msgid ""
 "or apply them to an empty _constraint_ if you want to allow unstable "
 "packages of a dependency for example."
 msgstr ""
-"`require`と`require-dev`は追加で *安定性フラグ* （[根幹限定](04-schema.md#root-package)）に対応しています。\n"
+"`require`と`require-dev`は追加で *安定性フラグ* （[根幹限定](04-"
+"schema.md#root-package)）に対応しています。\n"
 "\"*constraint*@*stability flag*\" の形式を取っています。\n"
-"これらによりパッケージの安定性を、[minimum-stability](#minimum-stability-root-only)の設定の範疇を超え、更に制限したり拡張したりできます。\n"
-"こうしたフラグが適用できるのは、制約や、例えば依存関係に不安定なパッケージを許容したい場合は、空の *制約* です。"
+"これらによりパッケージの安定性を、[minimum-stability](#minimum-stability-"
+"root-only)の設定の範疇を超え、更に制限したり拡張したりできます。\n"
+"こうしたフラグが適用できるのは、制約や、例えば依存関係に不安定なパッケージを"
+"許容したい場合は、空の *制約* です。"
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:416
@@ -13170,7 +13218,10 @@ msgid ""
 "Can be overridden via the [`COMPOSER_AUDIT_ABANDONED`](03-"
 "cli.md#composer_audit_abandoned)  environment variable or the [`--abandoned`]"
 "(03-cli.md#audit) CLI option."
-msgstr "[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned)環境変数または[`--abandoned`](03-cli.md#audit) CLIオプションによりオーバーライドできます。"
+msgstr ""
+"[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned)環境変数また"
+"は[`--abandoned`](03-cli.md#audit) CLIオプションによりオーバーライドできま"
+"す。"
 
 #. type: Plain text
 #: ../doc/06-config.md:377
@@ -14293,7 +14344,10 @@ msgid ""
 "Since Composer 2.7, the option can be overridden via the "
 "[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned) environment "
 "variable."
-msgstr "Composer 2.7以降、[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned)環境変数により、オプションをオーバーライドできます。"
+msgstr ""
+"Composer 2.7以降、[`COMPOSER_AUDIT_ABANDONED`](03-"
+"cli.md#composer_audit_abandoned)環境変数により、オプションをオーバーライドで"
+"きます。"
 
 #. type: Plain text
 #: ../doc/06-config.md:891
@@ -14558,8 +14612,10 @@ msgid ""
 msgstr ""
 "既定で`false`。\n"
 "到達できないリポジトリは`composer audit`のときに無視されるでしょう。\n"
-"必ずしも全てのリポジトリへアクセスできない環境でコマンドを実行するときは、これが役立つことがあります。\n"
-"この設定は`composer audit`コマンド以外のところで生成されたバージョンの遮断や監査の報告には適用されません。"
+"必ずしも全てのリポジトリへアクセスできない環境でコマンドを実行するときは、こ"
+"れが役立つことがあります。\n"
+"この設定は`composer audit`コマンド以外のところで生成されたバージョンの遮断や"
+"監査の報告には適用されません。"
 
 #. type: Fenced code block (json)
 #: ../doc/06-config.md:1008
@@ -16607,9 +16663,12 @@ msgid ""
 "--prefer-source and --prefer-dist, see [install options](../03-"
 "cli.md#install--i).)"
 msgstr ""
-"タグではなくブランチをチェックアウトしたければ、特別な`dev-*`接頭辞（ときには接尾辞、後述）を使ってブランチを指す必要があります。\n"
-"ブランチをチェックアウトすると、ブランチで *作業* したいものと仮定し、実際にリポジトリを`vendor`ディレクトリの正しい場所にクローンします。\n"
-"タグについては、実際にはリポジトリをクローンせず、正しいファイルをコピーします（--prefer-sourceや--prefer-distでこの挙動を改変できます。\n"
+"タグではなくブランチをチェックアウトしたければ、特別な`dev-*`接頭辞（ときには"
+"接尾辞、後述）を使ってブランチを指す必要があります。\n"
+"ブランチをチェックアウトすると、ブランチで *作業* したいものと仮定し、実際に"
+"リポジトリを`vendor`ディレクトリの正しい場所にクローンします。\n"
+"タグについては、実際にはリポジトリをクローンせず、正しいファイルをコピーしま"
+"す（--prefer-sourceや--prefer-distでこの挙動を改変できます。\n"
 "[インストールオプション](../03-cli.md#install--i)を参照）。"
 
 #. type: Plain text
@@ -16706,12 +16765,18 @@ msgid ""
 "\"stability flags\" in version constraints. Read more on the [schema page]"
 "(../04-schema.md#minimum-stability-root-only)."
 msgstr ""
-"もう1つ、ライブラリのVCSからチェックアウトされてプロジェクトに加わるファイルに作用する点があります。\n"
+"もう1つ、ライブラリのVCSからチェックアウトされてプロジェクトに加わるファイル"
+"に作用する点があります。\n"
 "Composerでは、安定性の制約を指定し、正当と見做されるタグを制限できます。\n"
-"上の例で、最終的な公式リリースの前に、バージョン`1.1`にベータ版と2つのリリース候補が、ライブラリでリリースされていることにご注目ください。\n"
-"`composer install`や`composer update`を走らせるときに、これらのバージョンを取得するには、リリース候補やベータリリース（または所望であればアルファリリース）で良いことを、Composerに陽に伝えなければなりません。\n"
-"これには、プロジェクト範囲の`composer.json`における`minimum-stability`値か、バージョン制約中の「安定性フラグ」のいずれかを使います。\n"
-"詳しくは[スキーマのページ](../04-schema.md#minimum-stability-root-only)をお読みください。"
+"上の例で、最終的な公式リリースの前に、バージョン`1.1`にベータ版と2つのリリー"
+"ス候補が、ライブラリでリリースされていることにご注目ください。\n"
+"`composer install`や`composer update`を走らせるときに、これらのバージョンを取"
+"得するには、リリース候補やベータリリース（または所望であればアルファリリー"
+"ス）で良いことを、Composerに陽に伝えなければなりません。\n"
+"これには、プロジェクト範囲の`composer.json`における`minimum-stability`値か、"
+"バージョン制約中の「安定性フラグ」のいずれかを使います。\n"
+"詳しくは[スキーマのページ](../04-schema.md#minimum-stability-root-only)をお読"
+"みください。"
 
 #. type: Title ##
 #: ../doc/articles/versions.md:106
@@ -17601,7 +17666,8 @@ msgid ""
 "latest version**. See [self-update](../03-cli.md#self-update--selfupdate) "
 "for details."
 msgstr ""
-"Composerを使っていてどんな問題に直面したときも、必ず **最新版を使って** ください。\n"
+"Composerを使っていてどんな問題に直面したときも、必ず **最新版を使って** くだ"
+"さい。\n"
 "詳しくは[self-update](../03-cli.md#self-update--selfupdate)を参照。"
 
 #. type: Bullet: '2. '
@@ -17666,8 +17732,10 @@ msgid ""
 "stability-root-only)**. To get started or be sure this is no issue, set "
 "`minimum-stability` to \"dev\"."
 msgstr ""
-"必ず **正しい[minimum-stability](../04-schema.md#minimum-stability-root-only)を設定** してください。\n"
-"始めたてのときや、これが問題になっていないことを確かめるには、`minimum-stability`を「dev」に設定してください。"
+"必ず **正しい[minimum-stability](../04-schema.md#minimum-stability-root-only)"
+"を設定** してください。\n"
+"始めたてのときや、これが問題になっていないことを確かめるには、`minimum-"
+"stability`を「dev」に設定してください。"
 
 #. type: Bullet: '3. '
 #: ../doc/articles/troubleshooting.md:40
@@ -18420,7 +18488,8 @@ msgid ""
 "environment variable which will force curl to resolve domains using IPv4. "
 "This only works when the curl extension is used for downloads."
 msgstr ""
-"[`COMPOSER_IPRESOLVE=4`](../03-cli.md#composer_ipresolve)環境変数を設定して、curlがIPv4を使ってドメイン解決するよう強制してください。\n"
+"[`COMPOSER_IPRESOLVE=4`](../03-cli.md#composer_ipresolve)環境変数を設定して、"
+"curlがIPv4を使ってドメイン解決するよう強制してください。\n"
 "これはcurl拡張がダウンロード用に使われるときだけ機能します。"
 
 #. type: Plain text

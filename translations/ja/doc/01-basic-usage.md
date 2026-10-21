@@ -30,14 +30,8 @@ Composerにプロジェクトが依存しているパッケージがどれであ
 見ての通り、[`require`](04-schema.md#require)は**パッケージ名**（例：`monolog/monolog`）と
 **パッケージバージョン**（例：`1.0.*`）を対応付けるオブジェクトを取ります。
 
-Composer uses this information to search for the right set of files in
-package "repositories" that you register using the
-[`repositories`](04-schema.md#repositories-root-only)  key, or in
-[Packagist.org](https://packagist.org), the default package repository.  In
-the above example, since no other repository has been registered in the
-`composer.json` file, it is assumed that the `monolog/monolog` package is
-registered on Packagist.org. (Read more [about Packagist](#packagist), and
-[about repositories](05-repositories.md)).
+Composerはこの情報を使って、[`repositories`](04-schema.md#repositories-root-only)キーを使って登録しているパッケージ「リポジトリ」にある、または既定のパッケージレジストリである[Packagist.org](https://packagist.org)にある、正しいファイル一式を探します。
+上の例では、他のリポジトリは`composer.json`ファイルに何も登録されていないので、`monolog/monolog`パッケージはPackagist.orgに登録されているものと推定されます（詳細は[Packagistについて](#packagist)と[リポジトリについて](05-repositories.md)を参照）。
 
 ### パッケージ名
 
@@ -56,17 +50,12 @@ registered on Packagist.org. (Read more [about Packagist](#packagist), and
 
 バージョンとバージョン間の関連、バージョン制約についてのより詳しい情報は[バージョン](articles/versions.md)を読んでください。
 
-> **How does Composer download the right files?** When you specify a dependency in
-> `composer.json`, Composer first takes the name of the package that you have requested
-> and searches for it in any repositories that you have registered using the
-> [`repositories`](04-schema.md#repositories-root-only) key. If you have not registered
-> any extra repositories, or it does not find a package with that name in the
-> repositories you have specified, it falls back to Packagist.org (more [below](#packagist)).
+> **どうやってComposerは正しいファイルをダウンロードしていますか。**
+> `composer.json`に依存関係を指定したとき、Composerはまず要求されたパッケージの名前を取り出して、[`repositories`](04-schema.md#repositories-root-only)キーを使って登録済みの全てのリポジトリで検索します。
+> もし1つも追加でリポジトリを登録していなかったり、指定したリポジトリにその名前のパッケージが見当たらないときは、Packagist.org（詳しくは[後述](#packagist)）に落ち着きます。
 >
-> When Composer finds the right package, either in Packagist.org or in a repo you have specified,
-> it then uses the versioning features of the package's VCS (i.e., branches and tags)
-> to attempt to find the best match for the version constraint you have specified. Be sure to read
-> about versions and package resolution in the [versions article](articles/versions.md).
+> Composerが正しいパッケージを見つけたときは、それがPackagist.orgまたは指定したリポジトリのいずれにあっても、パッケージのVCSのバージョン機能（つまりブランチとタグ）を使って、指定したバージョン制約に最も合致するものを見付け出そうと試みます。
+> 必ず[バージョンについての記事](articles/versions.md)でバージョンとパッケージの解決について読んでください。
 
 > **補足：** もしパッケージを要求したもののComposerがパッケージの安定性の理由で例外を投げた場合は、指定したバージョンが既定の最小の安定要件に見合わない可能性があります。
 > VCSで妥当なパッケージバージョンを探す際、既定では安定リリースのみが考慮されます。
@@ -76,8 +65,7 @@ registered on Packagist.org. (Read more [about Packagist](#packagist), and
 
 ## 依存物をインストール
 
-To initially install the defined dependencies for your project, you should
-run the [`update`](03-cli.md#update--u--upgrade) command.
+定義された依存関係をプロジェクトに初めてインストールするときは、[`update`](03-cli.md#update--u--upgrade)コマンドを走らせると良いです。
 
 ```shell
 php composer.phar update
@@ -90,13 +78,10 @@ php composer.phar update
   `composer.lock`ファイルはプロジェクトのリポジトリにコミットすべきです。
   そうすればプロジェクトに参画する全員にとって、同じバージョンの依存関係に固定されたものになります（詳細は後述）。
   これが`update`コマンドの主な役割です。
-- It then implicitly runs the [`install`](03-cli.md#install--i)
-  command. This will download the dependencies' files into the `vendor`
-  directory in your project. (The `vendor` directory is the conventional
-  location for all third-party code in a project). In our example from
-  above, you would end up with the Monolog source files in
-  `vendor/monolog/monolog/`. As Monolog has a dependency on `psr/log`, that
-  package's files can also be found inside `vendor/`.
+- それから暗黙裡に[`install`](03-cli.md#install--i)コマンドが走ります。
+  これにより依存関係のファイルがプロジェクトの`vendor`ディレクトリにダウンロードされます（`vendor`ディレクトリはプロジェクトの全てのサードパーティコード用の定番の場所です）。
+  上の例では、最終的にMonologのソースファイルが`vendor/monolog/monolog`にあることになります。
+  Monologには`psr/log`への依存関係があるため、そのパッケージのファイルもまた`vendor/`の中に見当たります。
 
 > **コツ：** gitをプロジェクトで使っているのなら、多分`.gitignore`に`vendor`を追加したいでしょう。
 > 実際のところ、バージョン管理されたリポジトリにサードパーティ製のコード全てを追加したくはないので。
@@ -109,8 +94,9 @@ CIサーバ、実運用マシン、チーム内の他の開発者、万物万人
 これにより特定のデプロイでのみ影響する潜在的なバグが低減されます。
 たとえ一人で開発していて、6箇月経ってからプロジェクトを再インストールしたとしても、そして依存関係が多くの新しいバージョンをリリースされていたとしても、インストールされた依存関係がちゃんと動くことは疑いありません（`update`コマンドの使用については以下の補足を参照してください）。
 
-> **Note:** Libraries should commit the lock file as well, see also:
-> [Libraries - Lock file](02-libraries.md#lock-file).
+> **補足：**
+> ライブラリも同様に、固定ファイルをコミットすべきです。
+> [ライブラリ――固定ファイル](02-libraries.html#lock-file)も参照。
 
 ### `composer.lock`からインストールする
 
@@ -133,11 +119,9 @@ Composerは既定で再生成可能な構築を有効にします。
 
 ## 最新版に依存関係を更新する
 
-As mentioned above, the `composer.lock` file prevents you from automatically
-getting the latest versions of your dependencies. To update to the latest
-versions, use the [`update`](03-cli.md#update--u--upgrade) command. This
-will fetch the latest matching versions (according to your `composer.json`
-file) and update the lock file with the new versions.
+先に言及したように、`composer.lock`ファイルは自動的に依存関係の最新版が取得されるのを防ぎます。
+最新のバージョンに更新するには、[`update`](03-cli.md#update--u--upgrade)コマンドを使います。
+こうすると（`composer.json`ファイルに沿うように）照合する最新バージョンを取得して新しいバージョンで固定ファイルを更新します。
 
 ```shell
 php composer.phar update
@@ -185,8 +169,8 @@ PHP自身やPHP拡張、システムライブライリが含まれます。
   次のものが利用できます：`curl`, `iconv`, `icu`, `libxml`, `openssl`, `pcre`, `uuid`,
   `xsl`。
 
-You can use [`show --platform`](03-cli.md#show--info) to get a list of your
-locally available platform packages.
+[`show
+--platform`](03-cli.md#show--info)を使うと、ローカルで利用できるプラットフォームパッケージの一覧が得られます。
 
 ## 自動読み込み
 
@@ -223,9 +207,8 @@ $log->warning('Foo');
 php composer.phar dump-autoload
 ```
 
-This command will re-generate the `vendor/autoload.php` file.  See the
-[`dump-autoload`](03-cli.md#dump-autoload--dumpautoload) section for more
-information.
+このコマンドは`vendor/autoload.php`ファイルを再生成します。
+より詳しい情報は[`dump-autoload`](03-cli.md#dump-autoload--dumpautoload)の節を参照。
 
 自動読み込みファイルを含めるとautoloaderインスタンスを返します。
 そのためインクルード呼び出しの返り値を変数に保持し、更に名前空間を追加できます。
