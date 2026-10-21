@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
 "POT-Creation-Date: 2026-10-11 09:20+0900\n"
-"PO-Revision-Date: 2026-10-11 09:37+0900\n"
+"PO-Revision-Date: 2026-10-22 05:01+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -14715,19 +14715,7 @@ msgstr "gitlab-token"
 
 #. type: Plain text
 #: ../doc/06-config.md:1120
-#, fuzzy, no-wrap
-#| msgid ""
-#| "A list of domain names and private tokens. Private token can be either simple\n"
-#| "string, or array with username and token. For example using `{\"gitlab.com\":\n"
-#| "\"privatetoken\"}` as the value of this option will use `privatetoken` to access\n"
-#| "private repositories on gitlab. Using `{\"gitlab.com\": {\"username\": \"gitlabuser\",\n"
-#| " \"token\": \"privatetoken\"}}` will use both username and token for gitlab deploy\n"
-#| "token functionality (https://docs.gitlab.com/ee/user/project/deploy_tokens/)\n"
-#| "Please note: If the package is not hosted at\n"
-#| "gitlab.com the domain names must be also specified with the\n"
-#| "[`gitlab-domains`](06-config.md#gitlab-domains) option. The token must have\n"
-#| "`api` or `read_api` scope.\n"
-#| "Further info can also be found [here](articles/authentication-for-private-packages.md#gitlab-token)\n"
+#, no-wrap
 msgid ""
 "A list of domain names and private tokens. Private token can be either simple\n"
 "string, or array with username and token. For example using `{\"gitlab.com\":\n"
@@ -14747,8 +14735,9 @@ msgstr ""
 "ドメイン名と私有トークンのリストです。\n"
 "私有トークンは、単純な文字列、または利用者名とトークンを含む配列の何れかです。\n"
 "たとえば、このオプションの値として`{\"gitlab.com\": \"privatetoken\"}`を使用すると、`privatetoken`を使用してgitlabの私有リポジトリにアクセスします。\n"
-"`{\"gitlab.com\": {\"username\": \"gitlabuser\", \"token\": \"privatetoken\"}}`を使用すると、利用者名とトークンの両方を使ってgitlabのデプロイトークン機能 (https://docs.gitlab.com/ ee/user/project/deploy_tokens/) を使用します。\n"
-"なお、パッケージがgitlab.comでホストされていない場合、ドメイン名も[`gitlab-domains`](06-config.md#gitlab-domains)オプションで指定する必要があります。\n"
+"`{\"gitlab.com\": {\"username\": \"gitlabuser\", \"token\": \"privatetoken\"}}`を使用すると、利用者名とトークンの両方を使ってgitlabのデプロイトークン機能 (https://docs.gitlab.com/ee/user/project/deploy_tokens/) を使用します。\n"
+"利用者名として`gitlab-ci-token`を代わりに使うと、[GitLab CIのジョブトークン](https://docs.gitlab.com/ci/jobs/ci_job_token/)が保管され、これはComposerから`JOB-TOKEN`ヘッダとして送るものであって、distのアーカイブをダウンロードするにはGitLab 19.3かそれより新しい版を要します。\n"
+"ご注意いただきたいのは、パッケージがgitlab.comで提供されていないのであれば、ドメイン名は[`gitlab-domains`](06-config.md#gitlab-domains)オプションでも指定しなければなりません。\n"
 "トークンには`api`または`read_api`スコープが必要です。\n"
 "詳細情報は[こちら](articles/authentication-for-private-packages.md#gitlab-token)にもあります。\n"
 
@@ -14760,16 +14749,6 @@ msgstr "gitlab-protocol"
 
 #. type: Plain text
 #: ../doc/06-config.md:1130
-#, fuzzy
-#| msgid ""
-#| "A protocol to force use of when creating a repository URL for the "
-#| "`source` value of the package metadata. One of `git` or `http`. (`https` "
-#| "is treated as a synonym for `http`.) Helpful when working with projects "
-#| "referencing private repositories which will later be cloned in GitLab CI "
-#| "jobs with a [GitLab CI_JOB_TOKEN](https://docs.gitlab.com/ee/ci/variables/"
-#| "predefined_variables.html#predefined-variables-reference)  using HTTP "
-#| "basic auth. By default, Composer will generate a git-over-SSH URL for "
-#| "private repositories and HTTP(S) only for public."
 msgid ""
 "A protocol to force use of when creating a repository URL for the `source` "
 "value of the package metadata. One of `git` or `http`. (`https` is treated "
@@ -14780,15 +14759,10 @@ msgid ""
 "auth for the clone. By default, Composer will generate a git-over-SSH URL "
 "for private repositories and HTTP(S) only for public."
 msgstr ""
-"パッケージメタデータの`source`値用にリポジトリのURLを作成するときに、強制的に"
-"使用するプロトコルです。\n"
+"パッケージメタデータの`source`値用にリポジトリのURLを作成するときに、強制的に使用するプロトコルです。\n"
 "`git`または`http`の何れかです（`https`は`http`の同義語として扱われます）。\n"
-"HTTPベーシック認証を使った[GitLabのCI_JOB_TOKEN](https://docs.gitlab.com/ee/"
-"ci/variables/predefined_variables.html#predefined-variables-reference)によ"
-"り、後々GitLab CIのジョブでクローンされる私有リポジトリを参照するプロジェクト"
-"を扱う際に役立ちます。\n"
-"既定では、Composerは私有リポジトリについてはgit-over-SSHのURLを生成し、公開リ"
-"ポジトリについてはHTTP(S)のみを生成します。"
+"私有リポジトリを参照するプロジェクトで作業をするときに有用であって、リポジトリがGitLab CIのジョブにおいて[GitLabのCI_JOB_TOKEN](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html#predefined-variables-reference)つきで後からクローンされ、またこのクローンにHTTPベーシック認証が使われるときがこれにあたります。\n"
+"既定では、Composerは私有リポジトリについてはgit-over-SSHのURLを生成し、公開リポジトリについてはHTTP(S)のみを生成します。"
 
 #. type: Title ##
 #: ../doc/06-config.md:1131
@@ -15117,13 +15091,7 @@ msgstr "cache-dir"
 
 #. type: Plain text
 #: ../doc/06-config.md:1251
-#, fuzzy, no-wrap
-#| msgid ""
-#| "Defaults to `C:\\Users\\<user>\\AppData\\Local\\Composer` on Windows,\n"
-#| "`/Users/<user>/Library/Caches/composer` on macOS, `$XDG_CACHE_HOME/composer`\n"
-#| "on unix systems that follow the XDG Base Directory Specifications, and\n"
-#| "`$COMPOSER_HOME/cache` on other unix systems. Stores all the caches used by\n"
-#| "Composer. See also [COMPOSER_HOME](03-cli.md#composer-home).\n"
+#, no-wrap
 msgid ""
 "Defaults to `C:\\Users\\<user>\\AppData\\Local\\Composer` on Windows,\n"
 "`/Users/<user>/Library/Caches/composer` on macOS, `$XDG_CACHE_HOME/composer`\n"
@@ -15132,9 +15100,9 @@ msgid ""
 "Composer. See also [COMPOSER_HOME](03-cli.md#composer-home), and\n"
 "[Caching Composer dependencies](articles/caching.md) for caching it in CI.\n"
 msgstr ""
-"既定では、Windowsでは`C:\\Users\\<user>\\AppData\\Local\\Composer`、macOSでは`/Users/<user>/Library/Caches/composer`、XDG Base Directory Specificationに従うunixシステムでは`$XDG_CACHE_HOME/composer`、他のunixシステムでは`$COMPOSER_HOME/cache`になります。\n"
+"既定では、Windowsでは`C:\\Users\\<利用者>\\AppData\\Local\\Composer`、macOSでは`/Users/<利用者>/Library/Caches/composer`、XDG Base Directory Specificationに従うunixシステムでは`$XDG_CACHE_HOME/composer`、他のunixシステムでは`$COMPOSER_HOME/cache`になります。\n"
 "Composerで使う全てのキャッシュが保管されます。\n"
-"[COMPOSER_HOME](03-cli.md#composer-home)も参照してください。\n"
+"[COMPOSER_HOME](03-cli.md#composer-home)、またCIでキャッシュするための[Composerの依存関係をキャッシュ](articles/caching.md)も参照してください。\n"
 
 #. type: Title ##
 #: ../doc/06-config.md:1252
@@ -15328,11 +15296,6 @@ msgstr "strict-psr-autoloader"
 
 #. type: Plain text
 #: ../doc/06-config.md:1317
-#, fuzzy
-#| msgid ""
-#| "**--strict-psr-autoloader:** Return a failed exit code (6) if PSR-4 or "
-#| "PSR-0 mapping errors are present in the current project (dependencies "
-#| "excluded). Requires `--optimize-autoloader` to work."
 msgid ""
 "Defaults to `false`. If `true`, `install` and `update` return a failed exit "
 "code (6), and `dump-autoload` returns a failed exit code (1), if PSR-4 or "
@@ -15340,10 +15303,9 @@ msgid ""
 "excluded). Requires `optimize-autoloader` or `classmap-authoritative` to be "
 "enabled to work."
 msgstr ""
-"**--strict-psr-autoloader:**\n"
-"現在のプロジェクトで（依存関係は除き）PSR-4またはPSR-0の対応付けのエラーが存"
-"在するなら失敗の終了コード (6) を返します。\n"
-"動作には`--optimize-autoloader`が必要です。"
+"既定で`false`。\n"
+"`true`なら、PSR-4またはPSR-0の対応付けエラーが（依存関係は除き）現在のプロジェクトに在るならば、`install`と`update`は失敗の終了コード (6) を返し、`dump-autoload`は失敗の終了コード (1) を返します。\n"
+"動作が有効になるには`optimize-autoloader`または`classmap-authoritative`が要求されます。"
 
 #. type: Title ##
 #: ../doc/06-config.md:1318
