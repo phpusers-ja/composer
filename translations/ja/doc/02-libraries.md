@@ -53,12 +53,25 @@ Composerがタグとブランチを扱う方法とパッケージのバージョ
 
 ## 固定ファイル
 
-お望みならライブラリに`composer.lock`ファイルをコミットできます。
-チームが常に同じ依存バージョンでテストする際の助けになります。
-しかし、この固定ファイルはこれに依存している他のプロジェクトにいかなる影響も齎しません。
-主眼のプロジェクトのみに影響します。
+For your library it is **recommended to commit the `composer.lock`
+file**. This helps your team to always test against the same dependency
+versions, and it can help prevent supply chain attacks from propagating, as
+newly published (possibly malicious) dependency versions are not pulled into
+your CI or development environment until you explicitly update.
 
-もし固定ファイルをコミットしたくなくて、且つgitを使っている場合は、`.gitignore`に追加してください。
+This protection only covers working on the library itself. The lock file has
+no effect on projects that depend on your library, they install whatever
+versions your constraints allow. You can therefore exclude it from dist
+archives using `export-ignore`, see [Light-weight distribution
+packages](#light-weight-distribution-packages).
+
+As your users will not get the locked versions, keep the lock file up to
+date and also run CI jobs with `composer update` (and `composer update
+--prefer-lowest`)  to catch breakage from new releases or too low lower
+bounds. As these jobs install unlocked versions, consider configuring a
+[cooldown](06-config.md#cooldown), do not give them access to secrets or
+write permissions (e.g. to your repository), and do not run `composer
+update` in any build or release steps.
 
 ## VCSに公開する
 
@@ -103,8 +116,8 @@ Composerがタグとブランチを扱う方法とパッケージのバージョ
 
 パッケージリポジトリの挙動や他にどのようなタイプが利用できるかについての詳細は、[リポジトリ](05-repositories.md)を参照してください。
 
-これで全てです。
-Composerの[`install`](03-cli.md#install)コマンドを実行すれば依存関係をインストールできます！
+That's all. You can now install the dependencies by running Composer's
+[`install`](03-cli.md#install--i) command!
 
 **まとめ：**
 `composer.json`を含むあらゆるgit/svn/hg/fossilリポジトリは、[`require`](04-schema.md#require)フィールドでパッケージリポジトリを指定して依存関係を宣言することで、プロジェクトに追加できます。
@@ -147,6 +160,7 @@ zipの配布パッケージが肥大化させる望ましくないファイル�
 /demo export-ignore
 phpunit.xml.dist export-ignore
 /.github/ export-ignore
+/composer.lock export-ignore
 ```
 
 生成されたzipファイルを手作業で調べて確認するには、次のようにします。

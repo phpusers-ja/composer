@@ -8,8 +8,9 @@
 
 ## 一般
 
-1. Composerを使っていてどんな問題に直面したときも、必ず **最新版を使って** ください。
-   詳しくは[self-update](../03-cli.md#self-update)をご参照ください。
+1. When facing any kind of problems using Composer, be sure to **work with
+   the latest version**. See
+   [self-update](../03-cli.md#self-update--selfupdate) for details.
 
 2. 誰かに尋ねる前に、[`composer diagnose`](../03-cli.md#diagnose)を走らせてください。
    よくある問題を確認できます。
@@ -29,9 +30,10 @@
 
 1. `composer.json`やリポジトリのブランチやタグ名で **誤植をしていないか** よくご確認ください。
 
-2. 必ず **正しい[minimum-stability](../04-schema.md#minimum-stability)を設定**
-   してください。
-   始めたてのときや、これが問題になっていないことを確かめるには、`minimum-stability`を「dev」に設定してください。
+2. Be sure to **set the right
+   [minimum-stability](../04-schema.md#minimum-stability-root-only)**. To
+   get started or be sure this is no issue, set `minimum-stability` to
+   "dev".
 
 3. **[Packagist](https://packagist.org/)由来でない** パッケージはいつも（全てのベンダーに依存する）
    **根幹パッケージに定義** すべきです。
@@ -132,8 +134,8 @@ php.ini to something higher.
 
 ## I have a dependency which contains a "repositories" definition in its composer.json, but it seems to be ignored.
 
-The [`repositories`](../04-schema.md#repositories) configuration property is
-defined as [root-only](../04-schema.md#root-package). It is not
+The [`repositories`](../04-schema.md#repositories-root-only) configuration
+property is defined as [root-only](../04-schema.md#root-package). It is not
 inherited. You can read more about the reasons behind this in the "[why
 can't Composer load repositories
 recursively?](../faqs/why-cant-composer-load-repositories-recursively.md)"
@@ -377,8 +379,9 @@ the following workarounds:
 
 **Generic Workaround:**
 
-[`COMPOSER_IPRESOLVE=4`](../03-cli.md#composer-ipresolve)環境変数を設定すると、curlをIPv4を使ってドメイン解決するよう強制します。
-これはcurl拡張がダウンロード用に使われるときだけ機能します。
+Set the [`COMPOSER_IPRESOLVE=4`](../03-cli.md#composer_ipresolve)
+environment variable which will force curl to resolve domains using
+IPv4. This only works when the curl extension is used for downloads.
 
 **Workaround Linux:**
 

@@ -171,8 +171,9 @@ via their `block-scope` setting.
 }
 ```
 
-> **`config.audit`からの移行ですか？**
-> 移行の際に以前のキーがどのように今なおフォールバックとして尊重されているかについては、[どのように`config.audit`が`config.policy`と対応するか](#how-config-audit-interacts-with-config-policy)を参照。
+> **Migrating from `config.audit`?** See
+> [How `config.audit` interacts with `config.policy`](#how-configaudit-interacts-with-configpolicy)
+> for how the legacy keys are still honored as a fallback while you migrate.
 
 ### advisories
 
@@ -369,8 +370,9 @@ during `update`/`require`/`remove`.
 }
 ```
 
-[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer-audit-abandoned)環境変数または[`--abandoned`](03-cli.md#audit)
-CLIオプションを介してオーバーライドできます。
+Can be overridden via the
+[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned)
+environment variable or the [`--abandoned`](03-cli.md#audit) CLI option.
 
 #### ignore
 
@@ -931,8 +933,9 @@ Composer 2.7以降、既定で`fail`です（このオプションが追加さ�
 }
 ```
 
-Composer
-2.7以降、[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer-audit-abandoned)環境変数を介して、オプションをオーバーライドできます。
+Since Composer 2.7, the option can be overridden via the
+[`COMPOSER_AUDIT_ABANDONED`](03-cli.md#composer_audit_abandoned) environment
+variable.
 
 Composer
 2.8以降、[`--abandoned`](03-cli.md#audit)コマンドラインオプションを介して、オプションをオーバーライドできます。
@@ -1060,10 +1063,11 @@ Composer
 > **非推奨です。**
 > [`config.policy.ignore-unreachable`](#ignore-unreachable)を代用してください。
 
-既定で`false`です。
-到達できないリポジトリは`composer audit`のときに無視されます。
-全てのリポジトリはアクセスできない環境でコマンドを実行するときに役立つことがあります。
-この設定は`composer audit`コマンド以外のところで生成されたバージョンの遮断や監査の報告には適用されません。
+Defaults to `false`. Should unreachable repositories be ignored during a
+`composer audit`. This can be helpful if you are running the command in an
+environment from which not all repositories can be accessed. This setting
+does not apply to version blocking or audit reports generated in other
+places than the `composer audit` command.
 
 ```json
 {
@@ -1163,31 +1167,22 @@ GitLabサーバーのドメインのリストです。
 
 ## gitlab-token
 
-A list of domain names and private tokens. Private token can be either simple
-string, or array with username and token. For example using `{"gitlab.com":
-"privatetoken"}` as the value of this option will use `privatetoken` to access
-private repositories on gitlab. Using `{"gitlab.com": {"username": "gitlabuser",
- "token": "privatetoken"}}` will use both username and token for gitlab deploy
-token functionality (https://docs.gitlab.com/ee/user/project/deploy_tokens/)
-Using `gitlab-ci-token` as the username instead stores a
-[GitLab CI job token](https://docs.gitlab.com/ci/jobs/ci_job_token/), which Composer sends as a
-`JOB-TOKEN` header, and which requires GitLab 19.3 or newer to download dist archives.
-Please note: If the package is not hosted at
-gitlab.com the domain names must be also specified with the
-[`gitlab-domains`](06-config.md#gitlab-domains) option. The token must have
-`api` or `read_api` scope.
-Further info can also be found [here](articles/authentication-for-private-packages.md#gitlab-token)
+ドメイン名と私有トークンのリストです。
+私有トークンは、単純な文字列、または利用者名とトークンを含む配列の何れかです。
+たとえば、このオプションの値として`{"gitlab.com": "privatetoken"}`を使用すると、`privatetoken`を使用してgitlabの私有リポジトリにアクセスします。
+`{"gitlab.com": {"username": "gitlabuser", "token": "privatetoken"}}`を使用すると、利用者名とトークンの両方を使ってgitlabのデプロイトークン機能 (https://docs.gitlab.com/ee/user/project/deploy_tokens/) を使用します。
+利用者名として`gitlab-ci-token`を代わりに使うと、[GitLab CIのジョブトークン](https://docs.gitlab.com/ci/jobs/ci_job_token/)が保管され、これはComposerから`JOB-TOKEN`ヘッダとして送るものであって、distのアーカイブをダウンロードするにはGitLab 19.3かそれより新しい版を要します。
+ご注意いただきたいのは、パッケージがgitlab.comで提供されていないのであれば、ドメイン名は[`gitlab-domains`](06-config.md#gitlab-domains)オプションでも指定しなければなりません。
+トークンには`api`または`read_api`スコープが必要です。
+詳細情報は[こちら](articles/authentication-for-private-packages.md#gitlab-token)にもあります。
 
 ## gitlab-protocol
 
-A protocol to force use of when creating a repository URL for the `source`
-value of the package metadata. One of `git` or `http`. (`https` is treated
-as a synonym for `http`.) Helpful when working with projects referencing
-private repositories which will later be cloned in GitLab CI jobs with a
-[GitLab
-CI_JOB_TOKEN](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html#predefined-variables-reference)
-using HTTP basic auth for the clone. By default, Composer will generate a
-git-over-SSH URL for private repositories and HTTP(S) only for public.
+パッケージメタデータの`source`値用にリポジトリのURLを作成するときに、強制的に使用するプロトコルです。
+`git`または`http`の何れかです（`https`は`http`の同義語として扱われます）。
+私有リポジトリを参照するプロジェクトで作業をするときに有用であって、リポジトリがGitLab
+CIのジョブにおいて[GitLabのCI_JOB_TOKEN](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html#predefined-variables-reference)つきで後からクローンされ、またこのクローンにHTTPベーシック認証が使われるときがこれにあたります。
+既定では、Composerは私有リポジトリについてはgit-over-SSHのURLを生成し、公開リポジトリについてはHTTP(S)のみを生成します。
 
 ## forgejo-domains
 
@@ -1282,9 +1277,11 @@ vendor-dirと以下の全ての`*-dir`オプション中では、`$HOME`と`~`�
 
 ## data-dir
 
-既定では、Windowsでは`C:\Users\<user>\AppData\Roaming\Composer`、XDG Base Directory Specificationsに従うunixシステムでは`$XDG_DATA_HOME/composer`、その他のunixシステムでは`$COMPOSER_HOME`です。
-現在、過去のcomposer.pharファイルを保存して古いバージョンにロールバックできるようにするためにのみ使用されています。
-[COMPOSER_HOME](03-cli.md#composer-home)も参照してください。
+Defaults to `C:\Users\<user>\AppData\Roaming\Composer` on Windows,
+`$XDG_DATA_HOME/composer` on unix systems that follow the XDG Base Directory
+Specifications, and `$COMPOSER_HOME` on other unix systems. Right now it is only
+used for storing past composer.phar files to be able to roll back to older
+versions. See also [COMPOSER_HOME](03-cli.md#composer_home).
 
 Because `self-update --rollback` restores a previously stored
 `composer.phar` from this directory, it must be writable only by the user
@@ -1298,7 +1295,7 @@ Defaults to `C:\Users\<user>\AppData\Local\Composer` on Windows,
 `/Users/<user>/Library/Caches/composer` on macOS, `$XDG_CACHE_HOME/composer`
 on unix systems that follow the XDG Base Directory Specifications, and
 `$COMPOSER_HOME/cache` on other unix systems. Stores all the caches used by
-Composer. See also [COMPOSER_HOME](03-cli.md#composer-home), and
+Composer. See also [COMPOSER_HOME](03-cli.md#composer_home), and
 [Caching Composer dependencies](articles/caching.md) for caching it in CI.
 
 ## cache-files-dir
@@ -1364,11 +1361,10 @@ Composerのキャッシュを読取専用モードで使うかどうかを決め
 
 ## strict-psr-autoloader
 
-Defaults to `false`. If `true`, `install` and `update` return a failed exit
-code (6), and `dump-autoload` returns a failed exit code (1), if PSR-4 or
-PSR-0 mapping errors are present in the current project (dependencies
-excluded). Requires `optimize-autoloader` or `classmap-authoritative` to be
-enabled to work.
+既定で`false`。
+`true`なら、PSR-4またはPSR-0の対応付けエラーが（依存関係は除き）現在のプロジェクトに在るならば、`install`と`update`は失敗の終了コード
+(6) を返し、`dump-autoload`は失敗の終了コード (1) を返します。
+動作が有効になるには`optimize-autoloader`または`classmap-authoritative`が要求されます。
 
 ## sort-packages
 
