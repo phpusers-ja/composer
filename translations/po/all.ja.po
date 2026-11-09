@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
 "POT-Creation-Date: 2026-11-09 08:56+0900\n"
-"PO-Revision-Date: 2026-10-22 06:03+0900\n"
+"PO-Revision-Date: 2026-11-09 11:16+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -5962,13 +5962,6 @@ msgstr "COMPOSER_AUTH"
 
 #. type: Plain text
 #: ../doc/03-cli.md:1312
-#, fuzzy
-#| msgid ""
-#| "The `COMPOSER_AUTH` var allows you to set up authentication as an "
-#| "environment variable.  The contents of the variable should be a JSON "
-#| "formatted object containing [http-basic, github-oauth, bitbucket-"
-#| "oauth, ... objects as needed](articles/authentication-for-private-"
-#| "packages.md), and following the [spec from the config](06-config.md)."
 msgid ""
 "The `COMPOSER_AUTH` var allows you to set up authentication as an "
 "environment variable.  The contents of the variable should be a JSON "
@@ -5979,10 +5972,9 @@ msgid ""
 "`forgejo-domains`. The same applies to a project's `auth.json` file."
 msgstr ""
 "`COMPOSER_AUTH`変数では、環境変数として認証を設定できます。\n"
-"変数の内容はJSON形式のオブジェクトで、[http-basic、github-oauth、bitbucket-"
-"oauth、……といった必要に応じたもの](articles/authentication-for-private-"
-"packages.md)です。\n"
-"オブジェクトは[設定の仕様](06-config.md)に従います。"
+"変数の内容はJSON形式のオブジェクトで、[http-basic、github-oauth、bitbucket-oauth、……といった必要に応じたオブジェクト](articles/authentication-for-private-packages.md)を含むものであり、[構成における仕様](06-config.md)に従います。\n"
+"そこに見られる他のすべての構成の設定は、`github-domains`、`gitlab-domains`、`forgejo-domains`を除き、無視されます。\n"
+"同じことがプロジェクトの`auth.json`ファイルに適用されます。"
 
 #. type: Title ###
 #: ../doc/03-cli.md:1313
@@ -11337,19 +11329,7 @@ msgstr "GitHubとBitbucketの私有リポジトリを全く同じやり方で扱
 
 #. type: Fenced code block (json)
 #: ../doc/05-repositories.md:585
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"repositories\": [\n"
-#| "        {\n"
-#| "            \"type\": \"vcs\",\n"
-#| "            \"url\":  \"git@bitbucket.org:vendor/my-private-repo.git\"\n"
-#| "        }\n"
-#| "    ],\n"
-#| "    \"require\": {\n"
-#| "        \"vendor/my-private-repo\": \"dev-master\"\n"
-#| "    }\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"repositories\": [\n"
@@ -11367,7 +11347,7 @@ msgstr ""
 "    \"repositories\": [\n"
 "        {\n"
 "            \"type\": \"vcs\",\n"
-"            \"url\":  \"git@bitbucket.org:vendor/my-private-repo.git\"\n"
+"            \"url\":  \"git@ssh.bitbucket.org:vendor/my-private-repo.git\"\n"
 "        }\n"
 "    ],\n"
 "    \"require\": {\n"
@@ -11508,17 +11488,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/05-repositories.md:643
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"repositories\": [\n"
-#| "        {\n"
-#| "            \"type\": \"composer\",\n"
-#| "            \"url\": \"https://example.org\",\n"
-#| "            \"filter\": false\n"
-#| "        }\n"
-#| "    ]\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"repositories\": [\n"
@@ -11533,9 +11503,9 @@ msgstr ""
 "{\n"
 "    \"repositories\": [\n"
 "        {\n"
-"            \"type\": \"composer\",\n"
-"            \"url\": \"https://example.org\",\n"
-"            \"filter\": false\n"
+"            \"type\": \"vcs\",\n"
+"            \"url\": \"https://github.com/symfony/symfony\",\n"
+"            \"only-branches\": [\"7.4\", \"8.*\"]\n"
 "        }\n"
 "    ]\n"
 "}\n"
@@ -11551,17 +11521,7 @@ msgstr ""
 
 #. type: Fenced code block (json)
 #: ../doc/05-repositories.md:660
-#, fuzzy, no-wrap
-#| msgid ""
-#| "{\n"
-#| "    \"repositories\": [\n"
-#| "        {\n"
-#| "            \"type\": \"composer\",\n"
-#| "            \"url\": \"https://example.org\",\n"
-#| "            \"filter\": false\n"
-#| "        }\n"
-#| "    ]\n"
-#| "}\n"
+#, no-wrap
 msgid ""
 "{\n"
 "    \"repositories\": [\n"
@@ -11576,9 +11536,9 @@ msgstr ""
 "{\n"
 "    \"repositories\": [\n"
 "        {\n"
-"            \"type\": \"composer\",\n"
-"            \"url\": \"https://example.org\",\n"
-"            \"filter\": false\n"
+"            \"type\": \"vcs\",\n"
+"            \"url\": \"https://github.com/acme/foo\",\n"
+"            \"exclude-branches\": [\"dependabot/*\", \"renovate/*\", \"gh-pages\"]\n"
 "        }\n"
 "    ]\n"
 "}\n"
@@ -13700,10 +13660,9 @@ msgstr ""
 
 #. type: Title ####
 #: ../doc/06-config.md:529
-#, fuzzy, no-wrap
-#| msgid "Bypassing the proxy for specific domains"
+#, no-wrap
 msgid "Bypassing the cooldown"
-msgstr "特定のドメインでプロキシを迂回する"
+msgstr "冷却期間を迂回"
 
 #. type: Plain text
 #: ../doc/06-config.md:533
@@ -15047,22 +15006,7 @@ msgstr "gitlab-token"
 
 #. type: Plain text
 #: ../doc/06-config.md:1127
-#, fuzzy, no-wrap
-#| msgid ""
-#| "A list of domain names and private tokens. Private token can be either simple\n"
-#| "string, or array with username and token. For example using `{\"gitlab.com\":\n"
-#| "\"privatetoken\"}` as the value of this option will use `privatetoken` to access\n"
-#| "private repositories on gitlab. Using `{\"gitlab.com\": {\"username\": \"gitlabuser\",\n"
-#| " \"token\": \"privatetoken\"}}` will use both username and token for gitlab deploy\n"
-#| "token functionality (https://docs.gitlab.com/ee/user/project/deploy_tokens/)\n"
-#| "Using `gitlab-ci-token` as the username instead stores a\n"
-#| "[GitLab CI job token](https://docs.gitlab.com/ci/jobs/ci_job_token/), which Composer sends as a\n"
-#| "`JOB-TOKEN` header, and which requires GitLab 19.3 or newer to download dist archives.\n"
-#| "Please note: If the package is not hosted at\n"
-#| "gitlab.com the domain names must be also specified with the\n"
-#| "[`gitlab-domains`](06-config.md#gitlab-domains) option. The token must have\n"
-#| "`api` or `read_api` scope.\n"
-#| "Further info can also be found [here](articles/authentication-for-private-packages.md#gitlab-token)\n"
+#, no-wrap
 msgid ""
 "A list of domain names and private tokens. Private token can be either simple\n"
 "string, or array with username and token. For example using `{\"gitlab.com\":\n"
@@ -15081,14 +15025,14 @@ msgid ""
 "`api` or `read_api` scope.\n"
 "Further info can also be found [here](articles/authentication-for-private-packages.md#gitlab-token)\n"
 msgstr ""
-"ドメイン名と私有トークンのリストです。\n"
+"ドメイン名と私有トークンのリスト。\n"
 "私有トークンは、単純な文字列、または利用者名とトークンを含む配列の何れかです。\n"
 "たとえば、このオプションの値として`{\"gitlab.com\": \"privatetoken\"}`を使用すると、`privatetoken`を使用してgitlabの私有リポジトリにアクセスします。\n"
 "`{\"gitlab.com\": {\"username\": \"gitlabuser\", \"token\": \"privatetoken\"}}`を使用すると、利用者名とトークンの両方を使ってgitlabのデプロイトークン機能 (https://docs.gitlab.com/ee/user/project/deploy_tokens/) を使用します。\n"
-"利用者名として`gitlab-ci-token`を代わりに使うと、[GitLab CIのジョブトークン](https://docs.gitlab.com/ci/jobs/ci_job_token/)が保管され、これはComposerから`JOB-TOKEN`ヘッダとして送るものであって、distのアーカイブをダウンロードするにはGitLab 19.3かそれより新しい版を要します。\n"
+"利用者名として`gitlab-ci-token`を代わりに使うと、[GitLab CIのジョブトークン](https://docs.gitlab.com/ci/jobs/ci_job_token/)が保管され、これはComposerから`JOB-TOKEN`ヘッダとして送る（このようにして`vcs`リポジトリからdistアーカイブをダウンロードするにはGitLabの19.3かそれより新しいものが要求されます）ものですが、GitLabのComposerパッケージレジストリは例外で、こちらは`gitlab-ci-token`の利用者名つきのHTTPベーシック認証によりジョブトークンのみを受け付けるため、Composerはそれをその場合に使います。\n"
 "ご注意いただきたいのは、パッケージがgitlab.comで提供されていないのであれば、ドメイン名は[`gitlab-domains`](06-config.md#gitlab-domains)オプションでも指定しなければなりません。\n"
 "トークンには`api`または`read_api`スコープが必要です。\n"
-"詳細情報は[こちら](articles/authentication-for-private-packages.md#gitlab-token)にもあります。\n"
+"詳細情報は[こちら](articles/authentication-for-private-packages.md#gitlab-token)でも見られます。\n"
 
 #. type: Title ##
 #: ../doc/06-config.md:1128
@@ -15310,13 +15254,6 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/06-config.md:1207
-#, fuzzy
-#| msgid ""
-#| "A list of domain names and username/passwords to authenticate against "
-#| "them. For example using `{\"example.org\": {\"username\": \"alice\", "
-#| "\"password\": \"foo\"}}` as the value of this option will let Composer "
-#| "authenticate against example.org.  More info can be found [here](articles/"
-#| "authentication-for-private-packages.md#http-basic)."
 msgid ""
 "A list of domain names and HTTP headers to send to them. For example using "
 "`{\"example.org\": [\"API-TOKEN: foo\", \"X-Custom-Header: bar\"]}` as the "
@@ -15325,12 +15262,10 @@ msgid ""
 "More info can be found [here](articles/authentication-for-private-"
 "packages.md#custom-headers)."
 msgstr ""
-"認証するためのドメイン名と、利用者名とパスワードのリストです。\n"
-"たとえば、このオプションの値として`{\"example.org\": {\"username\": "
-"\"alice\", \"password\": \"foo\"}}`を使用すると、Composerはexample.orgに対し"
-"て認証します。\n"
-"詳細については、[こちら](articles/authentication-for-private-"
-"packages.md#http-basic)を参照してください。"
+"送信するためのドメイン名とHTTPヘッダのリスト。\n"
+"たとえば、このオプションの値として`{\"example.org\": [\"API-TOKEN: foo\", \"X-Custom-Header: bar\"]}`を使用すると、両方のヘッダをexample.comへの毎回の要求で送ります。\n"
+"各ヘッダは`ヘッダ名: ヘッダ値`の形式でなければなりません。\n"
+"より詳しい情報は、[こちら](articles/authentication-for-private-packages.md#custom-headers)で見られます。"
 
 #. type: Title ##
 #: ../doc/06-config.md:1208
@@ -15340,13 +15275,6 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/06-config.md:1215
-#, fuzzy
-#| msgid ""
-#| "A list of domain names and username/passwords to authenticate against "
-#| "them. For example using `{\"example.org\": {\"username\": \"alice\", "
-#| "\"password\": \"foo\"}}` as the value of this option will let Composer "
-#| "authenticate against example.org.  More info can be found [here](articles/"
-#| "authentication-for-private-packages.md#http-basic)."
 msgid ""
 "A list of domain names and client TLS certificates to use for them. For "
 "example using `{\"example.org\": {\"local_cert\": \"/path/to/cert.pem\", "
@@ -15356,12 +15284,10 @@ msgid ""
 "optional. More info can be found [here](articles/authentication-for-private-"
 "packages.md#client-tls-certificates)."
 msgstr ""
-"認証するためのドメイン名と、利用者名とパスワードのリストです。\n"
-"たとえば、このオプションの値として`{\"example.org\": {\"username\": "
-"\"alice\", \"password\": \"foo\"}}`を使用すると、Composerはexample.orgに対し"
-"て認証します。\n"
-"詳細については、[こちら](articles/authentication-for-private-"
-"packages.md#http-basic)を参照してください。"
+"ドメイン名と、それらに使うためのTLS証明書のリスト。\n"
+"たとえば、このオプションの値として`{\"example.org\": {\"local_cert\": \"/path/to/cert.pem\", \"local_pk\": \"/path/to/key.pem\", \"passphrase\": \"foo\"}}`を使用すると、Composerに、その証明書でexample.orgに対して認証してもらいます。\n"
+"`local_cert`は必須で、`local_pk`と`passphrase`は省略可能です。\n"
+"より詳しい情報は、[こちら](articles/authentication-for-private-packages.md#client-tls-certificates)で見られます。"
 
 #. type: Title ##
 #: ../doc/06-config.md:1216
@@ -15567,10 +15493,9 @@ msgstr ""
 
 #. type: Title ##
 #: ../doc/06-config.md:1289
-#, fuzzy, no-wrap
-#| msgid "cache-files-ttl"
+#, no-wrap
 msgid "cache-ttl"
-msgstr "cache-files-ttl"
+msgstr "cache-ttl"
 
 #. type: Plain text
 #: ../doc/06-config.md:1296
@@ -15598,12 +15523,6 @@ msgstr "cache-files-ttl"
 
 #. type: Plain text
 #: ../doc/06-config.md:1307
-#, fuzzy
-#| msgid ""
-#| "Defaults to `15552000` (6 months). Composer caches all dist (zip, "
-#| "tar, ...)  packages that it downloads. Those are purged after six months "
-#| "of being unused by default. This option allows you to tweak this duration "
-#| "(in seconds) or disable it completely by setting it to 0."
 msgid ""
 "Defaults to the value of [cache-ttl](#cache-ttl), so `15552000` (6 months)  "
 "unless that is changed. Composer caches all dist (zip, tar, ...) packages "
@@ -15611,11 +15530,10 @@ msgid ""
 "option allows you to tweak this duration (in seconds) or disable it "
 "completely by setting it to 0."
 msgstr ""
-"既定では`15552000`（6箇月）です。\n"
-"Composerはダウンロードした全てのdist（zip、tar、……）をキャッシュします。\n"
-"既定では使われていないものについて6箇月経った後に削除します。\n"
-"このオプションはこの期間を（秒数で）調整ないし0に設定することで、完全に無効に"
-"できるようにするものです。"
+"既定では、変えられていなければ、[cache-ttl](#cache-ttl)の値、すなわち`15552000`（6箇月）です。\n"
+"Composerは、ダウンロードした全てのdist（zip、tar、……）をキャッシュします。\n"
+"この長さの間使われてなかった後、これらは一掃されます。\n"
+"このオプションでは、この期間を（秒数で）調整したり、0に設定することで、完全に無効にしたりできます。"
 
 #. type: Title ##
 #: ../doc/06-config.md:1308
