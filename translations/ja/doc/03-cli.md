@@ -1369,13 +1369,10 @@ PHP 8.0+では影響がなくこの設定を無視します。
 
 ### COMPOSER_AUTH
 
-The `COMPOSER_AUTH` var allows you to set up authentication as an
-environment variable.  The contents of the variable should be a JSON
-formatted object containing [http-basic, github-oauth, bitbucket-oauth,
-... objects as needed](articles/authentication-for-private-packages.md), and
-following the [spec from the config](06-config.md). Any other config setting
-found in there is ignored, except for `github-domains`, `gitlab-domains` and
-`forgejo-domains`. The same applies to a project's `auth.json` file.
+`COMPOSER_AUTH`変数では、環境変数として認証を設定できます。
+変数の内容はJSON形式のオブジェクトで、[http-basic、github-oauth、bitbucket-oauth、……といった必要に応じたオブジェクト](articles/authentication-for-private-packages.md)を含むものであり、[構成における仕様](06-config.md)に従います。
+そこに見られる他のすべての構成の設定は、`github-domains`、`gitlab-domains`、`forgejo-domains`を除き、無視されます。
+同じことがプロジェクトの`auth.json`ファイルに適用されます。
 
 ### COMPOSER_BIN_COMPAT
 

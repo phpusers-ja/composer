@@ -11,7 +11,7 @@
   * Fixed `require` and `remove` dropping empty
     `require`/`require-dev`/`repositories` keys from composer.json when the
     command had not emptied them itself (#13178)
-  * Fixed a PHP 8.6 deprecation warning from composer/ca-bundle (8bf8c27)
+  * composer/ca-bundleからのPHP 8.6の非推奨の警告を修正 (8bf8c27)
   * Fixed invalid `custom-headers` auth entries being sent as-is, they are
     now ignored with a warning (#13181)
 
@@ -26,8 +26,7 @@
     being escaped (#13169)
   * Security: Fixed svn passwords not being redacted from debug output
     (#13171)
-  * Security: Sanitize URL-embedded credentials in hg and fossil error
-    output (#13172)
+  * セキュリティ：hgとfossilのエラー出力中のURLに埋め込まれた機密情報を除去 (13172)
   * Improved dependency resolution performance and memory usage (#13174)
   * Fixed `config` corrupting composer.json when modifying `extra` or
     `scripts` entries which are JSON arrays (#13167)
@@ -53,7 +52,7 @@
   * Security: Fixed repository options like custom http headers being sent
     along to dist URLs on other hosts whose name starts with the repository
     host (#13142)
-  * Bumped `composer-plugin-api` to `2.11.0`
+  * `composer-plugin-api`を`2.11.0`に上げました
   * Added a `cooldown` policy to withhold newly released package versions
     for a configurable period, reducing exposure to compromised releases
     (#12692, #13098, #13099, #13100, #13102, #13153)
@@ -62,8 +61,7 @@
   * Added terminal progress/status reporting via OSC 7501 and OSC 9 escape
     sequences, which can be configured with `COMPOSER_TERMINAL_STATUS`
     (#13117)
-  * Added `--direct` (`-D`) option to `audit` to only audit direct
-    dependencies (#13121)
+  * 直接の依存関係のみ監査するための、`--direct` (`-D`) オプションを`audit`へ追加 (#13121)
   * Added support for Bitbucket Cloud's new `ssh.bitbucket.org` SSH
     hostname, which is also used for the SSH fallback now (#13152)
   * Added `strict-psr-autoloader` config option, the equivalent of the
@@ -111,8 +109,7 @@
   * Fixed `outdated` reporting packages with no installable version as
     outdated (#13138)
   * Fixed `update --minimal-changes` with wildcard package names (#13118)
-  * Fixed `bump` not handling `>=10` style constraints and loosening OR
-    constraints (#13133)
+  * `bump`が`>=10`の様式の制約を使っておらずORの制約が緩んでいた点を修正 (#13133)
   * Fixed security advisories wrongly applying to named dev branches like
     `dev-main` (#13089)
   * Fixed the vendor dir not being excluded from root classmap scanning in
@@ -135,15 +132,13 @@
 
 ### [2.10.3] 2026-08-27
 
-  * Security: Validate package bin paths against path traversal using
-    symlinks (GHSA-96h3-5x6v-m776, CVE-2026-59944)
-  * Security: Fixed command injection via malicious Perforce url
-    (GHSA-rvx4-ffvw-m9q3)
-  * Security: Sanitize URL-embedded usernames/token in a few more places
-    (#13044)
+  * セキュリティ：シンボリックリンクを使うパスの巡回に対してパッケージのbinパスを検証 (GHSA-96h3-5x6v-m776,
+    CVE-2026-59944)
+  * セキュリティ：悪意のあるPerforceのURLを介したコマンドインジェクションを修正 (GHSA-rvx4-ffvw-m9q3)
+  * セキュリティ：さらにいろいろなところでURLに埋め込まれた利用者名／トークンを除去 (13044)
   * Security: Fixed matching of gitlab URLs to avoid possible credential
     leak to the wrong domain (#12988)
-  * Fixed PHP 8.6 deprecation warnings (#12967, #13028)
+  * PHP 8.6の非推奨の警告を修正 (#12967, #13028)
   * Fixed error output when a policy blocks a package version to be clearer
     (#12993)
   * Fixed the lock file's content-hash with a conflict marker ending up

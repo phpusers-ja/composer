@@ -1,6 +1,5 @@
 (use-modules (gnu packages php)
              (gnu packages gettext)
-             (gnu packages node)
-             (gemmaro packages mdbook))
+             (gnu packages node))
 
 (packages->manifest (list php po4a node-lts))

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
 "POT-Creation-Date: 2026-11-09 08:56+0900\n"
-"PO-Revision-Date: 2026-07-21 17:25+0900\n"
+"PO-Revision-Date: 2026-11-09 11:21+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -18,10 +18,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../CHANGELOG.md:1
-#, fuzzy, no-wrap
-#| msgid "[2.10.1] 2026-06-04"
+#, no-wrap
 msgid "[2.11.1] 2026-10-30"
-msgstr "[2.10.1] 2026-06-04"
+msgstr "[2.11.1] 2026-10-30"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:9
@@ -55,10 +54,8 @@ msgstr ""
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:9
-#, fuzzy
-#| msgid "Fixed PHP 8.5 deprecation warnings (#12513)"
 msgid "Fixed a PHP 8.6 deprecation warning from composer/ca-bundle (8bf8c27)"
-msgstr "PHP 8.5の非推奨の警告を修正しました (#12513)"
+msgstr "composer/ca-bundleからのPHP 8.6の非推奨の警告を修正 (8bf8c27)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:9
@@ -69,10 +66,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../CHANGELOG.md:10
-#, fuzzy, no-wrap
-#| msgid "[2.10.0] 2026-05-28"
+#, no-wrap
 msgid "[2.11.0] 2026-10-29"
-msgstr "[2.10.0] 2026-05-28"
+msgstr "[2.11.0] 2026-10-29"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:21
@@ -104,16 +100,12 @@ msgstr ""
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:21
-#, fuzzy
-#| msgid ""
-#| "Security: Sanitize URL-embedded usernames/token in verbose output (GHSA-"
-#| "g6xq-892h-64w3)"
 msgid ""
 "Security: Sanitize URL-embedded credentials in hg and fossil error output "
 "(#13172)"
 msgstr ""
-"セキュリティ：冗長な出力でURLに埋め込まれた利用者名／トークンを除去 (GHSA-"
-"g6xq-892h-64w3)"
+"セキュリティ：hgとfossilのエラー出力中のURLに埋め込まれた機密情報を除去 "
+"(13172)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:21
@@ -144,10 +136,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../CHANGELOG.md:22
-#, fuzzy, no-wrap
-#| msgid "[2.10.0-RC1] 2026-04-01"
+#, no-wrap
 msgid "[2.11.0-RC1] 2026-10-22"
-msgstr "[2.10.0-RC1] 2026-04-01"
+msgstr "[2.11.0-RC1] 2026-10-22"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:69
@@ -190,10 +181,8 @@ msgstr ""
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:69
-#, fuzzy
-#| msgid "Bumped `composer-plugin-api` to `2.9.0`"
 msgid "Bumped `composer-plugin-api` to `2.11.0`"
-msgstr "`composer-plugin-api`を`2.9.0`に更新"
+msgstr "`composer-plugin-api`を`2.11.0`に上げました"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:69
@@ -219,16 +208,12 @@ msgstr ""
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:69
-#, fuzzy
-#| msgid ""
-#| "Added `--direct` to `show` and `outdated` commands to show only your "
-#| "direct dependencies in the listing"
 msgid ""
 "Added `--direct` (`-D`) option to `audit` to only audit direct dependencies "
 "(#13121)"
 msgstr ""
-"`show`コマンドと`outdated`コマンドに`--direct`を追加しました。\n"
-"一覧で直接の依存関係のみを表示するためのものです。"
+"直接の依存関係のみ監査するための、`--direct` (`-D`) オプションを`audit`へ追"
+"加 (#13121)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:69
@@ -395,15 +380,11 @@ msgstr ""
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:69
-#, fuzzy
-#| msgid ""
-#| "Fixed `bump` command not handling some `~` constraints correctly (#12038)"
 msgid ""
 "Fixed `bump` not handling `>=10` style constraints and loosening OR "
 "constraints (#13133)"
 msgstr ""
-"`bump`コマンドについて、`~`制約が正しく扱われていなかった点を直しました "
-"(#11889)"
+"`bump`が`>=10`の様式の制約を使っておらずORの制約が緩んでいた点を修正 (#13133)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:69
@@ -475,48 +456,35 @@ msgstr ""
 
 #. type: Title ###
 #: ../CHANGELOG.md:70
-#, fuzzy, no-wrap
-#| msgid "[2.10.0] 2026-05-28"
+#, no-wrap
 msgid "[2.10.3] 2026-08-27"
-msgstr "[2.10.0] 2026-05-28"
+msgstr "[2.10.3] 2026-08-27"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:82
-#, fuzzy
-#| msgid ""
-#| "Security: Validate package bin paths against path traversal (GHSA-"
-#| "gjfg-22fp-rrxx)"
 msgid ""
 "Security: Validate package bin paths against path traversal using symlinks "
 "(GHSA-96h3-5x6v-m776, CVE-2026-59944)"
 msgstr ""
-"セキュリティ：パスの巡回に対してパッケージのバイナリパスを検証 (GHSA-"
-"gjfg-22fp-rrxx)"
+"セキュリティ：シンボリックリンクを使うパスの巡回に対してパッケージのbinパスを"
+"検証 (GHSA-96h3-5x6v-m776, CVE-2026-59944)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:82
-#, fuzzy
-#| msgid ""
-#| "Security: Fixed command injection via malicious Perforce reference (GHSA-"
-#| "gqw4-4w2p-838q / CVE-2026-40261)"
 msgid ""
 "Security: Fixed command injection via malicious Perforce url (GHSA-rvx4-ffvw-"
 "m9q3)"
 msgstr ""
-"セキュリティ：悪意のあるPerforceの参照を介したコマンドインジェクションを直し"
-"ました (GHSA-gqw4-4w2p-838q / CVE-2026-40261)"
+"セキュリティ：悪意のあるPerforceのURLを介したコマンドインジェクションを修正 "
+"(GHSA-rvx4-ffvw-m9q3)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:82
-#, fuzzy
-#| msgid ""
-#| "Security: Sanitize URL-embedded usernames/token in verbose output (GHSA-"
-#| "g6xq-892h-64w3)"
 msgid ""
 "Security: Sanitize URL-embedded usernames/token in a few more places (#13044)"
 msgstr ""
-"セキュリティ：冗長な出力でURLに埋め込まれた利用者名／トークンを除去 (GHSA-"
-"g6xq-892h-64w3)"
+"セキュリティ：さらにいろいろなところでURLに埋め込まれた利用者名／トークンを除"
+"去 (13044)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:82
@@ -527,10 +495,8 @@ msgstr ""
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:82
-#, fuzzy
-#| msgid "Fixed PHP 8.5 deprecation warnings (#12513)"
 msgid "Fixed PHP 8.6 deprecation warnings (#12967, #13028)"
-msgstr "PHP 8.5の非推奨の警告を修正しました (#12513)"
+msgstr "PHP 8.6の非推奨の警告を修正 (#12967, #13028)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:82

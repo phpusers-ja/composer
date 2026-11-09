@@ -541,7 +541,7 @@ support wildcards (e.g. `vendor/*`).
 }
 ```
 
-#### Bypassing the cooldown
+#### 冷却期間を迂回
 
 To bypass the cooldown for a single run, pass `--no-cooldown` to `update`,
 `require`, `remove` or `create-project`. Other policies still apply, unlike
@@ -1169,22 +1169,14 @@ GitLabサーバーのドメインのリストです。
 
 ## gitlab-token
 
-A list of domain names and private tokens. Private token can be either simple
-string, or array with username and token. For example using `{"gitlab.com":
-"privatetoken"}` as the value of this option will use `privatetoken` to access
-private repositories on gitlab. Using `{"gitlab.com": {"username": "gitlabuser",
- "token": "privatetoken"}}` will use both username and token for gitlab deploy
-token functionality (https://docs.gitlab.com/ee/user/project/deploy_tokens/)
-Using `gitlab-ci-token` as the username instead stores a
-[GitLab CI job token](https://docs.gitlab.com/ci/jobs/ci_job_token/), which Composer sends as a
-`JOB-TOKEN` header (downloading dist archives from `vcs` repositories that way requires GitLab
-19.3 or newer), except for GitLab's Composer package registry, which only accepts job tokens via
-HTTP basic auth with the `gitlab-ci-token` username, so Composer uses that there.
-Please note: If the package is not hosted at
-gitlab.com the domain names must be also specified with the
-[`gitlab-domains`](06-config.md#gitlab-domains) option. The token must have
-`api` or `read_api` scope.
-Further info can also be found [here](articles/authentication-for-private-packages.md#gitlab-token)
+ドメイン名と私有トークンのリスト。
+私有トークンは、単純な文字列、または利用者名とトークンを含む配列の何れかです。
+たとえば、このオプションの値として`{"gitlab.com": "privatetoken"}`を使用すると、`privatetoken`を使用してgitlabの私有リポジトリにアクセスします。
+`{"gitlab.com": {"username": "gitlabuser", "token": "privatetoken"}}`を使用すると、利用者名とトークンの両方を使ってgitlabのデプロイトークン機能 (https://docs.gitlab.com/ee/user/project/deploy_tokens/) を使用します。
+利用者名として`gitlab-ci-token`を代わりに使うと、[GitLab CIのジョブトークン](https://docs.gitlab.com/ci/jobs/ci_job_token/)が保管され、これはComposerから`JOB-TOKEN`ヘッダとして送る（このようにして`vcs`リポジトリからdistアーカイブをダウンロードするにはGitLabの19.3かそれより新しいものが要求されます）ものですが、GitLabのComposerパッケージレジストリは例外で、こちらは`gitlab-ci-token`の利用者名つきのHTTPベーシック認証によりジョブトークンのみを受け付けるため、Composerはそれをその場合に使います。
+ご注意いただきたいのは、パッケージがgitlab.comで提供されていないのであれば、ドメイン名は[`gitlab-domains`](06-config.md#gitlab-domains)オプションでも指定しなければなりません。
+トークンには`api`または`read_api`スコープが必要です。
+詳細情報は[こちら](articles/authentication-for-private-packages.md#gitlab-token)でも見られます。
 
 ## gitlab-protocol
 
@@ -1257,22 +1249,20 @@ Bearer foo`ヘッダーを使用して、example.orgに対して認証を行う�
 
 ## custom-headers
 
-A list of domain names and HTTP headers to send to them. For example using
-`{"example.org": ["API-TOKEN: foo", "X-Custom-Header: bar"]}` as the value
-of this option will send both headers with every request to
-example.org. Each header must be in the `Header-Name: Header-Value` format.
-More info can be found
-[here](articles/authentication-for-private-packages.md#custom-headers).
+送信するためのドメイン名とHTTPヘッダのリスト。
+たとえば、このオプションの値として`{"example.org": ["API-TOKEN: foo", "X-Custom-Header:
+bar"]}`を使用すると、両方のヘッダをexample.comへの毎回の要求で送ります。
+各ヘッダは`ヘッダ名: ヘッダ値`の形式でなければなりません。
+より詳しい情報は、[こちら](articles/authentication-for-private-packages.md#custom-headers)で見られます。
 
 ## client-certificate
 
-A list of domain names and client TLS certificates to use for them. For
-example using `{"example.org": {"local_cert": "/path/to/cert.pem",
-"local_pk": "/path/to/key.pem", "passphrase": "foo"}}` as the value of this
-option will let Composer authenticate against example.org with that
-certificate. `local_cert` is required, `local_pk` and `passphrase` are
-optional. More info can be found
-[here](articles/authentication-for-private-packages.md#client-tls-certificates).
+ドメイン名と、それらに使うためのTLS証明書のリスト。
+たとえば、このオプションの値として`{"example.org": {"local_cert": "/path/to/cert.pem",
+"local_pk": "/path/to/key.pem", "passphrase":
+"foo"}}`を使用すると、Composerに、その証明書でexample.orgに対して認証してもらいます。
+`local_cert`は必須で、`local_pk`と`passphrase`は省略可能です。
+より詳しい情報は、[こちら](articles/authentication-for-private-packages.md#client-tls-certificates)で見られます。
 
 ## platform
 
@@ -1351,11 +1341,10 @@ caches, and disables the files cache unless
 
 ## cache-files-ttl
 
-Defaults to the value of [cache-ttl](#cache-ttl), so `15552000` (6 months)
-unless that is changed. Composer caches all dist (zip, tar, ...) packages
-that it downloads. Those are purged after being unused for that long. This
-option allows you to tweak this duration (in seconds) or disable it
-completely by setting it to 0.
+既定では、変えられていなければ、[cache-ttl](#cache-ttl)の値、すなわち`15552000`（6箇月）です。
+Composerは、ダウンロードした全てのdist（zip、tar、……）をキャッシュします。
+この長さの間使われてなかった後、これらは一掃されます。
+このオプションでは、この期間を（秒数で）調整したり、0に設定することで、完全に無効にしたりできます。
 
 ## cache-files-maxsize
 
