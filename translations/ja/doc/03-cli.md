@@ -215,6 +215,8 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
 * **--no-blocking:**
   このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
   [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
+* **--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown)
+  blocking during this command, other policies still apply.
 * **--lock:**
   パッケージのバージョンを更新せず、固定ファイルが期限切れであることについての警告を抑えるために固定ファイルを上書きします。
   ミラーやURLといったパッケージのメタデータが変更されていれば更新します。
@@ -328,6 +330,8 @@ php composer.phar require vendor/package vendor/package2
 * **--no-blocking:**
   このコマンドの間は、すべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。
   [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
+* **--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown)
+  blocking during this command, other policies still apply.
 * **--update-no-dev:**
   `--no-dev`オプションつきで依存関係の更新を走らせます。
   [COMPOSER_NO_DEV](#composer_no_dev)も参照。
@@ -402,6 +406,8 @@ php composer.phar remove vendor/package vendor/package2
 * **--no-blocking:**
   このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
   [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
+* **--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown)
+  blocking during this command, other policies still apply.
 * **--update-no-dev:**
   --no-devオプションつきで依存関係の更新を走らせます。
   [COMPOSER_NO_DEV](#composer_no_dev)も参照。
@@ -1151,6 +1157,8 @@ php composer.phar create-project composer/hello-world my-project
 * **--no-blocking:**
   このコマンドの間は、すべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。
   [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
+* **--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown)
+  blocking during this command, other policies still apply.
 * **--ignore-platform-reqs:**
   全てのプラットフォーム要件（`php`、`hhvm`、`lib-*`、`ext-*`）を無視し、ローカルマシンがたとえこれらを満たしていなくてもインストールを強行します。
   [`platform`](06-config.md#platform)設定オプションも参照してください。
@@ -1361,9 +1369,13 @@ PHP 8.0+では影響がなくこの設定を無視します。
 
 ### COMPOSER_AUTH
 
-`COMPOSER_AUTH`変数では、環境変数として認証を設定できます。
-変数の内容はJSON形式のオブジェクトで、[http-basic、github-oauth、bitbucket-oauth、……といった必要に応じたもの](articles/authentication-for-private-packages.md)です。
-オブジェクトは[設定の仕様](06-config.md)に従います。
+The `COMPOSER_AUTH` var allows you to set up authentication as an
+environment variable.  The contents of the variable should be a JSON
+formatted object containing [http-basic, github-oauth, bitbucket-oauth,
+... objects as needed](articles/authentication-for-private-packages.md), and
+following the [spec from the config](06-config.md). Any other config setting
+found in there is ignored, except for `github-domains`, `gitlab-domains` and
+`forgejo-domains`. The same applies to a project's `auth.json` file.
 
 ### COMPOSER_BIN_COMPAT
 

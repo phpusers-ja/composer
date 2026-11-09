@@ -548,7 +548,7 @@ GitHubとBitbucketの私有リポジトリを全く同じやり方で扱えま�
     "repositories": [
         {
             "type": "vcs",
-            "url":  "git@bitbucket.org:vendor/my-private-repo.git"
+            "url":  "git@ssh.bitbucket.org:vendor/my-private-repo.git"
         }
     ],
     "require": {
@@ -590,6 +590,52 @@ APIは使用せず、他のgitリポジトリと同様にリポジトリがク�
  同じパッケージをドライバと一緒にインストールしたい場合、`composer clearcache`コマンドに続けて`composer
 update`とすることでComposerのキャッシュを消去しdistからパッケージをインストールさせられることを覚えておきましょう
 * VCSドライバ`git-bitbucket`は`bitbucket`に取って代わられたため時代遅れです
+
+#### Restricting the loaded branches
+
+Repositories with a large number of branches can be slow to load, as the
+`composer.json` of every branch has to be read. You can restrict which
+branches are loaded with the `only-branches` key, which takes a list of
+branch names that may contain `*` wildcards. The default branch is always
+loaded, so an empty list loads only the default branch.
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/symfony/symfony",
+            "only-branches": ["7.4", "8.*"]
+        }
+    ]
+}
+```
+
+The `exclude-branches` key does the opposite and skips the branches matching
+its patterns, which lets you leave out bot-managed or otherwise short-lived
+branches. Both keys can be combined, in which case a branch is loaded only
+if it matches `only-branches` and does not match `exclude-branches`.
+
+```json
+{
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/acme/foo",
+            "exclude-branches": ["dependabot/*", "renovate/*", "gh-pages"]
+        }
+    ]
+}
+```
+
+Patterns are matched case-sensitively against the branch names as they
+appear in the repository (e.g. `7.4`, not `7.4.x-dev`). Tags are not
+affected by these options.
+
+> **Note:** For Mercurial and Perforce repositories the default branch is not
+> detected and thus not protected by these options, so make sure it is included
+> in `only-branches` (e.g. `default` for Mercurial, `master` for Perforce) and
+> not matched by `exclude-branches`, or it will be skipped.
 
 #### Bitbucketドライバ設定
 

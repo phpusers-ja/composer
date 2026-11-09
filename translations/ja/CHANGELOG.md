@@ -1,3 +1,138 @@
+### [2.11.1] 2026-10-30
+
+  * Added a warning when the cache dir is on a Windows drive while running
+    in WSL, as this makes filesystem operations very slow (#13175)
+  * Fixed GitLab CI job tokens failing to authenticate against the GitLab
+    Composer package registry, which requires HTTP Basic auth rather than
+    the `JOB-TOKEN` header (#13180)
+  * Fixed every update aborting with a `SecurityException` when a PHP
+    extension reports a name that is not a valid platform package name
+    (#13184)
+  * Fixed `require` and `remove` dropping empty
+    `require`/`require-dev`/`repositories` keys from composer.json when the
+    command had not emptied them itself (#13178)
+  * Fixed a PHP 8.6 deprecation warning from composer/ca-bundle (8bf8c27)
+  * Fixed invalid `custom-headers` auth entries being sent as-is, they are
+    now ignored with a warning (#13181)
+
+### [2.11.0] 2026-10-29
+
+  * Security: Fixed package names in `vendor/composer/installed.json` being
+    able to escape the vendor directory during install and reinstall
+    (GHSA-c968-33g3-wh7p)
+  * Security: Fixed inline repository HTTP headers, such as API tokens,
+    being written into `composer.lock` (GHSA-fm2w-xgf2-f9fh)
+  * Security: Fixed additional arguments passed to `@composer` scripts not
+    being escaped (#13169)
+  * Security: Fixed svn passwords not being redacted from debug output
+    (#13171)
+  * Security: Sanitize URL-embedded credentials in hg and fossil error
+    output (#13172)
+  * Improved dependency resolution performance and memory usage (#13174)
+  * Fixed `config` corrupting composer.json when modifying `extra` or
+    `scripts` entries which are JSON arrays (#13167)
+  * Fixed archives not being unwrapped correctly when OS/editor metadata
+    entries like `__MACOSX` or `Thumbs.db` sit next to the package's
+    top-level dir (#13168)
+  * Fixed `@script` references with quoted arguments being split on spaces
+    when passed to `@composer` scripts (#13169)
+
+### [2.11.0-RC1] 2026-10-22
+
+  * BC Break: Removed the `source-fallback` config option which was added in
+    2.10 as a temporary measure, dist installs no longer fall back to source
+    (#13050)
+  * Security: Reject TLS connections presenting distrusted intermediate
+    certificates (the compromised eMudhra ones) even if the system CA store
+    trusts their roots (#13146)
+  * Security: Fixed bin proxies embedding package-controlled bin paths and
+    shebangs unescaped, and bin paths containing shell metacharacters are
+    now rejected (#13056)
+  * Security: Fixed `secure-http` not catching insecure URLs that are not
+    strictly valid or use git's `<transport>::<address>` syntax (#13144)
+  * Security: Fixed repository options like custom http headers being sent
+    along to dist URLs on other hosts whose name starts with the repository
+    host (#13142)
+  * Bumped `composer-plugin-api` to `2.11.0`
+  * Added a `cooldown` policy to withhold newly released package versions
+    for a configurable period, reducing exposure to compromised releases
+    (#12692, #13098, #13099, #13100, #13102, #13153)
+  * Added `block-scope` option to custom policies so they can also block
+    during `install` (#12990)
+  * Added terminal progress/status reporting via OSC 7501 and OSC 9 escape
+    sequences, which can be configured with `COMPOSER_TERMINAL_STATUS`
+    (#13117)
+  * Added `--direct` (`-D`) option to `audit` to only audit direct
+    dependencies (#13121)
+  * Added support for Bitbucket Cloud's new `ssh.bitbucket.org` SSH
+    hostname, which is also used for the SSH fallback now (#13152)
+  * Added `strict-psr-autoloader` config option, the equivalent of the
+    `--strict-psr-autoloader` flag (#12893)
+  * Added a warning when an optimized autoload dump contains paths only
+    differing in casing (#13085)
+  * Added `only-branches` option to VCS repositories to restrict which
+    branches are loaded (#13086)
+  * Added installed versions of sub-dependencies in `show --tree
+    --format=json` output (#13049)
+  * Added batching of security advisory API queries for projects with a very
+    large number of dependencies (#13051)
+  * Added support for 429 responses and `Retry-After` headers, Composer now
+    waits and retries when a repository asks for it (#13082)
+  * Added AI coding agent to the User-Agent (#13073, #13087)
+  * Added a prompt in `init` to add composer.lock to .gitattributes with
+    export-ignore when creating a library (#13127)
+  * Improved dependency resolution performance and memory usage (#13071,
+    #13072, #13103, #13123, #13124, #13132)
+  * Improved performance by not requesting HTTP/3 anymore, which added a
+    delay on every new connection with recent curl versions (#13096)
+  * Improved performance of `outdated` and `show --latest` by loading
+    package metadata in parallel (#13113)
+  * Improved explanations for versions blocked by security advisories in
+    dependency conflict errors (#13108, #13075)
+  * Fixed the lock file not being flagged as outdated when the `policy`
+    config changes - this will trigger a lock file change warning if you
+    have a `policy` config defined (#13149)
+  * Fixed `install` to fail when composer.lock has a content-hash merge
+    conflict (#13105)
+  * Fixed truncated zip downloads failing at extraction, they are now
+    retried and never cached (#13094)
+  * Fixed generated files (autoloader, composer.json, ...) being rewritten
+    in place, which affected hardlinked copies and concurrent readers
+    (#13069)
+  * Fixed SSH URLs losing their user in git commands, causing auth failures
+    since 2.10.3 (#13081)
+  * Fixed GitLab CI job token authentication (#12916)
+  * Fixed `custom-headers` from a project auth.json or `COMPOSER_AUTH`
+    replacing the global ones instead of being merged (#13141)
+  * Fixed parallel requests failing with "Invalid credentials" instead of
+    retrying with credentials obtained by another request (#13135)
+  * Fixed the GitHub API rate limit not being reported when the clone
+    fallback fails (#13059)
+  * Fixed `outdated` reporting packages with no installable version as
+    outdated (#13138)
+  * Fixed `update --minimal-changes` with wildcard package names (#13118)
+  * Fixed `bump` not handling `>=10` style constraints and loosening OR
+    constraints (#13133)
+  * Fixed security advisories wrongly applying to named dev branches like
+    `dev-main` (#13089)
+  * Fixed the vendor dir not being excluded from root classmap scanning in
+    some cases (#13018)
+  * Fixed self-update failing with a class not found error while swapping
+    the phar (#13079)
+  * Fixed `clear-cache --no-cache` reporting missing dirs instead of the
+    cache being disabled (#13092)
+  * Fixed empty script commands not being treated as a no-op (#13053)
+  * Fixed `suggests` silently outputting nothing when filtering on a package
+    that is not installed or excluded by `--no-dev`, it now errors (#13014)
+  * Fixed `JsonManipulator::addSubNode()` modifying a nested key with the
+    same name (#13109)
+  * Fixed repeated warnings from repositories being output multiple times
+    (#13090)
+  * Fixed plugin capability classes being instantiated before checking they
+    implement the right interfaces (#13139)
+  * Fixed warnings when finding packages within inline packages without uid
+    (#13148)
+
 ### [2.10.3] 2026-08-27
 
   * Security: Validate package bin paths against path traversal using
@@ -3258,6 +3393,9 @@
 
   * 初回リリース。
 
+[2.11.1]: https://github.com/composer/composer/compare/2.11.0...2.11.1
+[2.11.0]: https://github.com/composer/composer/compare/2.11.0-RC1...2.11.0
+[2.11.0-RC1]: https://github.com/composer/composer/compare/2.10.3...2.11.0-RC1
 [2.10.3]: https://github.com/composer/composer/compare/2.10.2...2.10.3
 [2.10.2]: https://github.com/composer/composer/compare/2.10.1...2.10.2
 [2.10.1]: https://github.com/composer/composer/compare/2.10.0...2.10.1
