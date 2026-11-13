@@ -1477,6 +1477,13 @@ VagrantやVirtualboxを使っていてファイルが存在しているのにも
 プロキシに並列性の問題があるときはこの値を下げたいかもしれません。
 この値を増加させても一般には効率性が上がる結果にはならないでしょう。
 
+### COMPOSER_HTTP_STALL_TIMEOUT
+
+Set to a number of seconds after which a download that received no data at
+all is aborted and retried. This defaults to 30. Set it higher if a server
+you use is slow to start responding, or to `0` to disable the check
+entirely. This only works when the curl extension is used for downloads.
+
 ### COMPOSER_MAX_PARALLEL_PROCESSES
 
 Set to an integer to configure how many processes can be executed in

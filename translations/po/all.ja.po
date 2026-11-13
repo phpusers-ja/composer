@@ -19,7 +19,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
-"POT-Creation-Date: 2026-11-09 08:56+0900\n"
+"POT-Creation-Date: 2026-11-13 13:40+0900\n"
 "PO-Revision-Date: 2026-11-09 11:16+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
@@ -6371,12 +6371,28 @@ msgstr ""
 
 #. type: Title ###
 #: ../doc/03-cli.md:1443
+#, fuzzy, no-wrap
+#| msgid "COMPOSER_PROCESS_TIMEOUT"
+msgid "COMPOSER_HTTP_STALL_TIMEOUT"
+msgstr "COMPOSER_PROCESS_TIMEOUT"
+
+#. type: Plain text
+#: ../doc/03-cli.md:1449
+msgid ""
+"Set to a number of seconds after which a download that received no data at "
+"all is aborted and retried. This defaults to 30. Set it higher if a server "
+"you use is slow to start responding, or to `0` to disable the check "
+"entirely. This only works when the curl extension is used for downloads."
+msgstr ""
+
+#. type: Title ###
+#: ../doc/03-cli.md:1450
 #, no-wrap
 msgid "COMPOSER_MAX_PARALLEL_PROCESSES"
 msgstr "COMPOSER_MAX_PARALLEL_PROCESSES"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1447
+#: ../doc/03-cli.md:1454
 msgid ""
 "Set to an integer to configure how many processes can be executed in "
 "parallel.  This defaults to 10 and must be between 1 and 50."
@@ -6385,13 +6401,13 @@ msgstr ""
 "parallel.  This defaults to 10 and must be between 1 and 50."
 
 #. type: Title ###
-#: ../doc/03-cli.md:1448
+#: ../doc/03-cli.md:1455
 #, no-wrap
 msgid "COMPOSER_IPRESOLVE"
 msgstr "COMPOSER_IPRESOLVE"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1452
+#: ../doc/03-cli.md:1459
 msgid ""
 "Set to `4` or `6` to force IPv4 or IPv6 DNS resolution. This only works when "
 "the curl extension is used for downloads."
@@ -6400,13 +6416,13 @@ msgstr ""
 "ダウンロード用にcurl拡張が使用されている場合にのみ機能します。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1453
+#: ../doc/03-cli.md:1460
 #, no-wrap
 msgid "COMPOSER_SELF_UPDATE_TARGET"
 msgstr "COMPOSER_SELF_UPDATE_TARGET"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1456
+#: ../doc/03-cli.md:1463
 msgid ""
 "If set, makes the self-update command write the new Composer phar file into "
 "that path instead of overwriting itself. Useful for updating Composer on a "
@@ -6417,13 +6433,13 @@ msgstr ""
 "ムでComposerを更新するときに便利です。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1457
+#: ../doc/03-cli.md:1464
 #, no-wrap
 msgid "COMPOSER_DISABLE_NETWORK"
 msgstr "COMPOSER_DISABLE_NETWORK"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1461
+#: ../doc/03-cli.md:1468
 msgid ""
 "If set to `1`, disables network access (best effort). This can be used for "
 "debugging or to run Composer on a plane or a starship with poor connectivity."
@@ -6432,7 +6448,7 @@ msgstr ""
 "はComposerをデバッグしたり貧弱な接続環境下で走らせたりするのに使えます。"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1464
+#: ../doc/03-cli.md:1471
 msgid ""
 "If set to `prime`, GitHub VCS repositories will prime the cache, so it can "
 "then be used fully offline with `1`."
@@ -6441,13 +6457,13 @@ msgstr ""
 "くため、`1`で完全にオフラインで使えるようになります。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1465
+#: ../doc/03-cli.md:1472
 #, no-wrap
 msgid "COMPOSER_DEBUG_EVENTS"
 msgstr "COMPOSER_DEBUG_EVENTS"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1469
+#: ../doc/03-cli.md:1476
 msgid ""
 "If set to `1`, outputs information about events being dispatched, which can "
 "be useful for plugin authors to identify what is firing when exactly."
@@ -6457,13 +6473,13 @@ msgstr ""
 "ません。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1470
+#: ../doc/03-cli.md:1477
 #, no-wrap
 msgid "COMPOSER_SKIP_SCRIPTS"
 msgstr "COMPOSER_SKIP_SCRIPTS"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1473
+#: ../doc/03-cli.md:1480
 msgid ""
 "Accepts a comma-separated list of event names, e.g. `post-install-cmd` for "
 "which scripts execution should be skipped."
@@ -6472,13 +6488,13 @@ msgstr ""
 "例えば、スクリプト実行をスキップするための`post-install-cmd`があります。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1474
+#: ../doc/03-cli.md:1481
 #, no-wrap
 msgid "COMPOSER_NO_AUDIT"
 msgstr "COMPOSER_NO_AUDIT"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1477
+#: ../doc/03-cli.md:1484
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--no-audit` option to a "
 "`require`, `update`, `remove` or `create-project` command."
@@ -6487,13 +6503,13 @@ msgstr ""
 "no-audit`オプションを渡すことと等価になります。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1478
+#: ../doc/03-cli.md:1485
 #, no-wrap
 msgid "COMPOSER_AUDIT_ABANDONED"
 msgstr "COMPOSER_AUDIT_ABANDONED"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1481
+#: ../doc/03-cli.md:1488
 msgid ""
 "Set to `ignore`, `report` or `fail` to override the [policy.abandoned.audit]"
 "(06-config.md#audit) config option. Has no effect when `policy.abandoned` is "
@@ -6505,13 +6521,13 @@ msgstr ""
 "す。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1482
+#: ../doc/03-cli.md:1489
 #, no-wrap
 msgid "COMPOSER_POLICY"
 msgstr "COMPOSER_POLICY"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1485
+#: ../doc/03-cli.md:1492
 msgid ""
 "Main dependency policy switch. Set to `0` to disable all dependency policy "
 "enforcement on updates, installs and audits, or `1` to enable it. Setting "
@@ -6525,7 +6541,7 @@ msgstr ""
 "構成値を変えたければ、代わりに`composer config policy 1`を使ってください。"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1487
+#: ../doc/03-cli.md:1494
 msgid ""
 "When set to `0`, all policy specific overrides below are ignored — the whole "
 "dependency policy config is short-circuited to disabled."
@@ -6534,13 +6550,13 @@ msgstr ""
 "依存関係のポリシーの構成の全体が短絡され無効になります。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1488
+#: ../doc/03-cli.md:1495
 #, no-wrap
 msgid "COMPOSER_NO_BLOCKING"
 msgstr "COMPOSER_NO_BLOCKING"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1491
+#: ../doc/03-cli.md:1498
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--no-blocking` option to "
 "a `require`, `update`, `remove`, `install`, or `create-project` command. "
@@ -6556,19 +6572,19 @@ msgstr ""
 "れた依存関係のポリシーに対して`block`構成オプションをオーバーライドします。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1492
+#: ../doc/03-cli.md:1499
 #, no-wrap
 msgid "COMPOSER_NO_SECURITY_BLOCKING"
 msgstr "COMPOSER_NO_SECURITY_BLOCKING"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1495
+#: ../doc/03-cli.md:1502
 msgid "DEPRECATED, use [COMPOSER_NO_BLOCKING](#composer_no_blocking) instead."
 msgstr ""
 "廃用で、[COMPOSER_NO_BLOCKING](#composer_no_blocking)を代用してください。"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1497
+#: ../doc/03-cli.md:1504
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--no-security-blocking` "
 "option to a `require`, `update`, `remove`, `install`, or `create-project` "
@@ -6584,13 +6600,13 @@ msgstr ""
 "ます。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1498
+#: ../doc/03-cli.md:1505
 #, no-wrap
 msgid "COMPOSER_POLICY_ADVISORIES_BLOCK"
 msgstr "COMPOSER_POLICY_ADVISORIES_BLOCK"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1501
+#: ../doc/03-cli.md:1508
 msgid ""
 "If set to `1`, enables blocking of packages with security advisories during "
 "dependency resolution (equivalent to setting `policy.advisories.block` to "
@@ -6601,13 +6617,13 @@ msgstr ""
 "`0`に設定すれば、遮断を無効にします。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1502
+#: ../doc/03-cli.md:1509
 #, no-wrap
 msgid "COMPOSER_POLICY_MALWARE_BLOCK"
 msgstr "COMPOSER_POLICY_MALWARE_BLOCK"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1505
+#: ../doc/03-cli.md:1512
 msgid ""
 "If set to `1`, enables blocking of packages flagged as malware during "
 "dependency resolution (equivalent to setting `policy.malware.block` to "
@@ -6619,13 +6635,13 @@ msgstr ""
 "`0`に設定すれば、遮断を無効にします。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1506
+#: ../doc/03-cli.md:1513
 #, no-wrap
 msgid "COMPOSER_POLICY_ABANDONED_BLOCK"
 msgstr "COMPOSER_POLICY_ABANDONED_BLOCK"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1509
+#: ../doc/03-cli.md:1516
 msgid ""
 "If set to `1`, enables blocking of abandoned packages during dependency "
 "resolution (equivalent to setting `policy.abandoned.block` to `true`). If "
@@ -6636,7 +6652,7 @@ msgstr ""
 "`0`に設定すれば、遮断を無効にします。"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1511
+#: ../doc/03-cli.md:1518
 msgid ""
 "Value takes precedence over the value of the legacy variable "
 "[COMPOSER_SECURITY_BLOCKING_ABANDONED]"
@@ -6647,13 +6663,13 @@ msgstr ""
 "より優先されます。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1512
+#: ../doc/03-cli.md:1519
 #, no-wrap
 msgid "COMPOSER_SECURITY_BLOCKING_ABANDONED"
 msgstr "COMPOSER_SECURITY_BLOCKING_ABANDONED"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1515
+#: ../doc/03-cli.md:1522
 msgid ""
 "DEPRECATED, use [COMPOSER_POLICY_ABANDONED_BLOCK]"
 "(#composer_policy_abandoned_block) instead."
@@ -6662,7 +6678,7 @@ msgstr ""
 "(#composer_policy_abandoned_block)を代用してください。"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1517
+#: ../doc/03-cli.md:1524
 msgid ""
 "If set to `1`, enables blocking of abandoned packages during dependency "
 "resolution (equivalent to setting `audit.block-abandoned` config to `true`). "
@@ -6676,13 +6692,13 @@ msgstr ""
 "ライドします。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1518
+#: ../doc/03-cli.md:1525
 #, no-wrap
 msgid "COMPOSER_POLICY_COOLDOWN_PERIOD"
 msgstr "COMPOSER_POLICY_COOLDOWN_PERIOD"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1525
+#: ../doc/03-cli.md:1532
 msgid ""
 "If set to a value accepted by [policy.cooldown.period](06-config.md#period), "
 "such as `\"7 days\"`, `\"24 hours\"` or an integer number of seconds, "
@@ -6694,26 +6710,26 @@ msgid ""
 msgstr ""
 
 #. type: Title ###
-#: ../doc/03-cli.md:1526
+#: ../doc/03-cli.md:1533
 #, no-wrap
 msgid "COMPOSER_POLICY_COOLDOWN_BLOCK"
 msgstr "COMPOSER_POLICY_COOLDOWN_BLOCK"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1530
+#: ../doc/03-cli.md:1537
 msgid ""
 "If set to `1`, forces cooldown blocking on; if set to `0`, disables it. "
 "Overrides the [policy.cooldown.block](06-config.md#block-3) config option."
 msgstr ""
 
 #. type: Title ###
-#: ../doc/03-cli.md:1531
+#: ../doc/03-cli.md:1538
 #, no-wrap
 msgid "COMPOSER_NO_DEV"
 msgstr "COMPOSER_NO_DEV"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1536
+#: ../doc/03-cli.md:1543
 #, no-wrap
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--update-no-dev` option to `require`\n"
@@ -6724,13 +6740,13 @@ msgstr ""
 "`COMPOSER_NO_DEV=0`を設定することで1回のコマンドについてこの設定を上書きできます。\n"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1537
+#: ../doc/03-cli.md:1544
 #, no-wrap
 msgid "COMPOSER_PREFER_STABLE"
 msgstr "COMPOSER_PREFER_STABLE"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1541
+#: ../doc/03-cli.md:1548
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--prefer-stable` option "
 "to `update` or `require`."
@@ -6739,13 +6755,13 @@ msgstr ""
 "価になります。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1542
+#: ../doc/03-cli.md:1549
 #, no-wrap
 msgid "COMPOSER_PREFER_LOWEST"
 msgstr "COMPOSER_PREFER_LOWEST"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1546
+#: ../doc/03-cli.md:1553
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--prefer-lowest` option "
 "to `update` or `require`."
@@ -6754,13 +6770,13 @@ msgstr ""
 "価になります。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1547
+#: ../doc/03-cli.md:1554
 #, no-wrap
 msgid "COMPOSER_PREFER_DEV_OVER_PRERELEASE"
 msgstr "COMPOSER_PREFER_DEV_OVER_PRERELEASE"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1554
+#: ../doc/03-cli.md:1561
 msgid ""
 "If set to `1`, when resolving dependencies with both `--prefer-stable` and "
 "`--prefer-lowest` enabled, dev versions are treated as more stable than "
@@ -6775,13 +6791,13 @@ msgstr ""
 "れる可能性があるブランチを優先したいときに便利です。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1555
+#: ../doc/03-cli.md:1562
 #, no-wrap
 msgid "COMPOSER_MINIMAL_CHANGES"
 msgstr "COMPOSER_MINIMAL_CHANGES"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1559
+#: ../doc/03-cli.md:1566
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--minimal-changes` "
 "option to `update`, `require` or `remove`."
@@ -6790,13 +6806,13 @@ msgstr ""
 "を渡すことと等価になります。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1560
+#: ../doc/03-cli.md:1567
 #, no-wrap
 msgid "COMPOSER_IGNORE_PLATFORM_REQ or COMPOSER_IGNORE_PLATFORM_REQS"
 msgstr "COMPOSER_IGNORE_PLATFORM_REQやCOMPOSER_IGNORE_PLATFORM_REQS"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1564
+#: ../doc/03-cli.md:1571
 msgid ""
 "If `COMPOSER_IGNORE_PLATFORM_REQS` set to `1`, it is the equivalent of "
 "passing the `--ignore-platform-reqs` argument.  Otherwise, specifying a "
@@ -6809,7 +6825,7 @@ msgstr ""
 "らの特定の要件を無視します。"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1566
+#: ../doc/03-cli.md:1573
 msgid ""
 "For example, if a development workstation will never run database queries, "
 "this can be used to ignore the requirement for the database extensions to be "
@@ -6823,13 +6839,13 @@ msgstr ""
 "が有効になっていなくともパッケージをインストールします。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1567
+#: ../doc/03-cli.md:1574
 #, no-wrap
 msgid "COMPOSER_WITH_DEPENDENCIES"
 msgstr "COMPOSER_WITH_DEPENDENCIES"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1571
+#: ../doc/03-cli.md:1578
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--with-dependencies` "
 "option to `update`, `require` or `remove`."
@@ -6838,13 +6854,13 @@ msgstr ""
 "ションを渡すことと同じです。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1572
+#: ../doc/03-cli.md:1579
 #, no-wrap
 msgid "COMPOSER_WITH_ALL_DEPENDENCIES"
 msgstr "COMPOSER_WITH_ALL_DEPENDENCIES"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1576
+#: ../doc/03-cli.md:1583
 msgid ""
 "If set to `1`, it is the equivalent of passing the `--with-all-dependencies` "
 "option to `update`, `require` or `remove`."
@@ -6853,18 +6869,18 @@ msgstr ""
 "プションを渡すことと同じです。"
 
 #. type: Title ###
-#: ../doc/03-cli.md:1577
+#: ../doc/03-cli.md:1584
 #, no-wrap
 msgid "COMPOSER_TERMINAL_STATUS"
 msgstr "COMPOSER_TERMINAL_STATUS"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1580
+#: ../doc/03-cli.md:1587
 msgid "Controls terminal status reports. Defaults to `auto`."
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/03-cli.md:1595
+#: ../doc/03-cli.md:1602
 msgid ""
 "`auto` sends OSC 7501 status reports and also sends OSC 9 progress reports "
 "when the environment identifies Windows Terminal (`WT_SESSION`), ConEmu "
@@ -6877,36 +6893,36 @@ msgid ""
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/03-cli.md:1595
+#: ../doc/03-cli.md:1602
 msgid "`off` disables status reports."
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/03-cli.md:1595
+#: ../doc/03-cli.md:1602
 msgid "`7501` selects only OSC 7501."
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/03-cli.md:1595
+#: ../doc/03-cli.md:1602
 msgid "`9;4` selects only OSC 9 progress reports."
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/03-cli.md:1595
+#: ../doc/03-cli.md:1602
 msgid ""
 "`7501,9;4` selects both protocols, including in environments where automatic "
 "selection cannot recognize support."
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/03-cli.md:1595
+#: ../doc/03-cli.md:1602
 msgid ""
 "Any other value, such as `0` or `false`, disables status reports. Unknown "
 "entries in a comma-separated list are ignored."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/03-cli.md:1599
+#: ../doc/03-cli.md:1606
 msgid ""
 "Protocol selection is resolved once for each console IO instance. All modes "
 "respect quiet output, disabled ANSI decoration, and redirected stderr.  "
@@ -6914,7 +6930,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/03-cli.md:1608
+#: ../doc/03-cli.md:1615
 msgid ""
 "OSC 7501 is sent without querying the terminal. Supporting terminals can "
 "show Composer's state, messages, and reasons for waiting. Terminals that do "
@@ -6928,12 +6944,12 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/03-cli.md:1610
+#: ../doc/03-cli.md:1617
 msgid "For example, in a POSIX shell:"
 msgstr ""
 
 #. type: Fenced code block (sh)
-#: ../doc/03-cli.md:1611
+#: ../doc/03-cli.md:1618
 #, no-wrap
 msgid ""
 "COMPOSER_TERMINAL_STATUS=off composer install\n"
@@ -6941,13 +6957,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ###
-#: ../doc/03-cli.md:1616
+#: ../doc/03-cli.md:1623
 #, no-wrap
 msgid "SHELL_VERBOSITY"
 msgstr "SHELL_VERBOSITY"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1624
+#: ../doc/03-cli.md:1631
 msgid ""
 "Since Composer uses [symfony/console](https://github.com/symfony/console), "
 "you can define the [verbosity level](https://symfony.com/doc/current/console/"
@@ -6967,7 +6983,7 @@ msgstr ""
 "できます。"
 
 #. type: Plain text
-#: ../doc/03-cli.md:1625
+#: ../doc/03-cli.md:1632
 msgid "&larr; [Libraries](02-libraries.md)  | [Schema](04-schema.md) &rarr;"
 msgstr ""
 "&larr; [ライブラリ](02-libraries.md)  | [スキーマ](04-schema.md) &rarr;"
@@ -18144,21 +18160,45 @@ msgid ""
 "php.ini to something higher."
 msgstr ""
 
-#. type: Title ##
+#. type: Plain text
 #: ../doc/articles/troubleshooting.md:125
+#, fuzzy
+#| msgid "If you see something along the lines of:"
+msgid "If instead you see something like:"
+msgstr "以下のように行が続くさまが見られるなら……"
+
+#. type: Fenced code block
+#: ../doc/articles/troubleshooting.md:126
+#, fuzzy, no-wrap
+#| msgid "Failed to download * curl error 28 while downloading * Operation timed out after 300000 milliseconds\n"
+msgid "Failed to download * curl error 28 while downloading * Operation too slow. Less than 1 bytes/sec transferred the last 30 seconds\n"
+msgstr "Failed to download * curl error 28 while downloading * Operation timed out after 300000 milliseconds\n"
+
+#. type: Plain text
+#: ../doc/articles/troubleshooting.md:134
+msgid ""
+"It means the server accepted the request but did not send anything back for "
+"30 seconds, so Composer gave up on it. If the server is merely slow to start "
+"responding, you can raise this limit by setting the "
+"[`COMPOSER_HTTP_STALL_TIMEOUT`](../03-cli.md#composer-http-stall-timeout) "
+"env var to a higher number of seconds, or to `0` to disable it."
+msgstr ""
+
+#. type: Title ##
+#: ../doc/articles/troubleshooting.md:136
 #, no-wrap
 msgid "Package not found in a Jenkins-build"
 msgstr "パッケージがJenkinsのビルドで見つかりません"
 
 #. type: Bullet: '1. '
-#: ../doc/articles/troubleshooting.md:128
+#: ../doc/articles/troubleshooting.md:139
 msgid "Check the [\"Package not found\"](#package-not-found) item above."
 msgstr ""
 "上記の[「パッケージが見つかりません」](#package-not-found)の項目をご確認くだ"
 "さい。"
 
 #. type: Bullet: '2. '
-#: ../doc/articles/troubleshooting.md:136
+#: ../doc/articles/troubleshooting.md:147
 msgid ""
 "The git-clone / checkout within Jenkins leaves the branch in a \"detached "
 "HEAD\"-state. As a result, Composer may not able to identify the version of "
@@ -18172,13 +18212,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:138
+#: ../doc/articles/troubleshooting.md:149
 #, no-wrap
 msgid "I have a dependency which contains a \"repositories\" definition in its composer.json, but it seems to be ignored."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:144
+#: ../doc/articles/troubleshooting.md:155
 msgid ""
 "The [`repositories`](../04-schema.md#repositories-root-only) configuration "
 "property is defined as [root-only](../04-schema.md#root-package). It is not "
@@ -18190,13 +18230,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:146
+#: ../doc/articles/troubleshooting.md:157
 #, no-wrap
 msgid "I have locked a dependency to a specific commit but get unexpected results."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:151
+#: ../doc/articles/troubleshooting.md:162
 msgid ""
 "While Composer supports locking dependencies to a specific commit using the "
 "`#commit-ref` syntax, there are certain caveats that one should take into "
@@ -18205,7 +18245,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:158
+#: ../doc/articles/troubleshooting.md:169
 #, no-wrap
 msgid ""
 "> **Note:** While this is convenient at times, it should not be how you use\n"
@@ -18217,20 +18257,20 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:160
+#: ../doc/articles/troubleshooting.md:171
 msgid ""
 "There is no simple work-around to this limitation. It is therefore strongly "
 "recommended that you do not use it."
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:162
+#: ../doc/articles/troubleshooting.md:173
 #, no-wrap
 msgid "Need to override a package version"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:166
+#: ../doc/articles/troubleshooting.md:177
 msgid ""
 "Let's say your project depends on package A, which in turn depends on a "
 "specific version of package B (say 0.1). But you need a different version of "
@@ -18238,17 +18278,17 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:168
+#: ../doc/articles/troubleshooting.md:179
 msgid "You can fix this by aliasing version 0.11 to 0.1:"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:170
+#: ../doc/articles/troubleshooting.md:181
 msgid "composer.json:"
 msgstr "composer.json:"
 
 #. type: Fenced code block (json)
-#: ../doc/articles/troubleshooting.md:171
+#: ../doc/articles/troubleshooting.md:182
 #, no-wrap
 msgid ""
 "{\n"
@@ -18266,18 +18306,18 @@ msgstr ""
 "}\n"
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:181
+#: ../doc/articles/troubleshooting.md:192
 msgid "See [aliases](aliases.md) for more information."
 msgstr "詳細は[別称](aliases.md)をご確認ください。"
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:183
+#: ../doc/articles/troubleshooting.md:194
 #, no-wrap
 msgid "Figuring out where a config value came from"
 msgstr "構成値がどこから来たものか調べる"
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:186
+#: ../doc/articles/troubleshooting.md:197
 msgid ""
 "Use `php composer.phar config --list --source` to see where each config "
 "value originated from."
@@ -18286,67 +18326,67 @@ msgstr ""
 "わかります。"
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:187
+#: ../doc/articles/troubleshooting.md:198
 #, no-wrap
 msgid "Memory limit errors"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:190
+#: ../doc/articles/troubleshooting.md:201
 msgid ""
 "The first thing to do is to make sure you are running Composer 2, and if "
 "possible 2.2.0 or above."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:192
+#: ../doc/articles/troubleshooting.md:203
 msgid ""
 "Composer 1 used much more memory and upgrading to the latest version will "
 "give you much better and faster results."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:194
+#: ../doc/articles/troubleshooting.md:205
 msgid "Composer may sometimes fail on some commands with this message:"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:196
+#: ../doc/articles/troubleshooting.md:207
 #, no-wrap
 msgid "`PHP Fatal error:  Allowed memory size of XXXXXX bytes exhausted <...>`\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:198
+#: ../doc/articles/troubleshooting.md:209
 msgid "In this case, the PHP `memory_limit` should be increased."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:200
+#: ../doc/articles/troubleshooting.md:211
 #, no-wrap
 msgid "> **Note:** Composer internally increases the `memory_limit` to `1.5G`.\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:202
+#: ../doc/articles/troubleshooting.md:213
 msgid "To get the current `memory_limit` value, run:"
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:203
+#: ../doc/articles/troubleshooting.md:214
 #, no-wrap
 msgid "php -r \"echo ini_get('memory_limit').PHP_EOL;\"\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:209
+#: ../doc/articles/troubleshooting.md:220
 msgid ""
 "Try increasing the limit in your `php.ini` file (ex. `/etc/php5/cli/php.ini` "
 "for Debian-like systems):"
 msgstr ""
 
 #. type: Fenced code block (ini)
-#: ../doc/articles/troubleshooting.md:210
+#: ../doc/articles/troubleshooting.md:221
 #, no-wrap
 msgid ""
 "; Use -1 for unlimited or define an explicit value like 2G\n"
@@ -18354,31 +18394,31 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:216
+#: ../doc/articles/troubleshooting.md:227
 msgid ""
 "Composer also respects a memory limit defined by the `COMPOSER_MEMORY_LIMIT` "
 "environment variable:"
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:217
+#: ../doc/articles/troubleshooting.md:228
 #, no-wrap
 msgid "COMPOSER_MEMORY_LIMIT=-1 composer.phar <...>\n"
 msgstr "COMPOSER_MEMORY_LIMIT=-1 composer.phar <...>\n"
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:222
+#: ../doc/articles/troubleshooting.md:233
 msgid "Or, you can increase the limit with a command-line argument:"
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:223
+#: ../doc/articles/troubleshooting.md:234
 #, no-wrap
 msgid "php -d memory_limit=-1 composer.phar <...>\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:228
+#: ../doc/articles/troubleshooting.md:239
 msgid ""
 "However, please note that setting the memory limit using these methods "
 "primarily addresses memory issues within Composer itself and its immediate "
@@ -18388,7 +18428,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:230
+#: ../doc/articles/troubleshooting.md:241
 msgid ""
 "This issue can also happen on cPanel instances, when the shell fork bomb "
 "protection is activated. For more information, see the [documentation]"
@@ -18397,13 +18437,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:231
+#: ../doc/articles/troubleshooting.md:242
 #, no-wrap
 msgid "Xdebug impact on Composer"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:235
+#: ../doc/articles/troubleshooting.md:246
 msgid ""
 "To improve performance when the Xdebug extension is enabled, Composer "
 "automatically restarts PHP without it.  You can override this behavior by "
@@ -18411,7 +18451,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:239
+#: ../doc/articles/troubleshooting.md:250
 msgid ""
 "Composer will always show a warning if Xdebug is being used, but you can "
 "override this with an environment variable: "
@@ -18421,18 +18461,18 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:241
+#: ../doc/articles/troubleshooting.md:252
 #, no-wrap
 msgid "\"The system cannot find the path specified\" (Windows)"
 msgstr ""
 
 #. type: Bullet: '1. '
-#: ../doc/articles/troubleshooting.md:248
+#: ../doc/articles/troubleshooting.md:259
 msgid "Open regedit."
 msgstr ""
 
 #. type: Bullet: '2. '
-#: ../doc/articles/troubleshooting.md:248
+#: ../doc/articles/troubleshooting.md:259
 msgid ""
 "Search for an `AutoRun` key inside "
 "`HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Command Processor`, "
@@ -18441,20 +18481,20 @@ msgid ""
 msgstr ""
 
 #. type: Bullet: '3. '
-#: ../doc/articles/troubleshooting.md:248
+#: ../doc/articles/troubleshooting.md:259
 msgid ""
 "Check if it contains any path to a non-existent file, if it's the case, "
 "remove them."
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:250
+#: ../doc/articles/troubleshooting.md:261
 #, no-wrap
 msgid "SSL certificate problem: unable to get local issuer certificate"
 msgstr ""
 
 #. type: Bullet: '1. '
-#: ../doc/articles/troubleshooting.md:261
+#: ../doc/articles/troubleshooting.md:272
 msgid ""
 "Check that your root certificate store / CA bundle is up to date. Run "
 "`composer diagnose -vvv` and look for `Checked CA file ...` or `Checked "
@@ -18464,7 +18504,7 @@ msgid ""
 msgstr ""
 
 #. type: Bullet: '2. '
-#: ../doc/articles/troubleshooting.md:261
+#: ../doc/articles/troubleshooting.md:272
 msgid ""
 "If this did not help despite Composer finding a valid CA bundle, try "
 "disabling your antivirus and firewall software to see if that helps. We have "
@@ -18476,13 +18516,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:263
+#: ../doc/articles/troubleshooting.md:274
 #, no-wrap
 msgid "API rate limit and OAuth tokens"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:267
+#: ../doc/articles/troubleshooting.md:278
 msgid ""
 "Because of GitHub's rate limits on their API it can happen that Composer "
 "prompts for authentication asking your username and password so it can go "
@@ -18490,7 +18530,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:270
+#: ../doc/articles/troubleshooting.md:281
 msgid ""
 "If you would prefer not to provide your GitHub credentials to Composer you "
 "can manually create a token using the [procedure documented here]"
@@ -18498,43 +18538,43 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:272
+#: ../doc/articles/troubleshooting.md:283
 msgid "Now Composer should install/update without asking for authentication."
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:274
+#: ../doc/articles/troubleshooting.md:285
 #, no-wrap
 msgid "proc_open(): fork failed errors"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:277
+#: ../doc/articles/troubleshooting.md:288
 msgid "If Composer shows proc_open() fork failed on some commands:"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:279
+#: ../doc/articles/troubleshooting.md:290
 msgid ""
 "`PHP Fatal error: Uncaught exception 'ErrorException' with message "
 "'proc_open(): fork failed - Cannot allocate memory' in phar`"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:281
+#: ../doc/articles/troubleshooting.md:292
 msgid ""
 "This could be happening because the VPS runs out of memory and has no Swap "
 "space enabled."
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:282
+#: ../doc/articles/troubleshooting.md:293
 #, no-wrap
 msgid "free -m\n"
 msgstr ""
 
 #. type: Fenced code block (text)
-#: ../doc/articles/troubleshooting.md:285
+#: ../doc/articles/troubleshooting.md:296
 #, no-wrap
 msgid ""
 "total used free shared buffers cached\n"
@@ -18544,12 +18584,12 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:293
+#: ../doc/articles/troubleshooting.md:304
 msgid "To enable the swap you can use for example:"
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:294
+#: ../doc/articles/troubleshooting.md:305
 #, no-wrap
 msgid ""
 "/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024\n"
@@ -18559,30 +18599,30 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:301
+#: ../doc/articles/troubleshooting.md:312
 msgid ""
 "You can make a permanent swap file following this [tutorial](https://"
 "www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04)."
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:303
+#: ../doc/articles/troubleshooting.md:314
 #, no-wrap
 msgid "proc_open(): failed to open stream errors (Windows)"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:306
+#: ../doc/articles/troubleshooting.md:317
 msgid "If Composer shows proc_open(NUL) errors on Windows:"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:308
+#: ../doc/articles/troubleshooting.md:319
 msgid "`proc_open(NUL): failed to open stream: No such file or directory`"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:312
+#: ../doc/articles/troubleshooting.md:323
 msgid ""
 "This could be happening because you are working in a _OneDrive_ directory "
 "and using a version of PHP that does not support the file system semantics "
@@ -18590,7 +18630,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:315
+#: ../doc/articles/troubleshooting.md:326
 msgid ""
 "Alternatively it could be because the Windows Null Service is not enabled. "
 "For more information, see this [issue](https://github.com/composer/composer/"
@@ -18598,13 +18638,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:317
+#: ../doc/articles/troubleshooting.md:328
 #, no-wrap
 msgid "Degraded Mode"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:326
+#: ../doc/articles/troubleshooting.md:337
 msgid ""
 "Due to some intermittent issues on Travis and other systems, we introduced a "
 "degraded network mode which helps Composer finish successfully but disables "
@@ -18616,19 +18656,19 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:328
+#: ../doc/articles/troubleshooting.md:339
 msgid "If you have been pointed to this page, you want to check a few things:"
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/articles/troubleshooting.md:337
+#: ../doc/articles/troubleshooting.md:348
 msgid ""
 "If you are using ESET antivirus, go in \"Advanced Settings\" and disable "
 "\"HTTP-scanner\" under \"web access protection\""
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/articles/troubleshooting.md:337
+#: ../doc/articles/troubleshooting.md:348
 msgid ""
 "If you are using IPv6, try disabling it. If that solves your issues, get in "
 "touch with your ISP or server host, the problem is not at the Packagist "
@@ -18639,25 +18679,25 @@ msgid ""
 msgstr ""
 
 #. type: Bullet: '- '
-#: ../doc/articles/troubleshooting.md:337
+#: ../doc/articles/troubleshooting.md:348
 msgid "If none of the above helped, please report the error."
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:339
+#: ../doc/articles/troubleshooting.md:350
 #, no-wrap
 msgid "Operation timed out (IPv6 issues)"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:342
+#: ../doc/articles/troubleshooting.md:353
 msgid ""
 "You may run into errors if IPv6 is not configured correctly. A common error "
 "is:"
 msgstr ""
 
 #. type: Fenced code block (text)
-#: ../doc/articles/troubleshooting.md:343
+#: ../doc/articles/troubleshooting.md:354
 #, no-wrap
 msgid ""
 "The \"https://getcomposer.org/version\" file could not be downloaded: failed to\n"
@@ -18665,20 +18705,20 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:350
+#: ../doc/articles/troubleshooting.md:361
 msgid ""
 "We recommend you fix your IPv6 setup. If that is not possible, you can try "
 "the following workarounds:"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:352
+#: ../doc/articles/troubleshooting.md:363
 #, no-wrap
 msgid "**Generic Workaround:**\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:355
+#: ../doc/articles/troubleshooting.md:366
 msgid ""
 "Set the [`COMPOSER_IPRESOLVE=4`](../03-cli.md#composer_ipresolve) "
 "environment variable which will force curl to resolve domains using IPv4. "
@@ -18689,13 +18729,13 @@ msgstr ""
 "これはcurl拡張がダウンロード用に使われるときだけ機能します。"
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:357
+#: ../doc/articles/troubleshooting.md:368
 #, no-wrap
 msgid "**Workaround Linux:**\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:360
+#: ../doc/articles/troubleshooting.md:371
 msgid ""
 "On linux, it seems that running this command helps to make ipv4 traffic have "
 "a higher priority than ipv6, which is a better alternative than disabling "
@@ -18703,70 +18743,70 @@ msgid ""
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:361
+#: ../doc/articles/troubleshooting.md:372
 #, no-wrap
 msgid "sudo sh -c \"echo 'precedence ::ffff:0:0/96 100' >> /etc/gai.conf\"\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:366
+#: ../doc/articles/troubleshooting.md:377
 #, no-wrap
 msgid "**Workaround Windows:**\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:368
+#: ../doc/articles/troubleshooting.md:379
 msgid ""
 "On windows the only way is to disable ipv6 entirely I am afraid (either in "
 "windows or in your home router)."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:370
+#: ../doc/articles/troubleshooting.md:381
 #, no-wrap
 msgid "**Workaround Mac OS X:**\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:372
+#: ../doc/articles/troubleshooting.md:383
 msgid "Get name of your network device:"
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:373
+#: ../doc/articles/troubleshooting.md:384
 #, no-wrap
 msgid "networksetup -listallnetworkservices\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:378
+#: ../doc/articles/troubleshooting.md:389
 msgid "Disable IPv6 on that device (in this case \"Wi-Fi\"):"
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:379
+#: ../doc/articles/troubleshooting.md:390
 #, no-wrap
 msgid "networksetup -setv6off Wi-Fi\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:384
+#: ../doc/articles/troubleshooting.md:395
 msgid "Run Composer ..."
 msgstr "Composerを実行……"
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:386
+#: ../doc/articles/troubleshooting.md:397
 msgid "You can enable IPv6 again with:"
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:387
+#: ../doc/articles/troubleshooting.md:398
 #, no-wrap
 msgid "networksetup -setv6automatic Wi-Fi\n"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:394
+#: ../doc/articles/troubleshooting.md:405
 msgid ""
 "That said, if this fixes your problem, please talk to your ISP about it to "
 "try to resolve the routing errors. That's the best way to get things "
@@ -18774,13 +18814,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:396
+#: ../doc/articles/troubleshooting.md:407
 #, no-wrap
 msgid "Composer hangs with SSH ControlMaster"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:401
+#: ../doc/articles/troubleshooting.md:412
 msgid ""
 "When you try to install packages from a Git repository and you use the "
 "`ControlMaster` setting for your SSH connection, Composer might hang "
@@ -18789,21 +18829,21 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:403
+#: ../doc/articles/troubleshooting.md:414
 msgid ""
 "The reason for this is a SSH Bug: https://bugzilla.mindrot.org/show_bug.cgi?"
 "id=1988"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:405
+#: ../doc/articles/troubleshooting.md:416
 msgid ""
 "As a workaround, open a SSH connection to your Git host before running "
 "Composer:"
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:406
+#: ../doc/articles/troubleshooting.md:417
 #, no-wrap
 msgid ""
 "ssh -t git@mygitserver.tld\n"
@@ -18813,20 +18853,20 @@ msgstr ""
 "php composer.phar update\n"
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:412
+#: ../doc/articles/troubleshooting.md:423
 msgid ""
 "See also https://github.com/composer/composer/issues/4180 for more "
 "information."
 msgstr "詳しくは https://github.com/composer/composer/issues/4180 も参照。"
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:414
+#: ../doc/articles/troubleshooting.md:425
 #, no-wrap
 msgid "Zip archives are not unpacked correctly."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:419
+#: ../doc/articles/troubleshooting.md:430
 msgid ""
 "Composer can unpack zipballs using either a system-provided `unzip` or `7z` "
 "(7-Zip) utility, or PHP's native `ZipArchive` class. On OSes where ZIP files "
@@ -18835,13 +18875,13 @@ msgid ""
 msgstr ""
 
 #. type: Title ##
-#: ../doc/articles/troubleshooting.md:421
+#: ../doc/articles/troubleshooting.md:432
 #, no-wrap
 msgid "Disabling the pool optimizer"
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:428
+#: ../doc/articles/troubleshooting.md:439
 msgid ""
 "In Composer, the `Pool` class contains all the packages that are relevant "
 "for the dependency resolving process. That is what is used to generate all "
@@ -18851,7 +18891,7 @@ msgid ""
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:433
+#: ../doc/articles/troubleshooting.md:444
 msgid ""
 "If all goes well, you should never notice any issues with it but in case you "
 "run into an unexpected result such as an unresolvable set of dependencies or "
@@ -18861,20 +18901,20 @@ msgid ""
 msgstr ""
 
 #. type: Fenced code block (shell)
-#: ../doc/articles/troubleshooting.md:434
+#: ../doc/articles/troubleshooting.md:445
 #, no-wrap
 msgid "COMPOSER_POOL_OPTIMIZER=0 php composer.phar update\n"
 msgstr "COMPOSER_POOL_OPTIMIZER=0 php composer.phar update\n"
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:440
+#: ../doc/articles/troubleshooting.md:451
 msgid ""
 "Now double check if the result is still the same. It will take significantly "
 "longer and use a lot more memory to run the dependency resolving process."
 msgstr ""
 
 #. type: Plain text
-#: ../doc/articles/troubleshooting.md:442
+#: ../doc/articles/troubleshooting.md:453
 msgid ""
 "If the result is different, you likely hit a problem in the pool optimizer.  "
 "Please [report this issue](https://github.com/composer/composer/issues) so "
