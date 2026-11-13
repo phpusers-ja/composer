@@ -30,8 +30,7 @@
     accepts the connection but never responds are aborted and retried
     instead of hanging for 300 seconds, configurable or disabled via the
     `COMPOSER_HTTP_STALL_TIMEOUT` env var (#13243)
-  * Improved performance of security advisory lookups by querying the API
-    only once per package name (#13202)
+  * パッケージ名ごとに1度のみAPIを問い合わせることにより、セキュリティ勧告の検索の効率性を向上 (#13202)
   * Improved performance of VCS repository updates by skipping the default
     branch lookup when the git mirror is up to date (#13224)
   * Improved performance and memory usage of dependency resolution, package

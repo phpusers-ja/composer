@@ -53,11 +53,9 @@ Composerがタグとブランチを扱う方法とパッケージのバージョ
 
 ## 固定ファイル
 
-For your library it is **recommended to commit the `composer.lock`
-file**. This helps your team to always test against the same dependency
-versions, and it can help prevent supply chain attacks from propagating, as
-newly published (possibly malicious) dependency versions are not pulled into
-your CI or development environment until you explicitly update.
+ご自身のライブラリについて、 **`composer.lock`ファイルをコミットすることが推奨されます。**
+これにより、チームが常に同じ依存関係の版に対してテストする助けになり、伝播してくるサプライチェーン攻撃を防止することに役立つことがあります。
+というのも、新しく公開された（悪意のある可能性のある）依存関係の版は、陽に更新しない限りは、CIや開発環境へ取り込まれないので。
 
 This protection only covers working on the library itself. The lock file has
 no effect on projects that depend on your library, they install whatever

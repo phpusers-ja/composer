@@ -255,18 +255,15 @@ replace/provide規則はここでは考慮すべきではありません。
 これらのフィールドは省略可能です。
 恐らく独自のリポジトリでは必要ないでしょう。
 
-#### Rate limiting and warnings
+#### レート制限と警告
 
-A repository which needs to turn requests away for a while should respond
-with `429 Too Many Requests` and a `Retry-After` header, either as a number
-of seconds or as an HTTP date. When the interval is 60 seconds or less,
-Composer waits it out and retries the request, up to three times. The
-interval is taken to apply to the whole repository, so no further request to
-it, new or retried, is sent before the latest interval it asked for has
-passed. Requests to other repositories keep downloading in the meantime. A
-longer interval is not waited for, and the request fails with a message
-which says how long the repository asked to wait. A `429` without a
-`Retry-After` header is not retried.
+要求をしばらくの間追い払う必要があるリポジトリは、`429 Too Many
+Requests`と`Retry-After`ヘッダつきで応答すべきで、ヘッダの方は秒数かHTTPの日付のいずれかです。
+間隔が60秒以下なら、Composerは待機して要求を、3回まで再試行します。
+間隔はリポジトリ全体に適用されるものと取られるため、頼まれたその直近の間隔が過ぎるまでは、そこへのさらなる要求は、新規でも再試行でも、送られることはありません。
+他のリポジトリへの要求は傍らでダウンロードし続けます。
+それより長い間隔は待たず、要求は、どれだけリポジトリが待つように頼んだかを伝える伝文とともに失敗します。
+`Retry-After`ヘッダなしの`429`は再試行されません。
 
 `Retry-After` is also honoured on the status codes Composer already retries,
 such as `503 Service Unavailable`. There, an interval longer than 60 seconds

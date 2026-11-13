@@ -307,10 +307,9 @@ Registry](https://spdx.org/licenses/)に一覧になっています。
 
 ### source
 
-Where the package sources live, used when installing the package from
-source.
+パッケージのソースの在処で、ソースからパッケージをインストールするときに使われます。
 
-`type`, `url` and `reference` are required, `mirrors` is optional.
+`type`と`url`と`reference`が必須、`mirrors`は省略可能です。
 
 ```json
 {
@@ -335,10 +334,9 @@ the definition of a [`package` repository](05-repositories.md#package-1).
 
 ### dist
 
-Where the package archive lives, used when installing the package from dist.
+パッケージアーカイブの在処で、distからパッケージをインストールするときに使われます。
 
-`type` and `url` are required, `reference`, `shasum` and `mirrors` are
-optional.
+`type`と `url`が必須、`reference`と`shasum`と`mirrors`は省略可能です。
 
 ```json
 {

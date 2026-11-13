@@ -115,7 +115,7 @@ It means your network is probably so slow that a request took over
 you can increase it by increasing the `default_socket_timeout` value in your
 php.ini to something higher.
 
-If instead you see something like:
+その代わりにこのようなものが見られるなら：
 
 ```
 Failed to download * curl error 28 while downloading * Operation too slow. Less than 1 bytes/sec transferred the last 30 seconds

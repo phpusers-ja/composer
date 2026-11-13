@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
 "POT-Creation-Date: 2026-11-13 13:40+0900\n"
-"PO-Revision-Date: 2026-11-13 13:41+0900\n"
+"PO-Revision-Date: 2026-11-13 14:14+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -349,6 +349,11 @@ msgid ""
 "    <a href=\"https://www.sovereign.tech/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/sovereign-tech-agency-dark.svg\" alt=\"Sovereign Tech Fund\" height=\"60\" hspace=\"15\"></a>\n"
 "</p>\n"
 msgstr ""
+"<p>\n"
+"    <a href=\"https://packagist.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/private-packagist-dark.svg\" alt=\"Private Packagist\" height=\"60\" hspace=\"15\"></a>\n"
+"    <a href=\"https://www.aikido.dev/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/aikido-dark.svg\" alt=\"Aikido\" height=\"60\" hspace=\"15\"></a>\n"
+"    <a href=\"https://www.sovereign.tech/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/sovereign-tech-agency-dark.svg\" alt=\"Sovereign Tech Fund\" height=\"60\" hspace=\"15\"></a>\n"
+"</p>\n"
 
 #. type: Plain text
 #: ../README.md:100
@@ -360,6 +365,11 @@ msgid ""
 "    <a href=\"https://upsun.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/upsun-dark.svg\" alt=\"Upsun\" height=\"60\" hspace=\"15\"></a>\n"
 "</p>\n"
 msgstr ""
+"<p>\n"
+"    <a href=\"https://aws.amazon.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/aws-dark.svg\" alt=\"AWS\" height=\"60\" hspace=\"15\"></a>\n"
+"    <a href=\"https://socket.dev/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/socket-dark.svg\" alt=\"Socket\" height=\"60\" hspace=\"15\"></a>\n"
+"    <a href=\"https://upsun.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/upsun-dark.svg\" alt=\"Upsun\" height=\"60\" hspace=\"15\"></a>\n"
+"</p>\n"
 
 #. type: Plain text
 #: ../README.md:106
@@ -371,6 +381,11 @@ msgid ""
 "    <a href=\"https://tideways.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/tideways-dark.svg\" alt=\"Tideways\" height=\"60\" hspace=\"15\"></a>\n"
 "</p>\n"
 msgstr ""
+"<p>\n"
+"    <a href=\"https://www.sonatype.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/sonatype-dark.svg\" alt=\"Sonatype\" height=\"60\" hspace=\"15\"></a>\n"
+"    <a href=\"https://bunny.net/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/bunny-net-dark.svg\" alt=\"Bunny.net\" height=\"60\" hspace=\"15\"></a>\n"
+"    <a href=\"https://tideways.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/tideways-dark.svg\" alt=\"Tideways\" height=\"60\" hspace=\"15\"></a>\n"
+"</p>\n"
 
 #. type: Plain text
 #: ../README.md:112
@@ -382,6 +397,11 @@ msgid ""
 "    <a href=\"https://sentry.io/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/sentry-dark.svg\" alt=\"Sentry\" height=\"60\" hspace=\"15\"></a>\n"
 "</p>\n"
 msgstr ""
+"<p>\n"
+"    <a href=\"https://datadog.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/datadog-dark.svg\" alt=\"Datadog\" height=\"60\" hspace=\"15\"></a>\n"
+"    <a href=\"https://www.algolia.com/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/algolia-dark.svg\" alt=\"Algolia\" height=\"60\" hspace=\"15\"></a>\n"
+"    <a href=\"https://sentry.io/?utm_source=composer\"><img src=\"https://packagist.org/img/sponsors/sentry-dark.svg\" alt=\"Sentry\" height=\"60\" hspace=\"15\"></a>\n"
+"</p>\n"
 
 #. type: Title -
 #: ../README.md:114
@@ -1904,6 +1924,7 @@ msgstr ""
 msgid "Lock file"
 msgstr "固定ファイル"
 
+# https://ja.wikipedia.org/wiki/%E3%82%B5%E3%83%97%E3%83%A9%E3%82%A4%E3%83%81%E3%82%A7%E3%83%BC%E3%83%B3%E6%94%BB%E6%92%83
 #. type: Plain text
 #: ../doc/02-libraries.md:72
 msgid ""
@@ -1913,6 +1934,12 @@ msgid ""
 "published (possibly malicious) dependency versions are not pulled into your "
 "CI or development environment until you explicitly update."
 msgstr ""
+"ご自身のライブラリについて、 **`composer.lock`ファイルをコミットすることが推"
+"奨されます。**\n"
+"これにより、チームが常に同じ依存関係の版に対してテストする助けになり、伝播し"
+"てくるサプライチェーン攻撃を防止することに役立つことがあります。\n"
+"というのも、新しく公開された（悪意のある可能性のある）依存関係の版は、陽に更"
+"新しない限りは、CIや開発環境へ取り込まれないので。"
 
 #. type: Plain text
 #: ../doc/02-libraries.md:77
@@ -2917,6 +2944,9 @@ msgid ""
 "**--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown) "
 "blocking during this command, other policies still apply."
 msgstr ""
+"**--no-cooldown:**\n"
+"このコマンド中の[冷却の方針](06-config.md#cooldown)による遮断を無効にし、他の"
+"方針は適用されたままにします。"
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:250
@@ -3235,6 +3265,11 @@ msgid ""
 "Only allowed when the root package's type is `project`, or together with `--"
 "dev`."
 msgstr ""
+"**--fixed:**\n"
+"何も版の制約が与えられていないときは、推奨される制約の代わりに、"
+"`composer.json`に選ばれた厳密な版を書き出します。\n"
+"根幹のパッケージの種別が`project`のとき、または`--dev`と組み合わされたときに"
+"だけ許容。"
 
 #. type: Title ##
 #: ../doc/03-cli.md:335
@@ -3421,6 +3456,8 @@ msgstr "php composer.phar reinstall \"acme/*\"\n"
 msgid ""
 "To reinstall every installed package of a given type, use `--type` instead:"
 msgstr ""
+"与えられた種別のインストールされたパッケージ1つ1つを再インストールするには、"
+"`--type`を代わりに使うこと。"
 
 #. type: Fenced code block (shell)
 #: ../doc/03-cli.md:423
@@ -3905,6 +3942,11 @@ msgid ""
 "disabled or not blocking; `0` disables it for this run. Use with the --"
 "latest or --outdated option."
 msgstr ""
+"**--cooldown-period:**\n"
+"最新版を探し出す間は、方針が無効化されていたり遮断されていないときでも、構成"
+"された[policy.cooldown.period](06-config.md#period)を上塗り。\n"
+"`0`はこの実行で無効化。\n"
+"--latestか--outdatedのオプションと使うこと。"
 
 #. type: Bullet: '* '
 #: ../doc/03-cli.md:613 ../doc/03-cli.md:659
@@ -7888,11 +7930,13 @@ msgstr "source"
 msgid ""
 "Where the package sources live, used when installing the package from source."
 msgstr ""
+"パッケージのソースの在処で、ソースからパッケージをインストールするときに使わ"
+"れます。"
 
 #. type: Plain text
 #: ../doc/04-schema.md:314
 msgid "`type`, `url` and `reference` are required, `mirrors` is optional."
-msgstr ""
+msgstr "`type`と`url`と`reference`が必須、`mirrors`は省略可能です。"
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:315
@@ -7938,20 +7982,22 @@ msgstr ""
 #: ../doc/04-schema.md:337
 #, no-wrap
 msgid "dist"
-msgstr ""
+msgstr "dist"
 
 #. type: Plain text
 #: ../doc/04-schema.md:340
 msgid ""
 "Where the package archive lives, used when installing the package from dist."
 msgstr ""
+"パッケージアーカイブの在処で、distからパッケージをインストールするときに使わ"
+"れます。"
 
 #. type: Plain text
 #: ../doc/04-schema.md:343
 msgid ""
 "`type` and `url` are required, `reference`, `shasum` and `mirrors` are "
 "optional."
-msgstr ""
+msgstr "`type`と `url`が必須、`reference`と`shasum`と`mirrors`は省略可能です。"
 
 #. type: Fenced code block (json)
 #: ../doc/04-schema.md:344
@@ -10721,8 +10767,14 @@ msgstr ""
 #: ../doc/05-repositories.md:301
 #, no-wrap
 msgid "Rate limiting and warnings"
-msgstr ""
+msgstr "レート制限と警告"
 
+# The interval is taken to apply to the whole repository,
+# 間隔はリポジトリ全体に適用されるものと取られるため、
+#
+# so no further request to it, new or retried, is sent before the latest
+# interval it asked for has passed.
+# 頼まれたその直近の間隔が過ぎる前には、そこへのさらなる要求は、新規のものも再試行のものも、送られることはありません。
 #. type: Plain text
 #: ../doc/05-repositories.md:312
 msgid ""
@@ -10737,6 +10789,17 @@ msgid ""
 "which says how long the repository asked to wait. A `429` without a `Retry-"
 "After` header is not retried."
 msgstr ""
+"要求をしばらくの間追い払う必要があるリポジトリは、`429 Too Many Requests`と"
+"`Retry-After`ヘッダつきで応答すべきで、ヘッダの方は秒数かHTTPの日付のいずれか"
+"です。\n"
+"間隔が60秒以下なら、Composerは待機して要求を、3回まで再試行します。\n"
+"間隔はリポジトリ全体に適用されるものと取られるため、頼まれたその直近の間隔が"
+"過ぎるまでは、そこへのさらなる要求は、新規でも再試行でも、送られることはあり"
+"ません。\n"
+"他のリポジトリへの要求は傍らでダウンロードし続けます。\n"
+"それより長い間隔は待たず、要求は、どれだけリポジトリが待つように頼んだかを伝"
+"える伝文とともに失敗します。\n"
+"`Retry-After`ヘッダなしの`429`は再試行されません。"
 
 #. type: Plain text
 #: ../doc/05-repositories.md:316

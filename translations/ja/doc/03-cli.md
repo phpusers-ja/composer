@@ -215,8 +215,8 @@ php composer.phar update vendor/package:2.0.1 vendor/package2:3.0.*
 * **--no-blocking:**
   このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
   [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
-* **--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown)
-  blocking during this command, other policies still apply.
+* **--no-cooldown:**
+  このコマンド中の[冷却の方針](06-config.md#cooldown)による遮断を無効にし、他の方針は適用されたままにします。
 * **--lock:**
   パッケージのバージョンを更新せず、固定ファイルが期限切れであることについての警告を抑えるために固定ファイルを上書きします。
   ミラーやURLといったパッケージのメタデータが変更されていれば更新します。
@@ -330,8 +330,8 @@ php composer.phar require vendor/package vendor/package2
 * **--no-blocking:**
   このコマンドの間は、すべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。
   [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
-* **--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown)
-  blocking during this command, other policies still apply.
+* **--no-cooldown:**
+  このコマンド中の[冷却の方針](06-config.md#cooldown)による遮断を無効にし、他の方針は適用されたままにします。
 * **--update-no-dev:**
   `--no-dev`オプションつきで依存関係の更新を走らせます。
   [COMPOSER_NO_DEV](#composer_no_dev)も参照。
@@ -358,10 +358,9 @@ php composer.phar require vendor/package vendor/package2
   COMPOSER_MINIMAL_CHANGES=1環境変数を介して設定することもできます。
 * **--sort-packages:**
   パッケージを`package.json`で整列した状態にします。
-* **--fixed:** When no version constraint is given, write the exact version
-  that was picked to `composer.json` instead of the recommended constraint.
-  Only allowed when the root package's type is `project`, or together with
-  `--dev`.
+* **--fixed:**
+  何も版の制約が与えられていないときは、推奨される制約の代わりに、`composer.json`に選ばれた厳密な版を書き出します。
+  根幹のパッケージの種別が`project`のとき、または`--dev`と組み合わされたときにだけ許容。
 * **--optimize-autoloader (-o):**
   PSR-0自動読み込みをクラスマップに変換して、より高速な自動読み込み器を取得します。
   特に実運用で推奨されますが、走らせるのに少し時間が掛かるため、現時点では既定では有効になっていません。
@@ -406,8 +405,8 @@ php composer.phar remove vendor/package vendor/package2
 * **--no-blocking:**
   このコマンドの間は、すべてのポリシーに基づく依存関係の遮断を無効にし、これには冷却期間も含まれます。
   [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
-* **--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown)
-  blocking during this command, other policies still apply.
+* **--no-cooldown:**
+  このコマンド中の[冷却の方針](06-config.md#cooldown)による遮断を無効にし、他の方針は適用されたままにします。
 * **--update-no-dev:**
   --no-devオプションつきで依存関係の更新を走らせます。
   [COMPOSER_NO_DEV](#composer_no_dev)も参照。
@@ -466,7 +465,7 @@ php composer.phar reinstall acme/foo acme/bar
 php composer.phar reinstall "acme/*"
 ```
 
-To reinstall every installed package of a given type, use `--type` instead:
+与えられた種別のインストールされたパッケージ1つ1つを再インストールするには、`--type`を代わりに使うこと。
 
 ```shell
 php composer.phar reinstall --type=composer-plugin
@@ -653,10 +652,10 @@ php composer.phar show monolog/monolog 1.0.2
 * **--sort-by-age (-A):**
   インストールされたバージョンの経過時間を表示し、古い順にパッケージを整列します。
   --latestないし--outdatedオプションと一緒に使ってください。
-* **--cooldown-period:** Overrides the configured
-  [policy.cooldown.period](06-config.md#period) while looking up latest
-  versions, even when the policy is disabled or not blocking; `0` disables
-  it for this run. Use with the --latest or --outdated option.
+* **--cooldown-period:**
+  最新版を探し出す間は、方針が無効化されていたり遮断されていないときでも、構成された[policy.cooldown.period](06-config.md#period)を上塗り。
+  `0`はこの実行で無効化。
+  --latestか--outdatedのオプションと使うこと。
 * **--direct (-D):** パッケージの一覧を直接的な依存関係に限定します。
 * **--strict:** 時代遅れのパッケージがあるときは非ゼロの終了コードを返します。
 * **--format (-f):** 出力形式としてtext（既定）ないしjsonを選びます。
@@ -1157,8 +1156,8 @@ php composer.phar create-project composer/hello-world my-project
 * **--no-blocking:**
   このコマンドの間は、すべてのポリシーによる遮断を無効にし、これには冷却期間を含みます。
   [COMPOSER_NO_BLOCKING](#composer_no_blocking)も参照。
-* **--no-cooldown:** Disables the [cooldown policy](06-config.md#cooldown)
-  blocking during this command, other policies still apply.
+* **--no-cooldown:**
+  このコマンド中の[冷却の方針](06-config.md#cooldown)による遮断を無効にし、他の方針は適用されたままにします。
 * **--ignore-platform-reqs:**
   全てのプラットフォーム要件（`php`、`hhvm`、`lib-*`、`ext-*`）を無視し、ローカルマシンがたとえこれらを満たしていなくてもインストールを強行します。
   [`platform`](06-config.md#platform)設定オプションも参照してください。

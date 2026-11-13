@@ -107,7 +107,9 @@ msgstr ""
 msgid ""
 "Improved performance of security advisory lookups by querying the API only "
 "once per package name (#13202)"
-msgstr "パッケージ名ごとに1度のみAPIを問い合わせることにより、セキュリティ勧告の検索の効率性を向上 (#13202)"
+msgstr ""
+"パッケージ名ごとに1度のみAPIを問い合わせることにより、セキュリティ勧告の検索"
+"の効率性を向上 (#13202)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:21
