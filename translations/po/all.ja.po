@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
 "POT-Creation-Date: 2026-11-13 13:40+0900\n"
-"PO-Revision-Date: 2026-11-09 11:16+0900\n"
+"PO-Revision-Date: 2026-11-13 13:41+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -6371,10 +6371,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../doc/03-cli.md:1443
-#, fuzzy, no-wrap
-#| msgid "COMPOSER_PROCESS_TIMEOUT"
+#, no-wrap
 msgid "COMPOSER_HTTP_STALL_TIMEOUT"
-msgstr "COMPOSER_PROCESS_TIMEOUT"
+msgstr "COMPOSER_HTTP_STALL_TIMEOUT"
 
 #. type: Plain text
 #: ../doc/03-cli.md:1449
@@ -18162,17 +18161,14 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/articles/troubleshooting.md:125
-#, fuzzy
-#| msgid "If you see something along the lines of:"
 msgid "If instead you see something like:"
-msgstr "以下のように行が続くさまが見られるなら……"
+msgstr "その代わりにこのようなものが見られるなら："
 
 #. type: Fenced code block
 #: ../doc/articles/troubleshooting.md:126
-#, fuzzy, no-wrap
-#| msgid "Failed to download * curl error 28 while downloading * Operation timed out after 300000 milliseconds\n"
+#, no-wrap
 msgid "Failed to download * curl error 28 while downloading * Operation too slow. Less than 1 bytes/sec transferred the last 30 seconds\n"
-msgstr "Failed to download * curl error 28 while downloading * Operation timed out after 300000 milliseconds\n"
+msgstr "Failed to download * curl error 28 while downloading * Operation too slow. Less than 1 bytes/sec transferred the last 30 seconds\n"
 
 #. type: Plain text
 #: ../doc/articles/troubleshooting.md:134

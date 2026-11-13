@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
 "POT-Creation-Date: 2026-11-13 13:40+0900\n"
-"PO-Revision-Date: 2026-11-09 11:21+0900\n"
+"PO-Revision-Date: 2026-11-13 13:42+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -18,10 +18,9 @@ msgstr ""
 
 #. type: Title ###
 #: ../CHANGELOG.md:1
-#, fuzzy, no-wrap
-#| msgid "[2.9.2] 2025-11-19"
+#, no-wrap
 msgid "[2.11.2] 2026-11-11"
-msgstr "[2.9.2] 2025-11-19"
+msgstr "[2.11.2] 2026-11-11"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:21
@@ -105,16 +104,10 @@ msgstr ""
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:21
-#, fuzzy
-#| msgid ""
-#| "Improved performance of script handlers by reducing ad-hoc autoloader "
-#| "creation (#12456)"
 msgid ""
 "Improved performance of security advisory lookups by querying the API only "
 "once per package name (#13202)"
-msgstr ""
-"アドホックな自動読込器を作る処理を削減することでスクリプトを扱う処理の効率を"
-"改善しました (#12456)"
+msgstr "パッケージ名ごとに1度のみAPIを問い合わせることにより、セキュリティ勧告の検索の効率性を向上 (#13202)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:21
