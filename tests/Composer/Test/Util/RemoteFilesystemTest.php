@@ -13,6 +13,7 @@
 namespace Composer\Test\Util;
 
 use Composer\Config;
+use Composer\Downloader\TransportException;
 use Composer\IO\IOInterface;
 use Composer\Util\AuthHelper;
 use Composer\Util\RemoteFilesystem;
@@ -256,6 +257,76 @@ class RemoteFilesystemTest extends TestCase
             });
 
         $fs->getContents('http://example.org', 'http://example.org/packages.json', false);
+    }
+
+    /**
+     * @dataProvider provideFailedResponseHeaders
+     * @param string[] $responseHeaders
+     */
+    public function testErrorMessagesDoNotContainUrlCredentials(array $responseHeaders): void
+    {
+        $fs = $this->getRemoteFilesystemWithMockedMethods(['getRemoteContents']);
+        $fs->expects($this->once())->method('getRemoteContents')
+            ->willReturnCallback(static function ($originUrl, $fileUrl, $ctx, &$http_response_header) use ($responseHeaders): string {
+                $http_response_header = $responseHeaders;
+
+                return '';
+            });
+
+        try {
+            $fs->getContents('example.org', 'https://user:secret@example.org/packages.json', false);
+            self::fail('Expected a TransportException');
+        } catch (TransportException $e) {
+            self::assertStringNotContainsString('secret', $e->getMessage());
+            self::assertStringContainsString('https://user:***@example.org/packages.json', $e->getMessage());
+        }
+    }
+
+    /**
+     * @return array<string, array{string[]}>
+     */
+    public static function provideFailedResponseHeaders(): array
+    {
+        return [
+            'not found' => [['HTTP/1.1 404 Not Found']],
+            'redirect without location' => [['HTTP/1.1 302 Found']],
+        ];
+    }
+
+    /**
+     * @dataProvider provideRedirectHeaderCases
+     */
+    public function testCredentialHeadersAreOnlyKeptOnSameOriginRedirects(string $location, bool $expectAuthHeader): void
+    {
+        $sentHeaders = [];
+        $fs = $this->getRemoteFilesystemWithMockedMethods(['getRemoteContents']);
+        $fs->expects($this->exactly(2))->method('getRemoteContents')
+            ->willReturnCallback(static function ($originUrl, $fileUrl, $ctx, &$http_response_header) use ($location, &$sentHeaders): string {
+                $sentHeaders[] = implode("\n", (array) stream_context_get_options($ctx)['http']['header']);
+                $http_response_header = count($sentHeaders) === 1 ? ['HTTP/1.1 302 Found', 'Location: '.$location] : ['HTTP/1.1 200 OK'];
+
+                return 'ok';
+            });
+
+        $fs->getContents('example.org', 'https://example.org/packages.json', false, ['http' => ['header' => ['Authorization: Bearer abc', 'X-Custom: 1']]]);
+
+        self::assertStringContainsString('Authorization: Bearer abc', $sentHeaders[0]);
+        self::assertSame($expectAuthHeader, str_contains($sentHeaders[1], 'Authorization: Bearer abc'));
+        self::assertStringContainsString('X-Custom: 1', $sentHeaders[1]);
+    }
+
+    /**
+     * @return array<string, array{string, bool}>
+     */
+    public static function provideRedirectHeaderCases(): array
+    {
+        return [
+            'same origin, absolute path' => ['/other.json', true],
+            'same origin, absolute url' => ['https://example.org:443/other.json', true],
+            'other host' => ['https://example.net/other.json', false],
+            'other scheme' => ['http://example.org/other.json', false],
+            'other port' => ['https://example.org:8443/other.json', false],
+        ];
     }
 
     /**
