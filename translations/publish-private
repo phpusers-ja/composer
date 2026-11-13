@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eux
+
+mkdir -p /var/www/htdocs/composer
+(
+    set -eu
+
+    cd ../book
+    pax -rw . /var/www/htdocs/composer
+)
