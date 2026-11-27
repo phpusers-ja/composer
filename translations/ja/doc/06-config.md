@@ -218,7 +218,7 @@ like `3.3.x-dev` above.
 Defaults to `fail`. How `composer audit` treats packages with security
 advisories.
 
-- `ignore` — advisories are not checked nor reported
+- `ignore`では、勧告は検査も報告もされません
 - `report`では、勧告は報告されるものの非ゼロの終了コードになりません。
 - `fail`では、勧告により`composer audit`に非ゼロコードの失敗が引き起こされます。
 

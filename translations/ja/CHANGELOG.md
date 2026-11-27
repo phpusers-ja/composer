@@ -9,8 +9,7 @@
     invalid style tag (#13292)
   * Security: Fixed credentials embedded in repository URLs showing up in
     download error messages when curl is not available (#13266)
-  * Improved performance of security advisory filtering and of package
-    loading when a repository has none of the requested packages (#13264,
+  * リポジトリに要求されたパッケージが何もないときの、セキュリティ勧告の絞り込みとパッケージの読み込みの効率性を向上 (#13264,
     #13226)
   * Fixed `audit` ignoring the `policy.advisories.audit` setting, advisories
     are now skipped when it is set to `ignore` and only fail the audit when

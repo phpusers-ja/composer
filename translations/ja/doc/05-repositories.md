@@ -939,14 +939,9 @@ composer.json
 
 ### 私有Packagist
 
-[Private
-Packagist](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositories)
-is a hosted or self-hosted application providing private package hosting as
-well as mirroring of GitHub, Packagist.org and other package repositories.
+[私有Packagist](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositories)はホスティングまたは自前でのホストによるアプリケーションであり、私有パッケージのホスティングはもちろん、GitHub、Packagist.org、その他のパッケージリポジトリのミラーリングも提供します。
 
-Check out
-[Packagist.com](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositoriesmore)
-for more information.
+詳細は[Packagist.com](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositoriesmore)をご確認ください。
 
 ### Satis
 
@@ -957,8 +952,7 @@ Satisにはリポジトリを含む`composer.json`を与えます。
 リポジトリとしてよくあるのはVCSやパッケージレポジトリの定義です。
 `require`されるパッケージを全て取得し、`packages.json`を吐き出しますが、これが`composer`リポジトリになります。
 
-Check the [Satis documentation](https://composer.github.io/satis/) for more
-information.
+詳細は[Satisの文書](https://composer.github.io/satis/)をご確認ください。
 
 ## Packagist.orgを無効にする
 

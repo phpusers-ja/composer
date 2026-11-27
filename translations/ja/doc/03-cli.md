@@ -1523,12 +1523,11 @@ composer.jsonで`policy.abandoned`が`false`に設定されているときは効
 
 ### COMPOSER_POLICY
 
-Main dependency policy switch. Set to `0` to disable all dependency policy
-enforcement on updates, installs and audits, or `1` to enable it. When
-disabled, `composer audit` does not check anything and only prints a warning
-saying so. Setting this to `1` will use the policy configuration in the
-composer.json. If you want to change the config value, use `composer config
-policy 1` instead.
+主要な依存関係の方針のスイッチです。
+`0`に設定すると更新、インストール、監査での全ての依存関係の方針の促進が無効となり、あるいは`1`とすればそれを有効にします。
+無効のとき、`composer audit`は何も検査せずそのことが書かれた警告を印字するのみです。
+これを`1`に設定するとcomposer.json中での方針の構成を使います。
+構成値を変えたければ、代わりに`composer config policy 1`を使ってください。
 
 `0`に設定したときは、以降のポリシー固有のオーバーライドすべてが無視されます――依存関係のポリシーの構成の全体が短絡され無効になります。
 

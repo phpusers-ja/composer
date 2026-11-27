@@ -51,7 +51,9 @@ msgstr ""
 msgid ""
 "Improved performance of security advisory filtering and of package loading "
 "when a repository has none of the requested packages (#13264, #13226)"
-msgstr "リポジトリに要求されたパッケージが何もないときの、セキュリティ勧告の絞り込みとパッケージの読み込みの効率性を向上 (#13264, #13226)"
+msgstr ""
+"リポジトリに要求されたパッケージが何もないときの、セキュリティ勧告の絞り込み"
+"とパッケージの読み込みの効率性を向上 (#13264, #13226)"
 
 #. type: Bullet: '  * '
 #: ../CHANGELOG.md:12
