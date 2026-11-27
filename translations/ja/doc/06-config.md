@@ -171,6 +171,12 @@ via their `block-scope` setting.
 }
 ```
 
+This disables auditing as well: nothing is checked during
+`install`/`update`, and `composer audit` only prints a warning that
+dependency policies are disabled and exits with a zero code. The
+[`COMPOSER_POLICY`](03-cli.md#composer_policy) env var set to `0` has the
+same effect.
+
 > **`config.audit`からの移行ですか？**
 > 移行の際に旧いキーがどのように今なおフォールバックとして尊重されているかについては、[どのように`config.audit`が`config.policy`と対応するか](#how-configaudit-interacts-with-configpolicy)を参照。
 
@@ -212,7 +218,7 @@ like `3.3.x-dev` above.
 Defaults to `fail`. How `composer audit` treats packages with security
 advisories.
 
-- `ignore`は、勧告が報告されません
+- `ignore` — advisories are not checked nor reported
 - `report`では、勧告は報告されるものの非ゼロの終了コードになりません。
 - `fail`では、勧告により`composer audit`に非ゼロコードの失敗が引き起こされます。
 
@@ -227,6 +233,9 @@ advisories.
     }
 }
 ```
+
+Setting `policy.advisories` or the whole `policy` config to `false` implies
+`ignore`.
 
 #### ignore-id
 

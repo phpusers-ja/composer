@@ -40,8 +40,10 @@ IRCチャンネルは<irc.libera.chat>の
 [GitHub Discussions](https://github.com/composer/composer/discussions)
 には両方ともComposerに関係する質問が寄せられています。
 
-有料のサポートについては、Composerに関係するサポートを[Private
-Packagist](https://packagist.com)の顧客にチャットとEメールを介して提供しています。
+For paid support, we do provide Composer-related support via chat and email
+to [Private
+Packagist](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=community)
+customers.
 
 
 &larr; [ランタイム](07-runtime.md)
