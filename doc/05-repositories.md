@@ -1012,11 +1012,11 @@ There are a few tools that can help you create a `composer` repository.
 
 ### Private Packagist
 
-[Private Packagist](https://packagist.com/) is a hosted or self-hosted
+[Private Packagist](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositories) is a hosted or self-hosted
 application providing private package hosting as well as mirroring of
 GitHub, Packagist.org and other package repositories.
 
-Check out [Packagist.com](https://packagist.com/) for more information.
+Check out [Packagist.com](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositoriesmore) for more information.
 
 ### Satis
 
@@ -1027,8 +1027,7 @@ You give it a `composer.json` containing repositories, typically VCS and
 package repository definitions. It will fetch all the packages that are
 `require`d and dump a `packages.json` that is your `composer` repository.
 
-Check [the satis GitHub repository](https://github.com/composer/satis) and
-the [handling private packages article](articles/handling-private-packages.md) for more
+Check the [Satis documentation](https://composer.github.io/satis/) for more
 information.
 
 ## Disabling Packagist.org
