@@ -1,0 +1,28 @@
+name: 'API Surface Comment'
+on:
+  workflow_run:
+    workflows: ['API Surface Check']
+    types: [completed] # zizmor: ignore[dangerous-triggers]
+
+permissions: {}
+
+# Cancel an in-progress comment run when a force-push or workflow_run re-run
+# fires for the same PR. head_sha alone wouldn't catch force-pushes (each push
+# has a different SHA); the (head repo + head branch) pair survives that and
+# disambiguates forks using identical branch names.
+concurrency:
+  group: api-surface-comment-${{ github.event.workflow_run.head_repository.full_name }}-${{ github.event.workflow_run.head_branch }}
+  cancel-in-progress: true
+
+jobs:
+  comment:
+    name: "API surface comment"
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read        # download the artifact from the analysis run
+      pull-requests: write # create the comment on the pull request
+
+    steps:
+      - uses: composer/api-surface-check/post-comment@09e3754365a4626daac35eef61d474a389961084 # 2.0.0
