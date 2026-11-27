@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Composer\n"
 "POT-Creation-Date: 2026-11-28 00:34+0900\n"
-"PO-Revision-Date: 2026-11-13 14:14+0900\n"
+"PO-Revision-Date: 2026-11-28 00:41+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -2244,10 +2244,9 @@ msgstr ""
 
 #. type: Title ##
 #: ../doc/02-libraries.md:194
-#, fuzzy, no-wrap
-#| msgid "advisories"
+#, no-wrap
 msgid "Security advisories"
-msgstr "advisories"
+msgstr "セキュリティ勧告"
 
 #. type: Plain text
 #: ../doc/02-libraries.md:199
@@ -6731,13 +6730,6 @@ msgstr "COMPOSER_POLICY"
 
 #. type: Plain text
 #: ../doc/03-cli.md:1492
-#, fuzzy
-#| msgid ""
-#| "Main dependency policy switch. Set to `0` to disable all dependency "
-#| "policy enforcement on updates, installs and audits, or `1` to enable it. "
-#| "Setting this to `1` will use the policy configuration in the "
-#| "composer.json. If you want to change the config value, use `composer "
-#| "config policy 1` instead."
 msgid ""
 "Main dependency policy switch. Set to `0` to disable all dependency policy "
 "enforcement on updates, installs and audits, or `1` to enable it. When "
@@ -6747,8 +6739,8 @@ msgid ""
 "policy 1` instead."
 msgstr ""
 "主要な依存関係の方針のスイッチです。\n"
-"`0`に設定すると更新、インストール、監査での全ての依存関係の方針の促進が無効と"
-"なり、あるいは`1`とすればそれを有効にします。\n"
+"`0`に設定すると更新、インストール、監査での全ての依存関係の方針の促進が無効となり、あるいは`1`とすればそれを有効にします。\n"
+"無効のとき、`composer audit`は何も検査せずそのことが書かれた警告を印字するのみです。\n"
 "これを`1`に設定するとcomposer.json中での方針の構成を使います。\n"
 "構成値を変えたければ、代わりに`composer config policy 1`を使ってください。"
 
@@ -12614,32 +12606,20 @@ msgstr "私有Packagist"
 
 #. type: Plain text
 #: ../doc/05-repositories.md:1018
-#, fuzzy
-#| msgid ""
-#| "[Private Packagist](https://packagist.com/) is a hosted or self-hosted "
-#| "application providing private package hosting as well as mirroring of "
-#| "GitHub, Packagist.org and other package repositories."
 msgid ""
 "[Private Packagist](https://packagist.com/?"
 "utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositories) is a "
 "hosted or self-hosted application providing private package hosting as well "
 "as mirroring of GitHub, Packagist.org and other package repositories."
-msgstr ""
-"[私有Packagist](https://packagist.com/)ではGitHub、Packagist.org、その他の"
-"パッケージリポジトリのミラーリングと共に私有パッケージのホスティングを提供す"
-"るアプリケーションです。\n"
-"Packagistでも立てられていますが、自分で立てることもできます。"
+msgstr "[私有Packagist](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositories)はホスティングまたは自前でのホストによるアプリケーションであり、私有パッケージのホスティングはもちろん、GitHub、Packagist.org、その他のパッケージリポジトリのミラーリングも提供します。"
 
 #. type: Plain text
 #: ../doc/05-repositories.md:1020
-#, fuzzy
-#| msgid ""
-#| "Check out [Packagist.com](https://packagist.com/) for more information."
 msgid ""
 "Check out [Packagist.com](https://packagist.com/?"
 "utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositoriesmore) "
 "for more information."
-msgstr "詳細は[Packagist.com](https://packagist.com/)をご確認ください。"
+msgstr "詳細は[Packagist.com](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=repositoriesmore)をご確認ください。"
 
 #. type: Title ###
 #: ../doc/05-repositories.md:1021
@@ -12671,13 +12651,10 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/05-repositories.md:1032
-#, fuzzy
-#| msgid ""
-#| "Check out [Packagist.com](https://packagist.com/) for more information."
 msgid ""
 "Check the [Satis documentation](https://composer.github.io/satis/) for more "
 "information."
-msgstr "詳細は[Packagist.com](https://packagist.com/)をご確認ください。"
+msgstr "詳細は[Satisの文書](https://composer.github.io/satis/)をご確認ください。"
 
 #. type: Title ##
 #: ../doc/05-repositories.md:1033
@@ -13247,10 +13224,8 @@ msgstr ""
 
 #. type: Bullet: '- '
 #: ../doc/06-config.md:224
-#, fuzzy
-#| msgid "`ignore` — advisories are not reported"
 msgid "`ignore` — advisories are not checked nor reported"
-msgstr "`ignore`は、勧告が報告されません"
+msgstr "`ignore`では、勧告は検査も報告もされません"
 
 #. type: Bullet: '- '
 #: ../doc/06-config.md:224
@@ -16858,17 +16833,11 @@ msgstr ""
 
 #. type: Plain text
 #: ../doc/08-community.md:34
-#, fuzzy
-#| msgid ""
-#| "For paid support, we do provide Composer-related support via chat and "
-#| "email to [Private Packagist](https://packagist.com) customers."
 msgid ""
 "For paid support, we do provide Composer-related support via chat and email "
 "to [Private Packagist](https://packagist.com/?"
 "utm_source=getcomposer.org&utm_medium=docs&utm_campaign=community) customers."
-msgstr ""
-"有料のサポートについては、Composerに関係するサポートを[Private Packagist]"
-"(https://packagist.com)の顧客にチャットとEメールを介して提供しています。"
+msgstr "有料のサポートについては、Composerに関係するサポートを[Private Packagist](https://packagist.com/?utm_source=getcomposer.org&utm_medium=docs&utm_campaign=community)の顧客にチャットとEメールを介して提供しています。"
 
 #. type: Plain text
 #: ../doc/08-community.md:36
